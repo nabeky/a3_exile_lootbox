@@ -12,6 +12,7 @@ LB_Version = getText (configFile >> "CfgPatches" >> "lootbox" >> "lootbox_versio
 	};
 	LB_fnc_log = compile preprocessFileLineNumbers "\x\addons\a3_exile_lootbox\functions\log.sqf";
 	LB_fnc_marker = compile preprocessFileLineNumbers "\x\addons\a3_exile_lootbox\functions\marker.sqf";
+	LB_fnc_putSimpleobj = compile preprocessFileLineNumbers "\x\addons\a3_exile_lootbox\functions\putSimpleobj.sqf";
 	LB_fnc_collectItems = compile preprocessFileLineNumbers "\x\addons\a3_exile_lootbox\functions\collectItems.sqf";
 	LB_fnc_addCargo = compile preprocessFileLineNumbers "\x\addons\a3_exile_lootbox\functions\addCargo.sqf";
 	LB_fnc_isSafePos = compile preprocessFileLineNumbers "\x\addons\a3_exile_lootbox\functions\isSafePos.sqf";

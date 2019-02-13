@@ -12,8 +12,8 @@
 	0:array:item list
 */
 private["_gname","_itemconfig","_smulti","_srare","_trash","_ffixed","_automag","_lootGroup"];
-private["_C_lootStatic","_C_loot50p","_C_lootRare","_ItemsList"];
-private["_val","_mul","_item","_cnt","_cntStep","_rst","_sst"];
+private["_C_lootStatic","_C_loot50p","_C_lootRare","_ItemsList","_retlist"];
+private["_val","_mul","_item","_cnt","_cntStep","_rst","_sst","_j"];
 
 _gname = _this select 0;
 _itemconfig = _this select 1;
@@ -117,6 +117,13 @@ for "_j" from 1 to _cnt do
 	_ItemsList set [_x, selectRandom LB_TrashItems];	// replace
 }foreach _rst;
 
-[format["(items:%1 trash:%2 s-rare:%3)",count _ItemsList,_cnt,_srareOn]] call LB_fnc_log;
+_retlist = [];
+{
+	if!(_x isEqualTo "")then{
+		_retlist pushBack _x;
+	};
+}foreach _ItemsList;
 
-_ItemsList
+//[format["(items:%1 trash:%2 s-rare:%3)",count _ItemsList,_cnt,_srareOn]] call LB_fnc_log;
+
+_retlist

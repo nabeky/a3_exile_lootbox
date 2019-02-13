@@ -5,7 +5,7 @@ class CfgPatches
 		units[] = {};
 		weapons[] = {};
 		requiredVersion = 0.1;
-		lootbox_version = "v1.30 (17-05-2018)";
+		lootbox_version = "v1.40 (13-02-2019)";
 		requiredAddons[] = {"exile_client","exile_assets","exile_server_config","a3_dms"};
 		author[]= {"nabek"};
 	};

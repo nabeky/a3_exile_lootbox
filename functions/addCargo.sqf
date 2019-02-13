@@ -4,7 +4,7 @@
 	3:poptabs
 	4:trash items(fill mode)
 */
-private["_cargo","_items","_poptabs","_trash","_content"];
+private["_cargo","_items","_poptabs","_trash","_content","_ammoCount"];
 
 _cargo = _this select 0;
 _items = _this select 1;
@@ -23,7 +23,15 @@ _content = "";
 	_itemType = _x call BIS_fnc_itemType;
 	switch(_itemType select 0)do{
 		case "Weapon":{_cargo addWeaponCargoGlobal [_x, 1]};
-		case "Magazine":{_cargo addMagazineCargoGlobal [_x, 1]};
+		case "Magazine":
+		{
+			_ammoCount = getNumber(configFile >> "CfgMagazines" >> _x >> "count");
+			if(_ammoCount > 1)then{
+				_cargo addMagazineAmmoCargo [_x, 1,floor(random _ammoCount)+1];
+			}else{
+				_cargo addMagazineCargoGlobal [_x, 1]; 
+			};
+		};
 		case "Backpack":{_cargo addBackpackCargoGlobal [_x, 1]};
 		case "Item";
 		case "Equipment";

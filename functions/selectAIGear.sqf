@@ -7,23 +7,10 @@
 */
 private["_arg","_uniform","_vest","_headgear","_weapon","_weaponAttachments","_magazines","_pistol","_pistolAttachments","_assignedItems","_launcher","_backpack"];
 private["_AIItem","_AIUniforms","_AIVests","_AIHeadgear","_AIWeapon","_AIAttach","_AIHGun","_AIHgunAttach","_AIAssign","_AILauncher","_AIBackpack"];
-private["_ironman"];
+private["_ironman","_j"];
 _arg = toUpper _this;
 
 _ironman = false;
-
-_AIUniforms = LB_BanditUniforms;
-_AIVests = LB_BanditVests;
-_AIHeadgear = LB_BanditHeadgear;
-_AIWeapon = LB_BanditWeapon;
-_AIAttach = LB_BanditWeaponAttach;
-_AIHGun = LB_BanditPistol;
-_AIHgunAttach = LB_BanditPistolAttach;
-_AIAssign = LB_BanditAssignedItems;
-_AILauncher = LB_BanditLauncher;
-_AIBackpack = LB_BanditBackpack;
-_AIItem = LB_BanditItem;
-_magazines = [];
 
 // Iron-Man
 if(_arg isEqualTo "IRON")then
@@ -35,14 +22,31 @@ if(_arg isEqualTo "IRON")then
 	_AIBackpack = ["B_Carryall_oli"];
 	_AIWeapon = ["MMG_01_hex_F"];
 	_AIAttach = ["acc_flashlight","optic_AMS_snd","bipod_02_F_hex"];//muzzle_snds_93mmg_tan
-	_magazines pushBack ["HandGrenade",2];
+	_magazines = [["HandGrenade",2]];
 	_AIHGun = [];
 	_AIHgunAttach = [];
+	_AIAssign = ["Exile_Headgear_GasMask"];
+	_AIItem = [];
+	_AILauncher = [];
+}else{
+	_AIUniforms = LB_BanditUniforms;
+	_AIVests = LB_BanditVests;
+	_AIHeadgear = LB_BanditHeadgear;
+	_AIWeapon = LB_BanditWeapon;
+	_AIAttach = LB_BanditWeaponAttach;
+	_AIHGun = LB_BanditPistol;
+	_AIHgunAttach = LB_BanditPistolAttach;
+	_AIAssign = LB_BanditAssignedItems;
+	_AILauncher = LB_BanditLauncher;
+	_AIBackpack = LB_BanditBackpack;
+	_AIItem = LB_BanditItem;
+	_magazines = [];
 };
 
-for "_j" from 1 to round((count _AIItem)/2) do
-{
-	_magazines pushBack [selectRandom _AIItem,1];
+if(count _AIItem > 0)then{
+	for "_j" from 1 to round((count _AIItem)/2) do{
+		_magazines pushBack [selectRandom _AIItem,1];
+	};
 };
 
 _uniform = "";
@@ -65,30 +69,25 @@ if(count _AILauncher > 0)then {_launcher = selectRandom _AILauncher;};
 if(count _AIBackpack > 0)then {_backpack = selectRandom _AIBackpack;};
 _assignedItems = _AIAssign;
 
-if !(_ironman)then
-{
+if !(_ironman)then{
 	if(random 1 < 0.5)then {_weaponAttachments = [""];};
 	if(random 1 < 0.5)then {_pistolAttachments = [""];};
 	if(random 1 < 0.2)then {_backpack = "";};
 	if(random 1 < 0.4 OR isNil "_launcher")then {_launcher = "";};
 };
 
-if(_weapon != "")then
-{
+if(_weapon != "")then{
 	_mags = getArray(configFile >> "CfgWeapons" >> _weapon >> "magazines");
 	_magazines pushBack [selectRandom _mags,3+round(random 3)];
 };
-if(_pistol != "")then
-{
+if(_pistol != "")then{
 	_mags = getArray(configFile >> "CfgWeapons" >> _pistol >> "magazines");
 	_magazines pushBack [selectRandom _mags,2+round(random 3)];
 };
-if(_launcher != "")then
-{
+if(_launcher != "")then{
 	_mags = getArray(configFile >> "CfgWeapons" >> _launcher >> "magazines");
 	_magazines pushBack [selectRandom _mags,1];
 };
-
 _loadout = [
 	_weapon,
 	_weaponAttachments,

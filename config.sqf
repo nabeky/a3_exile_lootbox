@@ -1,10 +1,10 @@
 ////////////////////////////////////////////////////////////////////////
 // Looting boxes (a3_exile_lootbox)
-// * config file => config.sqf
+// *config file => config.sqf
 //
 // for Arma3 EXILE MOD (Server-Addon) and Community
 // *if u wont supports? blog.ahh.jp (Japanese only)
-// *included documents "readme_jp.txt" but japanese.
+// *included documents "readme_jp.txt" but japanese only.
 // *someone who translates!(English,French,German etc.)
 //
 //	Index
@@ -26,43 +26,44 @@
 //	(16) Flaming objects
 //	(17) Travelers AI
 //	(18) Iron-man AI
-//	(19) Static Water-cooler
+//	(19) Random Exile-objects
 //	(20) Custom billboards
 //	(21) Text on Map
 //	(22) Server messages
 ////////////////////////////////////////////////////////////////////////
 LB_DebugMode = true;
 LB_OutputLog = true;
-LB_PendingTime = 0.0;	// second
-LB_WaitSysBusy = true;	// 40fps lower
+LB_PendingTime = 5.0;	// second
+LB_WaitSysBusy = false;	// 40fps lower
 
 /*=============================
 	(1) Debug Marker
 
-	*loot-box/trap/strange-obj
+	*loot-box/trap/strange-obj positions
+	*bandits spawn & waypoint positions
 	*not use to MarkerType = ""
 	Marker Colors
 	https://community.bistudio.com/wiki/CfgMarkerColors_Arma_3
 	Marker Types
 	https://community.bistudio.com/wiki/cfgMarkers
 	*/
-LB_MapMarker = true;
-// Item-box
+LB_MapMarker = false;//true
+//*Item-box
 LB_MapMarkerType = "mil_dot_noShadow";
 LB_MapMarkerColor = "ColorYellow";
-// Trap
+//*Trap
 LB_MapMarkerTypeMine = "mil_dot_noShadow";
 LB_MapMarkerColorMine = "ColorRed";
-// AI
+//*AI
 LB_MapMarkerTypeAI = "mil_dot_noShadow";
 LB_MapMarkerColorAI = "ColorRed";
-// AI Traveler
+//*AI Traveler
 LB_MapMarkerTypeAITr = "mil_dot_noShadow";
 LB_MapMarkerColorAITr = "ColorBlue";
-// Vehicle
+//*Vehicle
 LB_MapMarkerTypeVehicle = "mil_dot_noShadow";
 LB_MapMarkerColorVehicle = "ColorOrange";
-// Strange/Framing-object/custom billboard
+//*Strange/Framing-object/Exile object/custom billboard
 LB_MapMarkerTypeST = "mil_dot_noShadow";
 LB_MapMarkerColorST = "ColorGreen";
 
@@ -73,11 +74,13 @@ LB_MapMarkerColorST = "ColorGreen";
 	Random pickup
 	*can unpack(Exile_Container_Storagecrate..)
 	Capacity
+	175:Exile_Container_Safe_Small
 	500:Exile_Container_CamoTent
 	600:Exile_Container_Storagecrate
+	2500:Exile_Container_OldChest
 	???:Exile_Container_SupplyBox
 	*/
-LB_BoxObjClass_indoor = ["Exile_Container_Storagecrate"];
+LB_BoxObjClass_indoor = ["Exile_Container_Storagecrate","Exile_Container_OldChest"];
 LB_BoxObjClass_outdoor = ["Exile_Container_Storagecrate","Exile_Container_CamoTent"];
 
 /*=============================
@@ -90,16 +93,17 @@ LB_BoxObjClass_outdoor = ["Exile_Container_Storagecrate","Exile_Container_CamoTe
 	*if use map-local randmark add "NameLocal"
 	*Traveler AI : use "NameCity","NameCityCapital"
 	*Iron-man AI : use "NameLocal"(search airport/military)
+	*Bandit-city : use "NameCityCapital"
 	*/
 //*Can use "Map Local name" for LB_LocationLoot
 LB_Locations = ["NameVillage","NameCity","NameCityCapital","NameLocal"];
 
-//*DEBUG fast finish(non Village)
+//*DEBUG:fast finish(non Village)
 //LB_Locations = ["NameCity","NameCityCapital","NameLocal"];
-//LB_Locations = [];
+//LB_Locations = ["NameCityCapital"];
 
 /*=============================
-	(4) Create new location
+	(4) Create new map-location
 	
 	(array)
 	1:Location type
@@ -107,7 +111,7 @@ LB_Locations = ["NameVillage","NameCity","NameCityCapital","NameLocal"];
 	3:Position
 	4:Radius
 	*type is "" disable
-	*If u wont Item-BOX/Vehicle/AI spawn area
+	*If u wont add Item-BOX/Vehicle/AI spawn areas
 	*/
 LB_NewLocation = [
 	["NameLocal","Scrap Yard",[5200,11300,0],500]
@@ -122,21 +126,29 @@ LB_NewLocation = [
 	[[x,y,z],radius],[[x,y,z],radius], ...
 	*/
 LB_Blacklist = [[[0,0,0],0]];
+//
 LB_BLTrader = 500;
 LB_BLSpawnZone = 0;
 LB_BLTerritory = 300;
-LB_BLItembox = 20;
-LB_BLBandit = 20;
-LB_BLVehicle = 20;
+//
+LB_BLItembox = 5;
+LB_BLBandit = 5;
+LB_BLVehicle = 10;
 
 /*=============================
-	(6) Trush items
+	(6) Trush items (garbage)
 
-	*overwrite the items list
+	*overwrite(replace or delete) the items-list
+	*("" is delete item)
 	*/
 LB_TrashItems = [
+	"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",	// ajust to delete items
+	"Exile_Item_XM8",
+	"Exile_Uniform_BambiOverall",
 	"Exile_Item_Magazine01",
 	"Exile_Item_Magazine02",
+	"Exile_Item_Magazine03",
+	//"Exile_Item_Magazine04",
 	"Exile_Item_Can_Empty",
 	"Exile_Item_PlasticBottleEmpty",
 	"Exile_Item_PlasticBottleDirtyWater",
@@ -219,10 +231,10 @@ LB_SRareItems = [
 ];
 
 /*=============================
-	(8) Loot groups
+	(8) Loot Item-type groups
 	
 	[group name] (3array)
-		[items....] <- static
+		[items....] <- static (all pickup)
 		[items....] <- 50% random pickup
 		[items....] <- rare random 1 pickup
 	*Think about Storage capacity
@@ -230,10 +242,11 @@ LB_SRareItems = [
 	*Finally it will be overwritten with trush(%)
 	*/
 LB_LootAllFixedItems = [
-	"ItemMap","Binocular","Exile_Item_PlasticBottleFreshWater","Exile_Item_SeedAstics",
-	"Exile_Item_Bandage","Exile_Item_Vishpirin",
-	"Exile_Weapon_M1014","Exile_Magazine_8Rnd_74Slug","Exile_Magazine_8Rnd_74Slug",
-	"Exile_Weapon_Taurus","Exile_Magazine_6Rnd_45ACP","Exile_Magazine_6Rnd_45ACP",
+	"ItemMap","Binocular",
+	//"Exile_Item_PlasticBottleFreshWater","Exile_Item_SeedAstics",
+	//"Exile_Item_Bandage","Exile_Item_Vishpirin",
+	"Exile_Weapon_M1014","Exile_Magazine_8Rnd_74Slug",
+	"Exile_Weapon_Taurus","Exile_Magazine_6Rnd_45ACP",
 	"9Rnd_45ACP_Mag",
 	"Exile_Magazine_7Rnd_45ACP",
 	"Exile_Magazine_8Rnd_9x18",
@@ -257,6 +270,11 @@ LB_LootGroups = [
 		["Exile_Item_MetalScrews","Exile_Item_Sand","Exile_Item_Cement","Exile_Item_LightBulb","Exile_Item_ExtensionCord"],
 		["Exile_Item_DuctTape","Exile_Item_Rope","Exile_Item_Pliers","Exile_Item_MetalBoard","Exile_Item_MetalPole","Exile_Item_Handsaw","Exile_Item_Screwdriver","Exile_Item_PortableGeneratorKit"],
 		["Exile_Item_Knife","Exile_Item_CodeLock","Exile_Item_Grinder","Exile_Item_Foolbox","Exile_Item_BaseCameraKit"]
+	]],
+	["books",[
+		["Exile_Item_Magazine01","Exile_Item_Magazine02","Exile_Item_Magazine03","Exile_Item_ToiletPaper"],
+		["Exile_Item_Magazine01","Exile_Item_Magazine02","Exile_Item_Magazine03","Exile_Item_ToiletPaper","Exile_Item_ToiletPaper","Exile_Item_SleepingMat"],
+		["Exile_Item_InstaDoc","Exile_Item_Magazine04","Exile_Item_ToiletPaper"]
 	]],
 	["weapon",[
 		[],
@@ -309,7 +327,7 @@ LB_LootGroups = [
 		"srifle_DMR_07_hex_F"
 		]
 	]],
-	["armo",[	//asalt,sniper
+	["ammo",[	//asalt,sniper
 		[
 		"Exile_Magazine_30Rnd_762x39_AK",
 		"Exile_Magazine_30Rnd_545x39_AK_White",
@@ -370,6 +388,13 @@ LB_LootGroups = [
 		["APERSBoundingMine_Range_Mag","APERSMine_Range_Mag","APERSTripMine_Wire_Mag","ClaymoreDirectionalMine_Remote_Mag","SLAMDirectionalMine_Wire_Mag","IEDLandBig_Remote_Mag","IEDLandSmall_Remote_Mag","IEDUrbanBig_Remote_Mag","IEDUrbanSmall_Remote_Mag"],
 		["SatchelCharge_Remote_Mag","DemoCharge_Remote_Mag"]
 	]],
+	["medicine",[
+		["Exile_Item_Bandage","Exile_Item_Bandage","Exile_Item_Bandage","Exile_Item_Bandage",
+		"Exile_Item_Vishpirin","Exile_Item_Vishpirin",
+		"Exile_Item_InstaDoc","Exile_Item_InstaDoc"],
+		[],
+		[]
+	]],
 	["vehicle",[	// use vehicle spawn
 		[],
 		["Exile_Item_Vishpirin","ItemGPS","MiniGrenade","1Rnd_HE_Grenade_shell"],
@@ -382,7 +407,9 @@ LB_LootGroups = [
 		"Exile_Item_Beer","Exile_Item_MountainDupe","Exile_Item_PowerDrink",
 		"Exile_Item_Moobar","Exile_Item_CockONut","Exile_Item_Noodles","Exile_Item_ChickenFilet_Cooked",
 		"Exile_Item_CanOpener","Exile_Item_DuctTape",
-		"Exile_Item_Magazine01","Exile_Item_Magazine02"],
+		"Exile_Magazine_30Rnd_762x39_AK","Exile_Magazine_30Rnd_545x39_AK","Exile_Magazine_10Rnd_303",
+		"30Rnd_556x45_Stanag","30Rnd_9x21_Mag","30Rnd_45ACP_Mag_SMG_01","Exile_Magazine_8Rnd_74Slug",
+		"Exile_Magazine_10Rnd_765x17_SA61","Exile_Magazine_20Rnd_765x17_SA61"],
 		[]
 	]]
 ];
@@ -399,7 +426,7 @@ LB_LootGroups = [
 	6:Add Special Rare item rate (0-1)%
 	7:Add Poptabs(random max value)　low:30%
 	8:Trash rate (0-1)%
-	9:Bandit AIs(0-x) *DMS Addon
+	9:Bandit AIs(0-x) *use DMS-Addon
 	10:Mine(s) count on nearest road
 	11:Wire-trap rate (0-1)%
 	12:Strange-objects(0-x)
@@ -410,27 +437,27 @@ LB_LootGroups = [
 	17:Loot groups(array)
 	*/
 LB_LocationLoot = [
-	["Hazar Bagh",[		// 1:<-map local name (Type:NameLocal)
-		300,			// 2:  *SAMPLE : local setting
+	["Hazar Bagh",[		// 1:<-Map-static location (Type:NameLocal)
+		300,			// 2:  *** SAMPLE : local setting
 		2,				// 3:
-		2,				// 4:
+		1,				// 4:
 		0.5,			// 5:
 		0.1,			// 6:
-		100,			// 7:
-		0.3,			// 8:
+		50,				// 7:
+		0.5,			// 8:
 		0,				// 9:
 		0,				// 10:
 		0.2,			// 11:
-		10,				// 12:
+		5,				// 12:
 		0,				// 13:
-		2,				// 14:
+		1,				// 14:
 		4,				// 15:
 		["poor"],		// 16:
-		["armo","civ","foods","asalt","weapon","backpack"]
+		["ammo","civ","foods","asalt","weapon","backpack"]
 		]
 	],
-	["Anar",[			// 1:<-map local name (Type:NameLocal)
-		300,			// 2:  *SAMPLE : no item-box,trader area etc..
+	["Anar",[			// 1:<-Map-static location (Type:NameLocal)
+		300,			// 2:  *** SAMPLE : no item-box,trader area etc..
 		0,				// 3:
 		0,				// 4:
 		0,				// 5:
@@ -440,9 +467,9 @@ LB_LocationLoot = [
 		0,				// 9:
 		0,				// 10:
 		0,				// 11:
-		15,				// 12:<-use strange-obj.
+		10,				// 12:<-use strange-obj.
 		1,				// 13:<-use flaming-obj.
-		2,				// 14:
+		0,				// 14:
 		0,				// 15:
 		[],				// 16:
 		[]
@@ -454,60 +481,60 @@ LB_LocationLoot = [
 		1,				// 4:
 		0,				// 5:
 		0.5,			// 6:
-		100,			// 7:
-		0.9,			// 8:
+		50,				// 7:
+		0.1,			// 8:
 		1,				// 9:
 		2,				// 10:
 		0,				// 11:
-		10,				// 12:
+		5,				// 12:
 		0,				// 13:
-		2,				// 14:
+		5,				// 14:
 		5,				// 15:
-		["car","guerilla","armed"],	// 16:
-		["armo","civ","foods","asalt","sniper","scope","explosives"]
+		["car","guerilla"],	// 16:
+		["ammo","civ","foods","asalt","sniper","scope","explosives"]
 		]
 	],
 	["NameVillage",[	// 1:(Type:NameVillage)
 		300,			// 2:
 		2,				// 3:
-		2,				// 4:
+		1,				// 4:
 		0.5,			// 5:
 		0.1,			// 6:
-		100,			// 7:
-		0.3,			// 8:
+		50,				// 7:
+		0.5,			// 8:
 		0,				// 9:
 		0,				// 10:
 		0.2,			// 11:
-		10,				// 12:
+		5,				// 12:
 		0,				// 13:
-		2,				// 14:
+		1,				// 14:
 		4,				// 15:
 		["poor"],		// 16:
-		["armo","civ","foods","asalt","weapon","backpack"]
+		["ammo","civ","foods","asalt","weapon","backpack"]
 		]
 	],
 	["NameCity",[		// 1:(Type:NameCity)
 		500,			// 2:
-		5,				// 3:
+		4,				// 3:
 		2,				// 4:
 		0.7,			// 5:
 		0.2,			// 6:
 		300,			// 7:
-		0.2,			// 8:
+		0.3,			// 8:
 		2,				// 9:
 		0,				// 10:
 		0.3,			// 11:
-		15,				// 12:
+		10,				// 12:
 		0,				// 13:
 		1,				// 14:
 		5,				// 15:
 		["poor","car"],	// 16:
-		["armo","civ","foods","armar","explosives"]
+		["ammo","civ","foods","armar","explosives","medicine"]
 		]
 	],
 	["NameCityCapital",[// 1:(Type:NameCityCapital)
 		800,			// 2:
-		10,				// 3:
+		6,				// 3:
 		2,				// 4:
 		0.8,			// 5:
 		0.3,			// 6:
@@ -517,16 +544,16 @@ LB_LocationLoot = [
 		0,				// 10:
 		0.5,			// 11:
 		20,				// 12:
-		1,				// 13:
+		2,				// 13:
 		1,				// 14:
 		5,				// 15:
 		["car","guerilla"],	// 16:
-		["armo","civ","foods","sniper","scope","armar","explosives"]
+		["ammo","civ","foods","medicine","sniper","scope","armar","explosives","books"]
 		]
 	],
 	["airfield",[		// 1:(Type:NameLocal:"airfield") *TANOA:type:"Airport"
 		800,			// 2:
-		2,				// 3:
+		3,				// 3:
 		2,				// 4:
 		0.1,			// 5:
 		0.5,			// 6:
@@ -535,17 +562,17 @@ LB_LocationLoot = [
 		3,				// 9:
 		1,				// 10:
 		0.7,			// 11:
-		0,				// 12:
+		2,				// 12:
 		2,				// 13:
 		0,				// 14:
 		3,				// 15:
-		["air","armed","guerilla"],	// 16:
-		["armo","asalt","sniper","scope","explosives"]
+		["air","guerilla","car"],	// 16:
+		["ammo","asalt","sniper","scope","explosives","books"]
 		]
 	],
 	["military base",[	// 1:(Type:NameLocal)
 		800,			// 2:
-		2,				// 3:
+		3,				// 3:
 		2,				// 4:
 		0.8,			// 5:
 		0.5,			// 6:
@@ -554,12 +581,12 @@ LB_LocationLoot = [
 		3,				// 9:
 		1,				// 10:
 		0.7,			// 11:
-		0,				// 12:
+		2,				// 12:
 		2,				// 13:
 		0,				// 14:
 		3,				// 15:
-		["guerilla","armed"],	// 16:
-		["armo","asalt","sniper","scope","explosives"]
+		["guerilla","car"],	// 16:
+		["ammo","asalt","sniper","scope","explosives","books"]
 		]
 	]
 ];
@@ -580,11 +607,11 @@ LB_LocationLoot = [
 	*use object LB_BoxObjClass_outdoor
 	*/
 LB_StaticBox = [
-	[[0,0,0],["asalt","sniper","scope"],2,0.8,0.1,3000]
+//	[[2,2,10],["asalt","sniper","scope"],2,0.8,0.1,3000]
 ];
 
 /*=============================
-	(11) Bandit AI(in City)
+	(11) Bandit AI(this addon-AIs)
 
 	*defficulty:
 		"random","static","hardcore","difficult","moderate","easy"
@@ -600,25 +627,28 @@ LB_StaticBox = [
 LB_BanditSide = EAST;
 LB_BanditDifficulty = "random";
 LB_BanditClass = "custom";
-LB_BanditSniper = 10;	// higher(ASL base difference) *class=DMS:sniper
-LB_BanditMove = 0.8;
-//*class:Custom Equipments
+LB_BanditSniper = 10;	// altitude(ASL base difference) *class=DMS:sniper
+LB_BanditMove = 0.9;	// moving chance,0 is chiken AI(in house)
+//*class:Custom Equipments(random equipped)
 LB_BanditUniforms		= ["Exile_Uniform_BambiOverall","U_C_Poloshirt_blue","U_C_Poloshirt_burgundy","U_C_Poloshirt_salmon","U_C_Poloshirt_stripped","U_C_Poloshirt_tricolour","U_NikosAgedBody","U_NikosBody","U_IG_Guerilla1_1","U_IG_Guerilla2_1","U_IG_Guerilla2_2","U_IG_Guerilla2_3","U_IG_Guerilla3_1","U_BG_Guerilla2_1","U_IG_Guerilla3_2","U_BG_Guerrilla_6_1","U_BG_Guerilla1_1","U_BG_Guerilla2_2","U_BG_Guerilla2_3","U_BG_Guerilla3_1"];
 LB_BanditVests			= ["V_Press_F","V_TacVestCamo_khk","V_TacVest_blk","V_BandollierB_blk","V_BandollierB_cbr","V_BandollierB_khk","V_BandollierB_oli"];
 LB_BanditHeadgear		= ["Exile_Headgear_SafetyHelmet","Exile_Headgear_SantaHat","H_TurbanO_blk","H_Shemag_khk","H_Shemag_olive","H_Shemag_olive_hs","H_Shemag_tan","H_ShemagOpen_khk","H_ShemagOpen_tan","Exile_Headgear_SafetyHelmet","Exile_Headgear_SantaHat","H_CrewHelmetHeli_B","H_CrewHelmetHeli_I","H_CrewHelmetHeli_O"];
-LB_BanditWeapon			= ["SMG_01_F","SMG_02_F","SMG_05_F","hgun_PDW2000_F","arifle_TRG21_F","arifle_TRG20_F","arifle_SDAR_F","Exile_Weapon_LeeEnfield","arifle_AKS_F","Exile_Weapon_AK74","Exile_Weapon_AK107","arifle_Katiba_F"];
-LB_BanditWeaponAttach	= ["acc_flashlight"];
-LB_BanditPistol			= ["hgun_ACPC2_F","hgun_P07_F","hgun_Pistol_heavy_01_F","hgun_Pistol_heavy_02_F","hgun_Rook40_F","Exile_Weapon_Makarov"];
-LB_BanditPistolAttach	= [];
-LB_BanditAssignedItems	= ["ItemMap","ItemCompass"];	//,"ItemGPS"
+LB_BanditWeapon			= ["SMG_01_F","SMG_02_F","SMG_05_F","hgun_PDW2000_F","arifle_TRG21_F","arifle_TRG20_F","arifle_CTAR_blk_F","arifle_SDAR_F","Exile_Weapon_LeeEnfield","arifle_AKS_F","Exile_Weapon_AK74","Exile_Weapon_AK107","arifle_Katiba_F","Exile_Weapon_M16A2"];
+LB_BanditWeaponAttach	= ["","acc_flashlight","acc_pointer_IR","optic_Arco_ghex_F","optic_ERCO_blk_F","optic_Arco"];
+LB_BanditPistol			= ["hgun_ACPC2_F","hgun_P07_F","hgun_Pistol_heavy_01_F","hgun_Pistol_heavy_02_F","hgun_Rook40_F","Exile_Weapon_Makarov","Exile_Weapon_SA61"];
+LB_BanditPistolAttach	= ["","","optic_Holosight","optic_MRD"];
 LB_BanditLauncher		= [];
 LB_BanditBackpack		= [
 	"B_HuntingBackpack","B_Kitbag_cbr","B_Kitbag_mcamo","B_Kitbag_sgg","B_OutdoorPack_blk","B_OutdoorPack_blu","B_OutdoorPack_tan","B_TacticalPack_blk","B_TacticalPack_mcamo","B_TacticalPack_ocamo","B_TacticalPack_oli","B_TacticalPack_rgr",
 	"B_ViperLightHarness_khk_F","B_ViperLightHarness_ghex_F","B_FieldPack_blk","B_ViperHarness_base_F","B_Bergen_blk","B_FieldPack_cbr","B_ViperHarness_khk_F","B_FieldPack_oucamo","B_FieldPack_oucamo","B_ViperHarness_hex_F","B_ViperLightHarness_blk_F","B_FieldPack_ocamo","B_ViperLightHarness_blk_F","B_ViperHarness_ghex_F","B_Bergen_sgg","B_ViperHarness_ghex_F","B_ViperLightHarness_khk_F","B_FieldPack_ocamo","B_ViperHarness_oli_F","B_FieldPack_cbr","B_FieldPack_blk","B_FieldPack_oucamo","B_ViperHarness_khk_F","B_ViperLightHarness_khk_F","B_ViperLightHarness_hex_F","B_FieldPack_ocamo","B_ViperHarness_hex_F","B_ViperHarness_base_F","B_ViperHarness_blk_F","B_ViperLightHarness_ghex_F","B_FieldPack_cbr","B_ViperLightHarness_oli_F","B_ViperHarness_oli_F","B_ViperLightHarness_hex_F","B_Bergen_rgr","B_FieldPack_blk","B_FieldPack_cbr","B_FieldPack_oucamo","B_ViperLightHarness_oli_F","B_ViperLightHarness_ghex_F","B_FieldPack_blk","B_FieldPack_cbr","B_ViperLightHarness_hex_F","B_FieldPack_oucamo","B_FieldPack_ocamo","B_FieldPack_ghex_F","B_FieldPack_blk","B_ViperLightHarness_blk_F","B_FieldPack_ocamo","B_ViperHarness_blk_F","B_Bergen_mcamo","B_ViperLightHarness_oli_F"];
+// 50% random pickup
 LB_BanditItem			= [];	// *recommend empty(use Item-box engine)
-LB_BanditItemGroups = ["civ","bandit"];
-LB_BanditItemCfg = [1,0.5,0.1];
-LB_BanditMaxPoptab = 1000;
+// Always equipped
+LB_BanditAssignedItems	= ["ItemMap","ItemCompass"];	//,"ItemGPS"
+// Addon-Item Engine
+LB_BanditItemGroups = ["civ","bandit","books"];
+LB_BanditItemCfg = [1,0.5,0.2];
+LB_BanditMaxPoptab = 500;	// random,max value(low:30%)
 
 /*=============================
 	(12) Trap
@@ -627,7 +657,7 @@ LB_BanditMaxPoptab = 1000;
 	SatchelCharge_F/DemoCharge_F/Claymore_F/IEDUrbanBig_F/IEDLandBig_F/IEDUrbanSmall_F/IEDLandSmall_F
 	UnderwaterMine/UnderwaterMineAB/UnderwaterMinePDM
 	*/
-LB_NearMine = ["APERSTripMine"];	// or "Samsung_Galaxy"
+LB_NearMine = ["APERSTripMine"];	// or "APERS_Samsung_Galaxy"
 LB_RoadMine = ["APERSMine"];
 
 /*=============================
@@ -651,15 +681,15 @@ LB_RoadMine = ["APERSMine"];
 LB_VRandomFuel = true;
 LB_VFuelLow = 0.1;
 LB_VFuelMax = 0.5;	// false:LB_VRandomFuel
-LB_VBrokenParts = ["wheel"];	// damege 0.9-0.99
+LB_VBrokenParts = ["wheel"];	// target damege 0.9-0.99
 LB_VDamageChance = 0.9;
 LB_VDamageLow = 0.5;
 LB_VDamageMax = 0.7;
-LB_EngineOn = 0.7;
-LB_LightOn = 0.0;	// see arma3 bug ;-)
-LB_VItemGroup = ["vehicle","civ","weapon"];
+LB_EngineOn = 0.2;	// 0-1 chance
+LB_LightOn = 0.0;	// 0-1 chance,see arma3 bug ;-)
+LB_VItemGroup = ["vehicle","civ","weapon","ammo"];
 LB_VItemConfig = [1,0.1,0.7];
-LB_VPoptabMax = 1000;
+LB_VPoptabMax = 300;
 LB_Vehicles = [
 	["poor",[
 		"Exile_Bike_OldBike",	//?!
@@ -721,23 +751,23 @@ LB_Vehicles = [
 		//"Exile_Car_HEMMT",
 		"Exile_Car_Hunter",
 		"Exile_Car_Ifrit",
-		"Exile_Car_Strider",
+		//"Exile_Car_Strider",
 		"Exile_Car_SUV_Armed_Black",
 		"Exile_Car_BRDM2_HQ",
-		"Exile_Car_BTR40_MG_Green",
+		//"Exile_Car_BTR40_MG_Green",
 		"Exile_Car_HMMWV_M134_Green",
 		"Exile_Car_HMMWV_M2_Green",
 		"Exile_Car_HMMWV_MEV_Green",
 		"Exile_Car_HMMWV_UNA_Green",
-		"Exile_Car_Tempest",
+		//"Exile_Car_Tempest",
 		"Exile_Car_Zamak"
 		]
 	],
 	["air",[
-		"Exile_Plane_Cessna",
-		"Exile_Plane_AN2_Green",
-		"Exile_Plane_AN2_White",
-		"Exile_Plane_AN2_Stripe",
+		//"Exile_Plane_Cessna",
+		//"Exile_Plane_AN2_Green",
+		//"Exile_Plane_AN2_White",
+		//"Exile_Plane_AN2_Stripe",
 		"Exile_Chopper_Hummingbird_Green",
 		"Exile_Chopper_Hummingbird_Civillian_Red",
 		"Exile_Chopper_Hummingbird_Civillian_Light",
@@ -760,79 +790,80 @@ LB_FirePlaceObjs = [
 	(15) Strange objects
 
 	[object,size,flat,simulation]
-	Randomly placed on the surrounding ground.
+	Randomly placed on the surrounding ground. Can use "Land_...."
 	ex:Garbage,Scarecrow,Blood pool,Oil spill,Dead body etc..
 	*if u wont can put Wreck vehicles,Air Planes,Rocks,Mountains!?
 	Worthless.. Joke? or landmark for BOX?!
 	*/
 LB_StrangeObjs = [
-	["Land_HighVoltageTower_dam_F",10,false,false],	// tower
-	["Land_Communication_F",10,false,false],		// higher tower
+	["Land_HighVoltageTower_dam_F",5,false,false],	// tower
+	["Land_Communication_F",5,false,false],			// higher tower
 	["Land_PowerPoleWooden_L_F",5,false,false],		// wooden tower
 	["Land_FieldToilet_F",5,false,false],			// toilet
-	["Land_GarbageBarrel_01_F",3,false,false],		// barrel
-	["Land_Garbage_square3_F",3,true,false],		// garbage
-	["Land_Garbage_square5_F",5,true,false],		// garbage
-	["Land_GarbageBags_F",5,false,false],			// garbage
-	["Land_GarbagePallet_F",5,false,false],			// garbage
+	["Land_GarbageBarrel_01_F",2,false,false],		// barrel
+	["Land_Garbage_square3_F",2,true,false],		// garbage
+	["Land_Garbage_square5_F",3,true,false],		// garbage
+	["Land_GarbageBags_F",3,false,false],			// garbage
+	["Land_GarbagePallet_F",3,false,false],			// garbage
 	["Land_GarbageWashingMachine_F",5,false,false],	// garbage
-	["Land_JunkPile_F",5,false,false],				// garbage
+	["Land_JunkPile_F",3,false,false],				// garbage
 	["Land_Tyre_F",1,false,false],					// tyre
-	["Land_CratesWooden_F",5,false,false],			// wooden box
-	["Land_Sacks_heap_F",3,false,false],			// sucks
-	["Land_Wreck_Skodovka_F",5,false,false],		// wreck vehicles
-	["Land_Wreck_CarDismantled_F",5,false,false],	//
-	["Land_Wreck_Truck_F",5,false,false],			//
-	["Land_Wreck_Car2_F",5,false,false],			//
-	["Land_Wreck_Car3_F",5,false,false],			//
-	["Land_Wreck_Hunter_F",5,false,false],			//
-	["Land_Wreck_Van_F",5,false,false],				//
-	["Land_Wreck_Offroad_F",5,false,false],			//
-	["Land_Wreck_Offroad2_F",5,false,false],		//
-	["Land_Wreck_UAZ_F",5,false,false],				//
-	["Land_Wreck_Ural_F",10,false,false],			//
-	["Land_Wreck_Truck_dropside_F",10,false,false],	//
-	["Land_Wreck_BMP2_F",10,false,false],			//
-	["Land_Wreck_HMMWV_F",10,false,false],			//
-	["Land_Wreck_BRDM2_F",10,false,false],			//
-	["Land_Wreck_Slammer_F",10,false,false],		//
-	["Land_Wreck_Heli_Attack_02_F",10,false,false],	//
-	["Land_UWreck_Heli_Attack_02_F",10,false,false],//
-	["Land_UWreck_MV22_F",10,false,false],			//
+	["Land_CratesWooden_F",2,false,false],			// wooden box
+	["Land_Sacks_heap_F",2,false,false],			// sucks
+	["Land_Wreck_Skodovka_F",3,false,false],		// wreck vehicles
+	["Land_Wreck_CarDismantled_F",3,false,false],	//
+	["Land_Wreck_Truck_F",3,false,false],			//
+	["Land_Wreck_Car2_F",3,false,false],			//
+	["Land_Wreck_Car3_F",3,false,false],			//
+	["Land_Wreck_Hunter_F",3,false,false],			//
+	["Land_Wreck_Van_F",3,false,false],				//
+	["Land_Wreck_Offroad_F",3,false,false],			//
+	["Land_Wreck_Offroad2_F",3,false,false],		//
+	["Land_Wreck_UAZ_F",3,false,false],				//
+	["Land_Wreck_Ural_F",3,false,false],			//
+	["Land_Wreck_Truck_dropside_F",3,false,false],	//
+	["Land_Wreck_BMP2_F",3,false,false],			//
+	["Land_Wreck_HMMWV_F",3,false,false],			//
+	["Land_Wreck_BRDM2_F",3,false,false],			//
+	["Land_Wreck_Slammer_F",3,false,false],			//
+	["Land_Wreck_Heli_Attack_02_F",5,false,false],	//
+	["Land_UWreck_Heli_Attack_02_F",5,false,false],	//
+	["Land_UWreck_MV22_F",5,false,false],			//
 
 	// DLC objects
 	["Oil_Spill_F",3,true,false],					// oil spill(DLC:cart)
-	["Land_GarbageHeap_01_F",5,false,false],		// garbage(DLC:apex)
-	["Land_GarbageHeap_02_F",5,false,false],		// garbage(DLC:apex)
-	["Land_GarbageHeap_03_F",5,false,false],		// garbage(DLC:apex)
-	["Land_GarbageHeap_04_F",5,false,false],		// garbage(DLC:apex)
-	["BloodPool_01_Large_New_F",3,true,false],		// blood(DLC:Laws of War)
-	["BloodPool_01_Large_Old_F",3,true,false],		// blood(DLC:Laws of War)
+	["Land_GarbageHeap_01_F",3,false,false],		// garbage(DLC:apex)
+	["Land_GarbageHeap_02_F",3,false,false],		// garbage(DLC:apex)
+	["Land_GarbageHeap_03_F",3,false,false],		// garbage(DLC:apex)
+	["Land_GarbageHeap_04_F",3,false,false],		// garbage(DLC:apex)
+	["BloodPool_01_Large_New_F",1,true,false],		// blood(DLC:Laws of War)
+	["BloodPool_01_Large_Old_F",1,true,false],		// blood(DLC:Laws of War)
 	
 	// !! Needs CUP-Terrains MOD !! or delete
-	["CUP_misc_TorzoTree_PMC",5,false,false],		// dead tree
-	["CUP_misc_BurnSpruce_PMC",5,false,false],		// dead tree
-	["Mass_grave",10,false,false],					// MAD..
-	["CUP_Akat02S",5,false,false],					// strange tree
-	["CUP_A2_snowman",2,false,false],				// snow-man
-	["CUP_A1_Mrtvola_Army2",3,false,false],			// dead man? Zombie?
-	["CUP_A1_Mrtvola_Army3",3,false,false],			// dead man? Sleeping?
-	["CUP_A1_pa_sx",3,false,false],					// X'mas tree
-	["CUP_A1_socha",10,false,false],				// large statue
-	["Land_tires_EP1",3,false,false],				// tyre
-	["CUP_A2_boogieman",3,false,false],				// scarecrow
+	["CUP_misc_TorzoTree_PMC",3,false,false],		// dead tree
+	["CUP_misc_BurnSpruce_PMC",3,false,false],		// dead tree
+	["Mass_grave",3,false,false],					// MAD..
+	["CUP_Akat02S",3,false,false],					// strange tree
+	["CUP_A2_snowman",1,false,false],				// snow-man
+	["CUP_A1_Mrtvola_Army2",2,false,false],			// dead man? Zombie?
+	["CUP_A1_Mrtvola_Army3",2,false,false],			// dead man? Sleeping?
+	["CUP_A1_pa_sx",1,false,false],					// X'mas tree
+	["CUP_A1_socha",3,false,false],					// large statue
+	["Land_tires_EP1",2,false,false],				// tyre
+	["CUP_A2_boogieman",1,false,false],				// scarecrow
+	["Land_A_Statue_EP1",3,false,false],			// soldiers statue
 	// !! Needs CUP-Terrains MOD !! or delete
-	["LADAWreck",5,false,false],					// wreck vihecles
-	["HMMWVWreck",5,false,false],					//
-	["JeepWreck1",5,false,false],					//
-	["JeepWreck2",5,false,false],					//
-	["JeepWreck3",5,false,false],					//
-	["hiluxWreck",5,false,false],					//
-	["datsun01Wreck",5,false,false],				//
-	["datsun02Wreck",5,false,false],				//
-	["SKODAWreck",5,false,false],					//
-	["Mi8Wreck",10,false,false],					// wreck helis
-	["BlackhawkWreck",10,false,false]				//
+	["LADAWreck",3,false,false],					// wreck vihecles
+	["HMMWVWreck",3,false,false],					//
+	["JeepWreck1",3,false,false],					//
+	["JeepWreck2",3,false,false],					//
+	["JeepWreck3",3,false,false],					//
+	["hiluxWreck",3,false,false],					//
+	["datsun01Wreck",3,false,false],				//
+	["datsun02Wreck",3,false,false],				//
+	["SKODAWreck",3,false,false],					//
+	["Mi8Wreck",5,false,false],						// wreck helis
+	["BlackhawkWreck",5,false,false]				//
 	//["Scarecrow_Trump",1,false,true]
 	//["Scarecrow_Putin",1,false,true]
 ];
@@ -841,7 +872,7 @@ LB_StrangeObjs = [
 	(16) Flaming objects
 
 	*Vehicles/Tanks or Building or Wood material?
-	*Free burning!
+	*Free burning! can't BBQ
 	*/
 LB_FlamingObjs = [
 	"Land_Wreck_Offroad_F",
@@ -865,10 +896,10 @@ LB_FlamingObjs = [
 	3:Trash rate (0-1)%
 	*/
 LB_Traveler = true;
-LB_TravelerGrpMaxAI = 3;
-LB_TravelerItemGrp = ["civ","foods","scope"];
-LB_TravelerItemCfg = [1,0.5,0.1];
-LB_TravelerPoptabMax = 3000;
+LB_TravelerGrpMaxAI = 4;
+LB_TravelerItemGrp = ["civ","foods","books"];
+LB_TravelerItemCfg = [1,0.5,0.3];
+LB_TravelerPoptabMax = 1000;
 
 /*=============================
 	(18) Iron-Man AI(not die?)
@@ -883,35 +914,80 @@ LB_TravelerPoptabMax = 3000;
 	*/
 LB_IronMan = [
 	//[[100,100,0],1]	// *SAMPLE [100,100] fixed spawn
-	[[],1],				// *SAMPLE airport or military random 1 spawn
-	[[],1]				// *SAMPLE airport or military random 1 spawn
+	[[],1],				// auto:"airport or military" random 1AI spawn
+	[[],1]				// auto:"airport or military" random 1AI spawn
 ];
 
 /*=============================
-	(19) Static Clean-water
+	(19) Random Exile Objects
+	
+	Clean-water / ConcreteMixer / Trader
 
-	LB_CleanWaterObj
-	1:Position([x,y,0] or [x,y,z])
-	2:Angle(0-359) *Eden editor rotation "Z" value
-	Fixed spawn clean-water objects
-	*default class "Land_WaterCooler_01_new_F"
-	*config.sqf:CfgInteractionModels->CleanWaterSource
+	LB_RandomExileObj
+	1:Obejct name(array:random 1)
+		CleanWater : "Land_WaterCooler_01_new_F"
+		ConcreteMixer : "Exile_ConcreteMixer"
+		Trader : "Exile_Trader_****"
+			Exile_Trader_AircraftCustoms
+			Exile_Trader_Aircraft
+			Exile_Trader_Armory
+			Exile_Trader_Hardware
+			Exile_Trader_Vehicle
+			Exile_Trader_VehicleCustoms
+			Exile_Trader_WasteDump
+			Exile_Trader_Food
+			Exile_Trader_SpecialOperations
+			Exile_Trader_Equipment
+			Exile_Trader_Office
+			Exile_Trader_CommunityCustoms
+			Exile_Trader_CommunityCustoms2-10
+	2:Position([x,y,0] or [x,y,z]) *AGL
+	3:Angle(0-359) *Eden editor rotation "Z" value
+
+	*config.sqf:CfgInteractionModels->CleanWaterSource etc..
 	*if u wont in building spawn. use Z value [x,y,z]
+	*trader:shitting position. Bambi overall & AK47 & Gasmask. with RubberDuck
+	*trader:Please place it in the back of the building
+	*The rest is randomly marked as a map & put skeleton head
 	*/
-LB_CleanWaterObj = [
-	[[100,100,0],0],
-	[[110,100,0],0],
-	[[120,100,0],0]
+LB_RandomExileObj = [
+//	[["Land_WaterCooler_01_new_F"],[5,5,0],0],	// SAMPLE
+//	[["Exile_ConcreteMixer"],[7,5,0],0]			// SAMPLE
+	[["Land_WaterCooler_01_new_F"],[8321.82,1846.05,0.102173],240],
+	[["Land_WaterCooler_01_new_F"],[5852.63,11494.3,0.32682],42.6],
+	[["Land_WaterCooler_01_new_F"],[10844.9,6317.2,6.4238],88.3],
+	[["Land_WaterCooler_01_new_F"],[5646.35,8900.67,0.178802],259.8],
+	[["Land_WaterCooler_01_new_F"],[7275.92,6420.29,1.59943],91],
+	[["Land_WaterCooler_01_new_F"],[9420.47,9996.45,4.85048],27.7],
+	[["Land_WaterCooler_01_new_F"],[3069.27,9920.28,4.58548],351],
+	[["Land_WaterCooler_01_new_F"],[5181.9,6099.38,0.660187],162],
+	[["Land_WaterCooler_01_new_F"],[6075.43,1175.63,8.01227],213],
+	[["Land_WaterCooler_01_new_F"],[3707.05,4445.97,8.23544],219.8],
+	[["Land_WaterCooler_01_new_F"],[1847.67,386.964,4.26706],121.9],
+	[["Land_WaterCooler_01_new_F"],[9891.4,4329.4,5.74286],185.8],
+	[["Exile_ConcreteMixer"],[5040.83,6922.05,0],54.2],
+	[["Exile_ConcreteMixer"],[7047.87,1027.37,-3.05],43.1],
+	[["Exile_ConcreteMixer"],[3802.93,11083.4,0],137.3],
+	[["Exile_Trader_CommunityCustoms2","Exile_Trader_CommunityCustoms3","Exile_Trader_CommunityCustoms5","Exile_Trader_CommunityCustoms6"],[4392.56,12007.7,1.988],224],
+	[["Exile_Trader_CommunityCustoms2","Exile_Trader_CommunityCustoms3","Exile_Trader_CommunityCustoms5","Exile_Trader_CommunityCustoms6"],[2148.54,224.011,2.47415],49],
+	[["Exile_Trader_CommunityCustoms2","Exile_Trader_CommunityCustoms3","Exile_Trader_CommunityCustoms5","Exile_Trader_CommunityCustoms6"],[8681.71,1401.34,6.58383],216],
+	[["Exile_Trader_CommunityCustoms2","Exile_Trader_CommunityCustoms3","Exile_Trader_CommunityCustoms5","Exile_Trader_CommunityCustoms6"],[6675.02,7470.7,3.20267],265],
+	[["Exile_Trader_CommunityCustoms2","Exile_Trader_CommunityCustoms3","Exile_Trader_CommunityCustoms5","Exile_Trader_CommunityCustoms6"],[12607.8,9837.27,2.82727],258],
+	[["Exile_Trader_CommunityCustoms2","Exile_Trader_CommunityCustoms3","Exile_Trader_CommunityCustoms5","Exile_Trader_CommunityCustoms6"],[3619.76,5573.88,3.73485],163]
 ];
-LB_CleanWaterCount = -1;	// -1 is All available,1-x is Random pickup
+LB_ReoCleanWaterCount = 1;		// -1 is All available,1-x is Random pickup count
+LB_ReoConcreteMixCount = 1;		// -1 is All available,1-x is Random pickup count
+LB_ReoTraderCount = 2;			// -1 is All available,1-x is Random pickup count
 
 /*=============================
 	(20) Custom billboards
 
+	*take easy custom-board put on surfaces
+	
 	LB_CBillboard
 	1:Object classname(Land_Billboard_F etc.)
 	2:Position[x,y,0]
-	3:Angle(0-359) *Eden editor rotation "Z" value
+	3:Angle(0-359) *Eden editor rotation value
 	4:Texture
 	*Change texture objects
 	*Use Eden editor menu(value:position/vector)
@@ -921,37 +997,57 @@ LB_CleanWaterCount = -1;	// -1 is All available,1-x is Random pickup
 	*Land_Billboard_04_blank_F(2screen) no support
 	*/
 LB_CBillboards = [
-	["Land_Billboard_F",[0,0,0],0,"bill0.jpg"]	// sample:map left-bottom corner,replace texture data
+//	["Land_Billboard_F",[0,0,0],180,"b0.jpg"]	// SAMPLE:map left-bottom corner
 ];
 
 /*=============================
 	(21) Map text
 
+	*text & markers & Ellipse on map
+	
 	LB_Maptext
 	1:Position on map
-	2:MarkerType
-	3:Text
-	4:Color
+	2:MarkerType (Icon name or "" is Shape:Ellipse)
+	3:Icon Text / Brush (MarkerType = "":Eclipse Brush name　*CfgMarkerBrushes)
+	4:Color　(*CfgMarkerColors)
 	5:Size[width,height] *marker scale,[0,0] is non-icon
 	*can use double-byte characters(Kanji)
 	*/
 LB_Maptext = [
-	[[400,400],"KIA","WUT is here!?","ColorBlack",[0,0]]
+//	[[400,400],"KIA","WUT is here!?","ColorBlack",[0,0]],	// SAMPLE:Icon & text
+//	[[400,400],"","Border","ColorRed",[300,300]]			// SAMPLE:Ellipse 600m
 ];
 
 /*=============================
 	(22) Broodcast messages
+
+	*broodcastting(system chat)
 	
 	*/
 LB_Bcmessage = [
-	"Hello everyone! ;-)",
-	"Welcome to Exile Server ;-)",
-	"Information https://steamcommunity.com/",
-	"Support http://google.com",
-	"Discord Ch. https://discordapp.com/",
-	"Donate https://www.paypal.com"
+	"* Hello everyone! ;-)",
+	"* Welcome to SABA-MISO Exile Server ;-)",
+	"* Information http://blog.ahh.jp/?page_id=14360",
+	"* Discord Ch. https://discord.gg/b4FT278"
+/* SAMPLE
+	"* Hello everyone! ;-)",
+	"* Welcome to Exile Server ;-)",
+	"* Information http://****",
+	"* Support http://google.com",
+	"* Discord Ch. https://discord.gg/****"
+	"* Donate https://www.paypal.com"
+*/
 ];
-LB_BcmessageTime = 60;	// seconds
+LB_BcmessageTime = 180;	// 1line message post time(seconds)
+
+/*=============================
+	(23) Bandit city
+
+	*Spawn on Capital city(random)
+	*with put vehicles(simple-objects)
+
+	*/
+LB_BCGroups = 3;	// 1group 3AIs, 0:disable
 
 // orz..
 LB_CompiledOkay = true;
