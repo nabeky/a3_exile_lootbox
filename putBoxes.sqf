@@ -499,7 +499,7 @@ _locCount = 0;
 					reloadEnabled _unit;
 					if(needReload _unit == 1)then{reload _unit};
 					_unit addEventHandler ["Fired","_this call LB_eh_Fired"];
-					_unit enableSimulationGlobal false;		// freeze!!
+					//_unit enableSimulationGlobal false;		// freeze!!
 
 					_aicnt = _aicnt - 1;
 					["LB_AI#"+_locationName+str _aicnt,_pos,_C_markertypeAI,_C_markercolorAI,0.7] call LB_fnc_marker;
@@ -712,7 +712,7 @@ if(_C_traveler)then{
 				reloadEnabled _unit;
 				if(needReload _unit == 1)then{reload _unit};
 				_unit addEventHandler ["Fired","_this call LB_eh_Fired"];
-				_unit enableSimulationGlobal false;		// freeze!!
+				//_unit enableSimulationGlobal false;		// freeze!!
 			};
 			_aicnt = _aicnt + 1;
 			["LB_TR#"+str _aicnt,_pos,_C_markertypeAItr,_C_markercolorAItr,0.7] call LB_fnc_marker;
@@ -896,7 +896,7 @@ if(_C_banditcitygrp > 0)then{
 					reloadEnabled _unit;
 					if(needReload _unit == 1)then{reload _unit};
 					_unit addEventHandler ["Fired","_this call LB_eh_Fired"];
-					_unit enableSimulationGlobal false;		// freeze!!
+					//_unit enableSimulationGlobal false;		// freeze!!
 					_AIcnt = _AIcnt + 1;
 					// log
 					//[format["AI %1 %2",_AIcnt,_pos]] call LB_fnc_log;
