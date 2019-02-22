@@ -1013,7 +1013,7 @@ if(count _C_rndexileobj > 0)then{
 		_angle = _x select 2;
 		// Clean water
 		if(_spawn_w > 0 and _className isEqualTo "Land_WaterCooler_01_new_F")then{
-			[_className,AGLToASL(_pos),_angle]call LB_fnc_putSimpleobj;
+			[_className,AGLToASL(_pos),_angle,0.5]call LB_fnc_putSimpleobj;
 			_spawn_w = _spawn_w - 1;
 			_ok = true;
 		};
@@ -1088,7 +1088,7 @@ if(count _C_rndexileobj > 0)then{
 			if(random 1 > 0.7)then{
 				// so bad..
 				//["BloodPool_01_Large_New_F",AGLToASL(_pos)] call LB_fnc_putSimpleobj;
-				["Land_HumanSkull_F",AGLToASL(_pos),_angle] call LB_fnc_putSimpleobj;
+				["Land_HumanSkull_F",AGLToASL(_pos),_angle,0.1] call LB_fnc_putSimpleobj;
 				[format["LB_REOBJ%1",_cnt],[_pos select 0,_pos select 1],"hd_unknown","",0.3,""] call LB_fnc_marker;
 			};
 		};

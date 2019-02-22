@@ -2,17 +2,19 @@
 	1:object class name
 	2:position(ASL)
 	3:angle
+	4:Z relative(= model center-position)
 	
 	return:
 	-
 */
-private ["_className","_pos","_spawned","_temp","_tpos","_vectorDirUp","_model","_vehicle","_angle"];
+private ["_className","_pos","_spawned","_temp","_tpos","_vectorDirUp","_model","_vehicle","_angle","_z_rel"];
 
 _this call
 {
 	_className = param[0,""];
 	_pos = param[1,[0,0,0]];
 	_angle = param[2,nil];
+	_z_rel = param[3,0];
 };
 if(isnil"_angle")then{
 	_angle = floor(random 360);
@@ -26,10 +28,9 @@ _model = getModelInfo _temp select 1;
 deleteVehicle _temp;
 
 if((count _pos) > 2)then{
-	_vehicle = createSimpleObject [_model, _pos];
-}else{
-	_vehicle = createSimpleObject [_model, _tpos];
+	_tpos = [_pos select 0,_pos select 1,(_pos select 2)+_z_rel];
 };
+_vehicle = createSimpleObject [_model, _tpos];
 if!(isNil"_vehicle")then{
 	_vehicle setVectorDirAndUp _vectorDirUp;
 };

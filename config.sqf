@@ -432,7 +432,7 @@ LB_LootGroups = [
 	12:Strange-objects(0-x)
 	13:Flaming-objects(0-x)
 	14:Fire places(0-x)
-	15:Vehicle count
+	15:Spawn Vehicle count
 	16:Vehicle type[] *Cliche:air/tank/army > spawn radius(20m)
 	17:Loot groups(array)
 	*/
@@ -448,7 +448,7 @@ LB_LocationLoot = [
 		0,				// 9:
 		0,				// 10:
 		0.2,			// 11:
-		5,				// 12:
+		10,				// 12:
 		0,				// 13:
 		1,				// 14:
 		4,				// 15:
@@ -505,7 +505,7 @@ LB_LocationLoot = [
 		0,				// 9:
 		0,				// 10:
 		0.2,			// 11:
-		5,				// 12:
+		8,				// 12:
 		0,				// 13:
 		1,				// 14:
 		4,				// 15:
@@ -562,7 +562,7 @@ LB_LocationLoot = [
 		3,				// 9:
 		1,				// 10:
 		0.7,			// 11:
-		2,				// 12:
+		10,				// 12:
 		2,				// 13:
 		0,				// 14:
 		3,				// 15:
@@ -581,7 +581,7 @@ LB_LocationLoot = [
 		3,				// 9:
 		1,				// 10:
 		0.7,			// 11:
-		2,				// 12:
+		10,				// 12:
 		2,				// 13:
 		0,				// 14:
 		3,				// 15:
@@ -810,25 +810,27 @@ LB_StrangeObjs = [
 	["Land_Tyre_F",1,false,false],					// tyre
 	["Land_CratesWooden_F",2,false,false],			// wooden box
 	["Land_Sacks_heap_F",2,false,false],			// sucks
-	["Land_Wreck_Skodovka_F",3,false,false],		// wreck vehicles
-	["Land_Wreck_CarDismantled_F",3,false,false],	//
-	["Land_Wreck_Truck_F",3,false,false],			//
-	["Land_Wreck_Car2_F",3,false,false],			//
-	["Land_Wreck_Car3_F",3,false,false],			//
-	["Land_Wreck_Hunter_F",3,false,false],			//
-	["Land_Wreck_Van_F",3,false,false],				//
-	["Land_Wreck_Offroad_F",3,false,false],			//
-	["Land_Wreck_Offroad2_F",3,false,false],		//
-	["Land_Wreck_UAZ_F",3,false,false],				//
-	["Land_Wreck_Ural_F",3,false,false],			//
-	["Land_Wreck_Truck_dropside_F",3,false,false],	//
-	["Land_Wreck_BMP2_F",3,false,false],			//
-	["Land_Wreck_HMMWV_F",3,false,false],			//
-	["Land_Wreck_BRDM2_F",3,false,false],			//
-	["Land_Wreck_Slammer_F",3,false,false],			//
-	["Land_Wreck_Heli_Attack_02_F",5,false,false],	//
-	["Land_UWreck_Heli_Attack_02_F",5,false,false],	//
-	["Land_UWreck_MV22_F",5,false,false],			//
+
+	// wreck vehicles
+	["Land_Wreck_Skodovka_F",3,false,false],
+	["Land_Wreck_CarDismantled_F",3,false,false],
+	["Land_Wreck_Truck_F",3,false,false],
+	["Land_Wreck_Car2_F",3,false,false],
+	["Land_Wreck_Car3_F",3,false,false],
+	["Land_Wreck_Hunter_F",3,false,false],
+	["Land_Wreck_Van_F",3,false,false],
+	["Land_Wreck_Offroad_F",3,false,false],
+	["Land_Wreck_Offroad2_F",3,false,false],
+	["Land_Wreck_UAZ_F",3,false,false],
+	["Land_Wreck_Ural_F",3,false,false],
+	["Land_Wreck_Truck_dropside_F",3,false,false],
+	["Land_Wreck_BMP2_F",3,false,false],
+	["Land_Wreck_HMMWV_F",3,false,false],
+	["Land_Wreck_BRDM2_F",3,false,false],
+	["Land_Wreck_Slammer_F",3,false,false],
+	["Land_Wreck_Heli_Attack_02_F",5,false,false],
+	["Land_UWreck_Heli_Attack_02_F",5,false,false],
+	["Land_UWreck_MV22_F",5,false,false],
 
 	// DLC objects
 	["Oil_Spill_F",3,true,false],					// oil spill(DLC:cart)
@@ -1022,13 +1024,17 @@ LB_Maptext = [
 	(22) Broodcast messages
 
 	*broodcastting(system chat)
+	*repeat the list
 	
 	*/
 LB_Bcmessage = [
 	"* Hello everyone! ;-)",
 	"* Welcome to SABA-MISO Exile Server ;-)",
-	"* Information http://blog.ahh.jp/?page_id=14360",
-	"* Discord Ch. https://discord.gg/b4FT278"
+	"* [PR] FaminyMart : Convenience Stores",
+	"* No Ero-books, No Life.",
+	"* [PR] FOWA-Type89 Rifle, Made in Japan.",
+	"* Yellow Duck is Danger!",
+	"* [PR] TOKYO 2020 Olympics."
 /* SAMPLE
 	"* Hello everyone! ;-)",
 	"* Welcome to Exile Server ;-)",
@@ -1038,7 +1044,7 @@ LB_Bcmessage = [
 	"* Donate https://www.paypal.com"
 */
 ];
-LB_BcmessageTime = 180;	// 1line message post time(seconds)
+LB_BcmessageTime = 300;	// 1line message post time(seconds)
 
 /*=============================
 	(23) Bandit city
