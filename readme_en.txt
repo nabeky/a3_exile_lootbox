@@ -133,96 +133,91 @@ Official BI tools are nice to have
 	* Install through Steam
 	* Arma Tools would be needed for such as when you want to make a custom sign
 
-// Still translating below... (yukihito23) //
-
 -------------------------------------------------------------------------------
-■■ 動作説明 / Description
-[マップロケーション]
-マップに登録されているロケーション情報（町やランドマーク等）を対象にして、アイテムボックス等をランダムで配置します。
-デフォルトでは、「村・町・大きな町」の３種類を対象に、動作します。
-ロケーションタイプだけでなく、ロケーション地名を指定する事も可能です（この場合、マップ依存になります）
-タイプが合致すると、無条件に全ての町を対象にするため、無効にしたい場合は別途個別に設定してください。
-このロケーションエンジンにて、それぞれに基準点が決められます。
+## Description
+[Map Locations]
+Lootboxes and such shall be randomly placed based on map locations (towns, landmarks, etc..)
+By default this addon works on 3 different tiers of locations (villages, cities, large cities)
+Apart from location type, this addon can be customized to use location names (this customization will make the addon map specific)
+When the location type is found within the given map, it will execute on all it finds so if you need to blacklist specifi locations, please customize the addon to your needs.
+This addon functionality all bases on above mentioned location engine.
 
-他のランドマークも対象にしたい場合は、以下を参照するか、マップデータを調査してください。
+If you want to add other landmarks, you can use below as reference or look through your map.
 https://community.bistudio.com/wiki/Location
-	ロケーションタイプ名
-	NameVillage　村
-	NameCity　町
-	NameCityCapital　大きな町
-	NameLocal　何らかのランドマーク (*)
-	Mount　山
-	Airport　空港
+	Location Type // Name
+	NameVillage // Village
+	NameCity // City
+	NameCityCapital // Large City (Capital)
+	NameLocal // Landmarks
+	Mount // Mountains
+	Airport // Airports
 	etc..
 
-	技術的：
-	マップデータには、地点毎に"タイプ名"と"地名"のセットで登録されてます。
-	よって、タイプではなく、地名で指定すると、その１箇所のみが対象となります。
-	町として登録されていない、任意のランドマーク（NameLocal）を対象にする場合は、ログファイルを参照して手動で設定してください。
-	（CUP Takistanの場合、"山・林"、"集落"や"オイルパイプライン"、"地雷原"など）
-	当アドオンで唯一、マップに依存する設定項目（NameLocal）となります。
+	Technnical Background: 
+	On any given correctly made map, there are different points where Type Names and Location Names are set.
+	Thus, if you specify by location name instead of type, the addon will work on that one specific location.
+	If the given location doesn't have a type name defined on the map, you would be able to use the landmarks instead (NameLocal) my finding this value from logfiles.
+	(In terms of CUP Takistan, Hills, Brushes, Unnamed villages, pipelines, etc..)
+	This addon will only create a requirement for the specific map information if above is utilized.
 
-	ランダム要素を増やすため、ロケーション発見時に、"基準点"を若干ランダムで移動させます。
+	To add randomness to the functionality, when the engine runs and finds a location to execute on, it will have a random sway in setting its center point.
 
-	（メモ）
-	ミリタリーエリア（軍事施設）に関しては、ロケーションタイプというのは存在しません。
-	そのため、調査の上、独自に判断してます。
-	（Airport又はNameLocalに属している、NameCityCapitalの場合も有り）
-	
-[新しいロケーション作成]
-マップ上に、独自にロケーションを作成する事ができます。
-このロケーションを、ロケーションエンジンの動作対象にする事も可能となってます。
+	(Memo)
+	Oftenly, military locations do not have location types thus this addon will try to find it on it's own.
+	(Such as the military is near/within an Airport or a NameLocal, NameCityCapital as well)
 
-	技術的：
-	ロケーションタイプはArma3側で登録されている設定を引き継ぎます。
-	（マップ表示の色やフォント、サイズ、アイコン種類など）
+[Creating new locations]
+        Technnical Background:
+	Location type uses what Arma3 uses as default.
+	(such as font, size, icons)
 
-[アイテムボックス場所]
-アイテムボックスの設置箇所は、簡単には見つからないような場所を探しています。
-以下の条件内でランダムで決められます。
-	o MAPデータ内ロケーション登録地点を基準とした範囲内
-	o 範囲内の建物をランダムで選び、屋内外のいずれか
-	※屋内：屋内のいずれかの場所（主に窓際や出入り口等）
-		入口から最も遠い場所が選択されます
-		建物によっては、最上階のパターンになります
-	※屋外：建物の周囲、近辺になります
-	（いずれも範囲内に建物が無い場合、無効となります）
-	
-	技術的：
-	o 屋内湧きは、buildingPositionデータを利用します
+[Lootbox locations]
+Lootboxe spawn mechanism tries to find a hidden location.
+Spawn mechanism will be based randomly on below criteria.
+  * Within realms of the specified locations within the map
+  * Indoors OR outdoors of a structure within the realm
+  * Indoors: Either OR locations within the structure
+    * the furthest away location from entrance
+    * Depending on structure, such as the most upper level
+  * Outdoors: Random location around the given structure
+  (If mechanism can not find any structures, it will not execute)
+  
+  Technnical Background:
+    * For spawning the lootbox indoors, I am use data provided by "buildingPosition"
 
-[アイテムリスト生成]
-アイテムボックスや湧き車両コンテナ、バンディットＡＩの所持物に適用されます。
-アイテムリストは、複数の要素によって決められます。
-個々のアイテムボックス毎に、以下の各要素の合算分が統合され決定されます。
+[Generating item lists]
+This mechanism is used for Lootbox inventory, spawned vehicle inventory, Bandit AI inventory.
+Item lists will be determined by several factors.
+For each individual inventory, below is calculated and used.
 
-アイテム要素　→レア追加？　→ゴミ化（又は削除）　→シャッフル　→決定
+Item -> Add Rare items? -> Possibility of changing items to trash (or remove) -> Shuffle -> Define and execute
+  * Static Add (global which influences all inventory types)
+  * Statuc quantity value (If value is defined to fluctuate, then random value from range)
+  * 50% of defined list is set randomly
+  * 1 item is selected from the Rare items list
+  * Possibility of 1 item is selected from the Special Rate item list
+  * Poptabs added randomly based on range specified
+  
+    Technical Background:
+    I've tried to make mechanism average out as possible.
+    Once defined and executed, the item order is set to be random as well.
+    (Takes in to account of given inventory container capacity.)
 
-	o 固定追加（全タイプ共通）
-	o 固定(倍率指定されてる場合は、複数個ランダム)
-	o リスト内の５０％がランダムで選択
-	o ”レア”リスト内の１つがランダムで選択
-	o ”スペシャルレア”内から、確立で１つ選択
-	o ポップタブが範囲ランダムで追加
+[Trash filter]
+Once initial item list is created, Trash filter will replace items with trash based on percentage.
+(If setting Trash filter to = 1, then it means all items will be set to trash.)
+With the same mechanism, it's possible to make it such as if Village, the percentage of trash is higher.
+Instead of turning to trash, mechanism will also delete from initial set item list.
 
-	技術的：
-	可能な限り公平に分布されるよう計算の上配慮してます。
-	最終的にはリスト順番もバラバラになるようにしています。
-	（コンテナキャパシティ制限を考えたため、切り捨て）
+[Poptabs]
+Poptabs will be added to given inventory container.
+Poptabs will be calculated based on specified value as max value, then will generate the poptab amount with a 30% minimam value calculation.
+Poptabs in vehicles will follow the same calculation
 
-[ゴミ化フィルター]
-仕上がったアイテムリストに対して、ゴミ率を割合として置換します。
-（つまり、ゴミ化率を１で設定すると、全てがゴミに変わってしまいます）
-同一設定で、村でのアイテムボックスは、ゴミが多い、という形に出来ます。
-ゴミに変えるではなく、削除する機能も追加しました。
+  Example: If specified value = 1000, then 1000 x 0.3 = 300 (minimum value)
+           Thus amount of poptabs will be a random value between 300 to 1000
 
-[ポップタブ]
-アイテムボックスに、ランダムでポップタブが格納されます。
-設定された値を最大として、30%下限でランダムとなります。
-車両も同様となります。
-
-	例：指定値1000の場合、1000 x 0.3 = 300（下限値）
-	300-1000の範囲でランダム
+// Still translating below... (yukihito23) //
 
 [アイテムボックストラップ]
 トラップワイヤーが、アイテムボックス近くに設置されます（屋外のみ＆確立）
