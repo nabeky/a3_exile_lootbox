@@ -1,4 +1,4 @@
-*Japanese documents(UTF,tab:4)
+*English documents(UTF,tab:4)
 *Version look to (config.cpp)
 *Change log to End of doc.
 *We are looking for someone who translates this document　;-)
@@ -11,110 +11,107 @@
 //	開発 ○ 著作/Dev.&Auth.：nabek (blog.ahh.jp) 2018/4-
 //	Discord Ch. https://discord.gg/b4FT278
 //
-//	取扱説明書 / Manual （日本語 / Japanese）
+//	Manual （英語 / English）
 //
-//		目次 / Index
-//		o アドオン概要 / Overview
-//		o 動作確認 / Environment
-//		o 動作説明 / Description
-//		o インストール方法 / Setups
-//		o 設定方法 / Cooking method
-//		o 参考資料 / Documents
-//		o ログ内容 / Logging
-//		o ログエラーについて / Errors and remedy
-//		o 改造について / Customize
-//		o ライセンス・サポートについて / License & Supports
-//		o 既知の問題・バグ / Cockroaches?
-//		o たぶん開発者らしいnabekから / from Dev.nabek
-//		o 更新履歴 / Change logs
+//		Index
+//		o Overview
+//		o Environment
+//		o Description
+//		o Setups
+//		o Cooking method
+//		o Documents
+//		o Logging
+//		o Errors and remedy
+//		o Customize
+//		o License & Supports
+//		o Cockroaches?
+//		o from Dev.nabek
+//		o Change logs
 ////////////////////////////////////////////////////////////////////////
 
 -------------------------------------------------------------------------------
-■■ アドオン概要 / Overview
-Arma3 EXILE MODサーバ専用アドオンとなります。
-マップ上の " 町 " に重きを置いた機能を中心に提供します。
-ほとんどの機能は、マップデータから自動設定するため、サーバディレクトリにコピーするだけで動作します。
-クライアント側（mp_mission.pbo）の設定は不要です。
+@@ Overview
 
-閑散としがちな町やランドマークを、プレーヤーに注目してもらおうというアドオンです。
-アイテム漁りのために、通常のアイテム湧きとは別に、町中の地表または建物内のどこかに、アイテムボックスを配置します。
-アイテムボックスには、主に初期プレーヤーのためになるアイテムやポップタブ、ゴミが入っています。
-（分かり難い場所、アイテムボックス周辺に、ランダムでワイヤートラップや地雷を設置）
-車両湧きも、独自機能を盛り込み、搭載してます。
-他にも多くの機能を内蔵しており、序盤のプレーヤーを飽きさせない、普段とは違う雰囲気を提供できます。
+This is a server side addon mod for Arma3 Exile servers.
+This addon is focused on providing additional experiences around "towns" and "cities" on your prefered map.
+Majority of the functionality will work out of the box by just copying in to your server addon directory as it reads and utilizes map data to adjust itself.
+There is no need to set anything inside your mp_mission.pbo for this addon to work.
 
-出来るだけ丁寧にコードを書いたつもりですので、必要なら改造してください。
-必要なMODは、御座いません（設定内容に依存）
-必要なサーバアドオンとして、「Arma3 DMS(a3_dms)」が必要となります（ＡＩ生成に利用）
+This addon has been developed to try to get players to explore to towns and landmarks which oftenly are barren in default Exile game play.
+For looting, this addon will create a lootbox somewhere outside, or indoors of random towns. (apart from Exile loot spawn system.)
+The lootboxes oftenly have some random items, poptabs, trash which would benefit bambie players. (There is a module which will spawn landmines near these lootboxes.)
+This addon has an inhouse vehicle spawning system. (apart from Exile vehicle spawning system.)
+There are various additiona functioanlity this addon supports which should provide players with some nice experiences when playing.
 
-■ ロケーションエンジンに関する主な機能
-	o 町に、アイテムボックスを配置
-		屋内／屋外にランダム配置されます
-		きめ細やかにアイテム要素を設定できます
-		（町の大きさに合わせて設定可能、３段階）
-		また、同時にワイヤートラップを仕掛けられます
-	o 町に、湧き車両や航空機を配置
-		Server側との違いは、故障具合の細かな設定とアイテム湧き他
-		GRPトラップや、グレネードトラップもあります
-		（建物近くに湧くようになっており、道路上には湧きません）
-	o 町に、バンディット町ＡＩを配置
-		建物内に配置し、町を徘徊していたり、立て籠もっています
-		（近くの給油所や車両、道路上を徘徊）
-		場所（高所）によってスナイパーとなります
-	o 町周辺に、地雷を配置
-		道路上に設置されます
-	o 町に、奇妙なオブジェクトや炎上オブジェクトを配置
-		いつもと違う街の風景をプレーヤーに与えます
-		路上ゴミ、破損車両など
-	o 町の建物のドアがランダムで開いてます
-		他プレーヤーの足跡を消します
-	o キャンプファイヤーをランダム設置
-		夜間の雰囲気や、プレーヤーのクラフト用に提供
-	o トラベラーＡＩを配置
-		町と町の間を移動しているＡＩ達
-		要処間でのプレーヤーの遭遇確率を上げます
-	o アイアンマンＡＩ（無敵？）を配置
-		治癒能力を持つ無敵？バンディットＡＩ
-		（アイテムを一切残さず、リスペクトもゼロ）
-	o GPSトラップ
-		バンディットに見つかるとマップにマークされてしまいます
-		車両エンジンONでも確立で作動します
-		※当アドオンで発生したAIのみ
-	o グレネードトラップ
-		車両エンジンONにて確立でトラップが作動します
-		（スモーク又はミニグレネード）
-	o バンディットに占領された町
-		どこかの大きな町一つがバンディット達に占領されています
-		報酬の無いミッションのような扱いになります
+I have tried to do my best in writing the code in an easily understand format but if you need to modify it, please do so.
+There are no mods needed for this addon to work.
+This addon relies on DMS for it's AI spawning functionality (even if you don't use the DMS mission system.)
 
-■ その他
-	o 位置設定などは自動認識して動作
-		自動でマップデータから取得して自動で作動します
-		マップを変えても、（基本的に）そのまま動作します
-		固定位置で設定した場合は除きます。
-	o マガジン残弾数がランダムになります
-		湧きアイテムに残数のあるものは、ランダムになります
-		（銃弾マガジン、マッチ、グレネードなど）
-	o 水汲みやコンクリートミキサーを設置できます(ランダム可)
-		これらExileアイテムをランダム位置にもできます
-	o マップにオリジナルの地名を作成できます
-	o マップにテキストを表示できます
-		テキストの他、マーカーや円形図形を描画できます
-		日本語の場合は読みにくいです
-	o カスタム看板を作成できます
-		好きな画像を貼り付けられます
-		テクスチャー変更可能なオブジェクトなら看板で無くても構いません
-	o サーバーメッセージ配信（システムチャット）
-		定期的にメッセージを全プレーヤーに配信します
+@ Changes mainly around the location system
+  * Spawns loot boxes in random towns
+    * Lootbox will randomly spawn either outside or inside houses
+    * Loot contents can be configured easily (Such as there are 3 tiers you can set the lootbox size to be depending on size of town.)
+    * Capable of setting wiretrap mines around loot boxes for that extra entertainment  
+  * Spawns random vehicles and aircrafts around in/near random towns
+    * Vehicles can be customized to have different tiers of damage and items
+    * Vehicles will mainly spawn near buildings, not on roads our out in the open
+    * Capable of setting GPR and grenade traps around these vehicles for that extra entertainment
+  * Spawns bandit AI in random towns
+    * AI will spawn inside buildings and can garrison or wander around town
+    * AI will also wander around near petrol stations, spawned vehicles and on roads
+    * Depending on the latitude of location, there is a possibility of sniper AI spawning
+  * Spawns landmines around towns
+    * landmines will be placed mainly on roads
+  * Spawns defined objects, objects with fire effects in random towns
+    * You would be able to provide a bit of a differente experience to players
+    * You will be able to spawn trash, broken vehicles around towns
+  * Buildings will have a random percentage the doors are open
+    * Erases other players footstep marks on the ground
+  * Places random campfires around the map
+    * This will give a nice feeling to night time as well as provide lucky players with a fire to cook
+  * Spawns traveling AI
+    * AI will traven from town to town
+    * Players will have higher possibility of encountering these traveling AI between locations
+  * Spawns a so-called "Iron-Man" AI (does not die)
+    * "Iron Man" is a bandit with high self-healing capability
+    * "Iron Man" will not drop any items or provide any respect
+  * GPS Traps
+    * When found by AI, your location will be marked on map
+    * There is a certail percentage AI will mark map if you turn on a found vehicle
+    * (Above functionality only works for AI spawned by this addon)
+  * Grenade Traps
+    * There is a certail percentage a grenade trap goes off if you turn on a found vehicle
+    * (Above will either be smoke or mini grenades)
+  * Town invasion by bandit AI
+    * A random town will be invaded by bandit AI
+    * This system will not have any loot rewards
 
-当LOOTBOXアドオンの起動は、他アドオンと並列で動作します（遅延・負荷時待機可）
-マップデータやサーバスペックによりますが、処理が完了するまでは、数分掛かります。
-プレーヤーがイン可能な状態のまま、処理が続行中の場合があります。
-（Arma3サーバの仕様によるもので、他アドオンも同様となっております）
-※参考：CUP Takistanの場合、約3分（Windows/Core i5）
+@ Others
+  * This addon will work out of the box
+    * This addon will read needed values from the map directly
+    * This addon will work on different maps without problem
+    * (Above is true unless you customize it to have a static location value)
+  * Ammo inside magazines will be random
+    * Any spawned loot item with a magazine type system will become random
+  * Water source and concrete mixers can be placed (can be configured to be random)
+    * Various Exile related objects can be set to spawn randomly
+  * Function to add custom location names on the map
+  * Function to add desired text on the map
+    * Function to add map markers as well
+    * (double-byte language text is hard to read)
+  * Functionality to add custom signs
+    * Signs can use graphic files you want to use
+    * If the given object supports texture changes, it doesn't have to be a sign object
+  * Supports sending out server messages
+    * Supports sending canned messages to all players on the server at set interval time
+
+Lootbox addon will execute and run along with other addons the server has (possible to configure so lootbox stops and waits if other addons are using up resource.)
+Lootbox addon will still keep running even if players log in to the server after restart
+(Above is something to do with the Arma3 engine, other addons react the same)
+* test results: on CUP Takistan (Windows/Core i5) around 3 minutes for addon to fully execute
 
 -------------------------------------------------------------------------------
-■■ 動作確認 / Environment
+@@ Environment
 Arma3 1.88.145285　64bit/32bit
 Arma3 Dedicated Server
 Windows 10 Home/Professional
@@ -124,21 +121,21 @@ MOD:Exile MOD Server 1.0.3a/1.0.4a(Pineapple)
 Addon:DMS/Defent's Mission System　Server
 	https://www.exilemod.com/topic/61-dms-defents-mission-system/
 
-PBOファイルのパック＆アンパックは、以下のソフトウェアが必要になります。
+Below will be needed to unpack/pack the pbo.
 	PBO Manager
 	http://www.armaholic.com/page.php?id=16369
-設定ファイル等の編集にお薦めなテキストエディタ
+Great text editor to use to change config values and such
 	Notepad+
 	https://notepad-plus-plus.org/
-	※VisualStudio Codeもよく使われてるそうです
-公式の各種ユーティリティソフト群、あれば便利
+	* Visual Code is a good one as well
+Official BI tools are nice to have
 	Arma3 Tools
-	※Steamにて別途インストール可能
-	※画像変換にも必須となります
+	* Install through Steam
+	* Arma Tools would be needed for such as when you want to make a custom sign
 
 -------------------------------------------------------------------------------
-■■ 動作説明 / Description
-[マップロケーション]
+@@ Description
+[Map Loactions]
 マップに登録されているロケーション情報（町やランドマーク等）を対象にして、アイテムボックス等をランダムで配置します。
 デフォルトでは、「村・町・大きな町」の３種類を対象に、動作します。
 ロケーションタイプだけでなく、ロケーション地名を指定する事も可能です（この場合、マップ依存になります）
