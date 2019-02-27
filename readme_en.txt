@@ -62,7 +62,7 @@ This addon relies on DMS for it's AI spawning functionality (even if you don't u
     * Depending on the latitude of location, there is a possibility of sniper AI spawning
   * Spawns landmines around towns
     * landmines will be placed mainly on roads
-  * Spawns defined objects, objects with fire effects in random towns
+  * Spawns unusual objects, objects with fire effects in random towns
     * You would be able to provide a bit of a differente experience to players
     * You will be able to spawn trash, broken vehicles around towns
   * Buildings will have a random percentage the doors are open
@@ -217,105 +217,104 @@ Poptabs in vehicles will follow the same calculation
   Example: If specified value = 1000, then 1000 x 0.3 = 300 (minimum value)
            Thus amount of poptabs will be a random value between 300 to 1000
 
-// Still translating below... (yukihito23) //
+[Lootbox traps]
+When lootbox is placed outdoors, there is a possibility of a wiretrap to be placed around the given lootbox
+The Wiretrap will be placed randomly within 2m of the given lootbox
+You would be able to change the trap type if wanted
+    Technical Background:
+    Depending on terrain slope, sometimes the traps will be burried underground
+    (I've tried to make this not happen as much as possible, but it can still happen)
 
-[アイテムボックストラップ]
-トラップワイヤーが、アイテムボックス近くに設置されます（屋外のみ＆確立）
-ランダムで周囲2m付近に設置されます。
-他トラップに変更する事ができます。
+[Static Lootbox Spawns]
+You will be able to set static locations for lootboxes apart from base spawn function according to locations
+This function can be used for such situations as prizes inside mazes or on mountain tops, etc...
+    Technical Background:
+    coordinates can be defined by X/Y values
+    Z value is "0" to specify to spawn on the terrain surface
+    Example:[1800,2130,0]
+    Note: you can not specify a static lootbox to spawn near spawn points or bases
 
-	技術的：
-	地形によっては、地面に隠れてしまう場合があります。
-	（微調整はしましたが・・限界が・・あります）
+[Traps and Landmines]
+Once lootboxes finish spawning in a given location, the addon will start spawning traps and landmines randomly on roads around the area
+This is meant for hardcore gameplay so be warned.
+If your AI are set to be EAST faction, the AI will be able to see traps and landmine locations so they shouldn't step on them.
+You will be able to change trap/Landmine types if you want
+    Technical Background:
+    Traps/Landmines will be placed around the middle of the road
+    It'll only look like a small dot on the road so unless you are careful beforehand, they are hard to find and avoid.
+    Traps/Landmines will spawn on any surface defined as a "road" by the map (such as, on airport landimg strips)
 
-[アイテムボックス固定湧き]
-ロケーションとは関係無く、指定場所にアイテムボックスを湧かせる事ができます。
-迷路、山頂や行きにくい場所などのプライズ的な利用を想定しています。
+[GPS Trap]
+Your location will be marked on the map when you are found by bandit AI, or mistakenly execute a vehicle trap
+If a Bandit AI shoots you, you will always be marked on the map
+As well, Bandit AI will report your location on global chat
+Above functionality will only support AI spawned by this addon
+(Town invasion AI, Traveling AI, Iron Man)
+This function triggers based on gunfire, thus it will execute as well when firing upon zombies or allies
+All players in the server will be able to see the AI map marker
+Vehicle traps will have a percentage possibility of being marked on the map
+Marked location is not exact and is generalized
+    Technical Background:
+    For vehicle traps, there is a 50% chance it will execute the trap, then it will select to either detonate a grenade trap or GPS trap.
+    Map markers are refreshed every 1 minute but each AI group
 
-	技術的：
-	この項目に限った事ではありませんが、座標はX/Yのみで構いません。
-	Z値軸の"0"は、その地点の地表という意味になります。
-	例：[1800,2130,0]
-	セーフゾーンや拠点近くには設置できません。
+[Grenade Trap]
+2 seconds after a found vehicle's engine is started, the trap will detonate either a smoke grenade or a mini grenade
+Function will have a 20% possibility of using mini grenades
+    Technical Background:
+    The even hook will only execute the 1st time and will then delete itself from happening again on the same vehicle.
 
-[トラップ・地雷]
-１ロケーションの全てのアイテムボックスを置き終わると、周囲の道路上に地雷をランダムで配置します。
-とても、鬼畜な設定となりますので、ご注意ください。
-EAST側には、地雷の場所が分かってる形になっているため、ＡＩが掛かる事は無いかと思います。
-他トラップに変更する事ができます。
+[Unusual Objects]
+You will be able to random spawn defined objects within defined area
+By default, this function will spawn dead trees, statues, barrels, wrecked vehicles.
+By placing wrecked vehicles, trash, old tires, dead bodies, you would be able to provide some  unique experiences to your server.
+You will also be able to place buildings which can change the look of a given town
+    Technical Background:
+    This function will randomly try to place given object at an open area, but will try its best to place near a structure
+    If in case the object is a flat type (such as oil spills, blood splatter, trash) it will place itself on roads as higher priority
+    You can specify object size to try to avoid the object clipping in to other objects
+    For sake of performance, I would suggest disabling simulation
+    (by default, objects are generated with CreateSimpleObject attributes, which will reduce performance load by around 10%-20%)
 
-	技術的：
-	道の中央に設置されます。
-	目視では、小さな黒い点でしか無いため、まず回避する事ができません。
-	マップデータで道路として認識されている場所全てが適用されます（空港の滑走路など）
+[Camp Fires]
+Camp fires will be placed for night time lighting or cooking
+Camp fires will be placed randomly near structures
+You can use this functionality for being nice to bambies (such as, use around spawn points or villages)
 
-[GPSトラップ]
-車両トラップか、バンディットに見つかった際に、マップ上に黒点マークされてしまいます。
-バンディットに見つかった（射撃された）場合は、必ずマークされます。
-同時に、バンディットによる全チャット報告がされます。
-バンディットは、当アドオンでスポーンしたものに限ります。
-（町ＡＩ、トラベラーＡＩ、アイアンマンＡＩ）
-射撃をトリガーとしているため、味方やゾンビなどに発砲した際も、マークされます。
-全プレーヤーに、プレーヤーがその付近に居る事が、分かってしまいます。
-車両の場合でも、確立でトラップが作動します。
-マークされる場所は、おおよその場所となります。
+[Burning objects]
+This function will randomly place specified objects with burning effects or smoking effects around towns
+You can specify not only vehicles wrecks or heli wrecks, but objects like structures or stack of wood, etc..
+This function can be used as dummy heli crashes or visible reference of town locations from afar.
+    Technical Background:
+    This function will try to avoid placing itself on top of roads
+    This is to reduce Driving patrol AI from crashing in to the objects
 
-	技術的：
-	車両の場合、５０％の確立で、トラップが確定し、グレネードトラップかGPSトラップとなります。
-	マップマークは、ＡＩグループ単位で、１分間単位で更新されます。
-
-[グレネードトラップ]
-車両特有のトラップで、エンジンを掛けた２秒後、スモークグレネードか、ミニグレネードが起爆します。
-およそ２０％の確立で、ミニグレネードになります。
-
-	技術的：
-	イベントフックは最初の１回だけで、削除されます。
-
-[奇妙オブジェクト]
-指定されたオブジェクトを、範囲内のどこかにランダムで複数配置できます。
-デフォルトでは、枯れた木、銅像、ドラム缶、破損車両などが設定されています。
-壊れた車両や、ゴミ、古タイヤ、死体などを散らばらせ、いつもとは違う雰囲気を提供する事ができます。
-また、建物を置くことも可能であり、町を擬似的に様変わりさせる事が可能となってます。
-
-	技術的：
-	ランダムで空き空間に配置していますが、可能な限り建物近くを選択します。
-	但し、フラット型は、道路に優先的に配置します（オイル漏れ、血溜まり、ゴミ帯など）
-	他オブジェクトとは重ならないよう、オブジェクトのサイズ設定にて回避可能となってます。
-	負荷的に、シミュレーションを無効にする事をお勧めします。
-	（CreateSimpleObjectにて生成します。約10-20%負荷低下）
-
-[キャンプファイヤ]
-クラフトや調理、夜間の照明などに利用できる小さなキャンプファイヤを設置します。
-ランダムで、建物近くに置かれます。
-初期プレーヤーのための施策としてお使いください（スポーン地や村など）
-
-[炎上オブジェクト]
-町内にランダムで、炎上及び黒煙を、複数設置します。
-それと共に、オブジェクトをランダムで設置できます。
-車両やヘリだけでなく、建物や建築資材などのオブジェクトを設定できます。
-ヘリクラッシュのダミーとしても、遠方からでも町の場所が分かります。
-	
-	技術的：
-	この項目に限った事ではありませんが、道路上は避けて設置されます。
-	ＡＩパトロール車両の衝突を防ぐためでもあります。
-	
-[バンディット町ＡＩ]
-建物屋内（主に窓際・出入り口）に、バンディットＡＩをランダム配置する事ができます。
-建物内場所の高さが規定以上の場合に、スナイパーを配置できます。
-また、パトロールの可否についての設定も可能となってます。
-パトロールの際は、近場の車両や、道路、給油所を徘徊します。
-クラスをカスタムとして、装備を別に設定する事ができます。
-（ＡＩスキル設定に関しては、DMSアドオン設定が利用されます）
-建物が無い場合は、範囲内にランダム配置されます。
-プレーヤーを発見（発砲）した場合、おおよその場所にマップマークします。
-（名称：GPSトラップ）
-
-	技術的：
-	難易度は、DMS設定（random）としています。
-	プレーヤーが近くにいない時は、動作を停止しています（DMS Freeze）
-	マップ位置は、出来るだけ高台（ASL基準）を選択しますが、以下の場合は無視します。
-	o ロケーションタイプがairfield/Airport/military baseの場合
-	o 地域内高低差が10m以下の場合
+[Bandit AI in towns]
+This function will place bandit AI inside structures within towns (mostly around near windows or entrances/exits)
+If the specified spawn location of the AI is above defined values, it can spawn snipers
+You will be able to specify if these AI will patrol or not
+If AI is set to patrol, they will patrol around nearby vehicles, roads, petrol stations within range
+You can specify a seperate class all together to have custom loadouts
+(As for AI skill settings, I'm having addon to reference what DMS specifies)
+If in case there are no structures within realms of specified spawn point, they will be randomly placed within the area
+If a player shoots against these AI, they will mark a general location of the player on the map (aka, GPS trap)
+    Technical Background:
+    AI strengh is set to random by DMS
+    When a player is not near, the AI will use DMS AI Freeze function to reduce server load
+    AI spawns will try to spawn at the most highest point within the area unless below
+      * Location type is airfoeld/Airport/military base
+      * if in case the latitude difference within the specified area is within 10m difference
+    
+    When placing AI inside structures, it uses buildingPosition data from the map
+    Within above, it will also take in to consideration of spawning at a location which is within 100m of a road type
+    Above is set to increase possibility of finding players
+    
+    This function will define 1 AI as 1 group
+    (Arma3 is able to handle more than 200 groups but be careful in how you set this up)
+ 
+ // Still translating below... (yukihito23) //
+ 
+    AI which are set to patrol will
 
 	屋内位置は、マップのbuildingPositionデータを利用します。
 	その中でも、近辺100m以内の道路に最も近い場所を選択します。
