@@ -1,4 +1,4 @@
-*Japanese documents(UTF,tab:4)
+*English documents(UTF,tab:4)
 *Version look to (config.cpp)
 *Change log to End of doc.
 *We are looking for someone who translates this document　;-)
@@ -8,113 +8,110 @@
 //	"a3_exile_lootbox"
 //	アイテム漁りに小さな幸せを・・　/ for beggar-man
 //
-//	開発 ○ 著作/Dev.&Auth.：nabek (blog.ahh.jp) 2018/4-
+//	Dev.&Auth.：nabek (blog.ahh.jp) 2018/4-
 //	Discord Ch. https://discord.gg/b4FT278
 //
-//	取扱説明書 / Manual （日本語 / Japanese）
+//	Manual （英語 / English）
 //
-//		目次 / Index
-//		o アドオン概要 / Overview
-//		o 動作確認 / Environment
-//		o 動作説明 / Description
-//		o インストール方法 / Setups
-//		o 設定方法 / Cooking method
-//		o 参考資料 / Documents
-//		o ログ内容 / Logging
-//		o ログエラーについて / Errors and remedy
-//		o 改造について / Customize
-//		o ライセンス・サポートについて / License & Supports
-//		o 既知の問題・バグ / Cockroaches?
-//		o たぶん開発者らしいnabekから / from Dev.nabek
-//		o 更新履歴 / Change logs
+//		Index
+//		* Overview (EN translated)
+//		* Environment (EN translated)
+//		* Description
+//		* Setups
+//		* Cooking method
+//		* Documents
+//		* Logging
+//		* Errors and remedy
+//		* Customize
+//		* License & Supports
+//		* Cockroaches?
+//		* from Dev.nabek
+//		* Change logs
 ////////////////////////////////////////////////////////////////////////
 
 -------------------------------------------------------------------------------
-■■ アドオン概要 / Overview
-Arma3 EXILE MODサーバ専用アドオンとなります。
-マップ上の " 町 " に重きを置いた機能を中心に提供します。
-ほとんどの機能は、マップデータから自動設定するため、サーバディレクトリにコピーするだけで動作します。
-クライアント側（mp_mission.pbo）の設定は不要です。
+## Overview
 
-閑散としがちな町やランドマークを、プレーヤーに注目してもらおうというアドオンです。
-アイテム漁りのために、通常のアイテム湧きとは別に、町中の地表または建物内のどこかに、アイテムボックスを配置します。
-アイテムボックスには、主に初期プレーヤーのためになるアイテムやポップタブ、ゴミが入っています。
-（分かり難い場所、アイテムボックス周辺に、ランダムでワイヤートラップや地雷を設置）
-車両湧きも、独自機能を盛り込み、搭載してます。
-他にも多くの機能を内蔵しており、序盤のプレーヤーを飽きさせない、普段とは違う雰囲気を提供できます。
+This is a server side addon mod for Arma3 Exile servers.
+This addon is focused on providing additional experiences around "towns" and "cities" on your prefered map.
+Majority of the functionality will work out of the box by just copying in to your server addon directory as it reads and utilizes map data to adjust itself.
+There is no need to set anything inside your mp_mission.pbo for this addon to work.
 
-出来るだけ丁寧にコードを書いたつもりですので、必要なら改造してください。
-必要なMODは、御座いません（設定内容に依存）
-必要なサーバアドオンとして、「Arma3 DMS(a3_dms)」が必要となります（ＡＩ生成に利用）
+This addon has been developed to try to get players to explore to towns and landmarks which oftenly are barren in default Exile game play.
+For looting, this addon will create a lootbox somewhere outside, or indoors of random towns. (apart from Exile loot spawn system.)
+The lootboxes oftenly have some random items, poptabs, trash which would benefit bambie players. (There is a module which will spawn landmines near these lootboxes.)
+This addon has an inhouse vehicle spawning system. (apart from Exile vehicle spawning system.)
+There are various additiona functioanlity this addon supports which should provide players with some nice experiences when playing.
 
-■ ロケーションエンジンに関する主な機能
-	o 町に、アイテムボックスを配置
-		屋内／屋外にランダム配置されます
-		きめ細やかにアイテム要素を設定できます
-		（町の大きさに合わせて設定可能、３段階）
-		また、同時にワイヤートラップを仕掛けられます
-	o 町に、湧き車両や航空機を配置
-		Server側との違いは、故障具合の細かな設定とアイテム湧き他
-		GRPトラップや、グレネードトラップもあります
-		（建物近くに湧くようになっており、道路上には湧きません）
-	o 町に、バンディット町ＡＩを配置
-		建物内に配置し、町を徘徊していたり、立て籠もっています
-		（近くの給油所や車両、道路上を徘徊）
-		場所（高所）によってスナイパーとなります
-	o 町周辺に、地雷を配置
-		道路上に設置されます
-	o 町に、奇妙なオブジェクトや炎上オブジェクトを配置
-		いつもと違う街の風景をプレーヤーに与えます
-		路上ゴミ、破損車両など
-	o 町の建物のドアがランダムで開いてます
-		他プレーヤーの足跡を消します
-	o キャンプファイヤーをランダム設置
-		夜間の雰囲気や、プレーヤーのクラフト用に提供
-	o トラベラーＡＩを配置
-		町と町の間を移動しているＡＩ達
-		要処間でのプレーヤーの遭遇確率を上げます
-	o アイアンマンＡＩ（無敵？）を配置
-		治癒能力を持つ無敵？バンディットＡＩ
-		（アイテムを一切残さず、リスペクトもゼロ）
-	o GPSトラップ
-		バンディットに見つかるとマップにマークされてしまいます
-		車両エンジンONでも確立で作動します
-		※当アドオンで発生したAIのみ
-	o グレネードトラップ
-		車両エンジンONにて確立でトラップが作動します
-		（スモーク又はミニグレネード）
-	o バンディットに占領された町
-		どこかの大きな町一つがバンディット達に占領されています
-		報酬の無いミッションのような扱いになります
+I have tried to do my best in writing the code in an easily understand format but if you need to modify it, please do so.
+There are no mods needed for this addon to work.
+This addon relies on DMS for it's AI spawning functionality (even if you don't use the DMS mission system.)
 
-■ その他
-	o 位置設定などは自動認識して動作
-		自動でマップデータから取得して自動で作動します
-		マップを変えても、（基本的に）そのまま動作します
-		固定位置で設定した場合は除きます。
-	o マガジン残弾数がランダムになります
-		湧きアイテムに残数のあるものは、ランダムになります
-		（銃弾マガジン、マッチ、グレネードなど）
-	o 水汲みやコンクリートミキサーを設置できます(ランダム可)
-		これらExileアイテムをランダム位置にもできます
-	o マップにオリジナルの地名を作成できます
-	o マップにテキストを表示できます
-		テキストの他、マーカーや円形図形を描画できます
-		日本語の場合は読みにくいです
-	o カスタム看板を作成できます
-		好きな画像を貼り付けられます
-		テクスチャー変更可能なオブジェクトなら看板で無くても構いません
-	o サーバーメッセージ配信（システムチャット）
-		定期的にメッセージを全プレーヤーに配信します
+# Changes mainly around the location system
+  * Spawns loot boxes in random towns
+    * Lootbox will randomly spawn either outside or inside houses
+    * Loot contents can be configured easily (Such as there are 3 tiers you can set the lootbox size to be depending on size of town.)
+    * Capable of setting wiretrap mines around loot boxes for that extra entertainment  
+  * Spawns random vehicles and aircrafts around in/near random towns
+    * Vehicles can be customized to have different tiers of damage and items
+    * Vehicles will mainly spawn near buildings, not on roads our out in the open
+    * Capable of setting GPR and grenade traps around these vehicles for that extra entertainment
+  * Spawns bandit AI in random towns
+    * AI will spawn inside buildings and can garrison or wander around town
+    * AI will also wander around near petrol stations, spawned vehicles and on roads
+    * Depending on the latitude of location, there is a possibility of sniper AI spawning
+  * Spawns landmines around towns
+    * landmines will be placed mainly on roads
+  * Spawns unusual objects, objects with fire effects in random towns
+    * You would be able to provide a bit of a differente experience to players
+    * You will be able to spawn trash, broken vehicles around towns
+  * Buildings will have a random percentage the doors are open
+    * Erases other players footstep marks on the ground
+  * Places random campfires around the map
+    * This will give a nice feeling to night time as well as provide lucky players with a fire to cook
+  * Spawns traveling AI
+    * AI will traven from town to town
+    * Players will have higher possibility of encountering these traveling AI between locations
+  * Spawns a so-called "Iron-Man" AI (does not die)
+    * "Iron Man" is a bandit with super health regeneration capability
+    * "Iron Man" will not drop any items or provide any respect
+  * GPS Traps
+    * When found by AI, your location will be marked on map
+    * There is a certail percentage AI will mark map if you turn on a found vehicle
+    * (Above functionality only works for AI spawned by this addon)
+  * Grenade Traps
+    * There is a certail percentage a grenade trap goes off if you turn on a found vehicle
+    * (Above will either be smoke or mini grenades)
+  * Town invasion by bandit AI
+    * A random town will be invaded by bandit AI
+    * This system will not have any loot rewards
 
-当LOOTBOXアドオンの起動は、他アドオンと並列で動作します（遅延・負荷時待機可）
-マップデータやサーバスペックによりますが、処理が完了するまでは、数分掛かります。
-プレーヤーがイン可能な状態のまま、処理が続行中の場合があります。
-（Arma3サーバの仕様によるもので、他アドオンも同様となっております）
-※参考：CUP Takistanの場合、約3分（Windows/Core i5）
+# Others
+  * This addon will work out of the box
+    * This addon will read needed values from the map directly
+    * This addon will work on different maps without problem
+    * (Above is true unless you customize it to have a static location value)
+  * Ammo inside magazines will be random
+    * Any spawned loot item with a magazine type system will become random
+  * Water source and concrete mixers can be placed (can be configured to be random)
+    * Various Exile related objects can be set to spawn randomly
+  * Function to add custom location names on the map
+  * Function to add desired text on the map
+    * Function to add map markers as well
+    * (double-byte language text is hard to read)
+  * Functionality to add custom signs
+    * Signs can use graphic files you want to use
+    * If the given object supports texture changes, it doesn't have to be a sign object
+  * Supports sending out server messages
+    * Supports sending canned messages to all players on the server at set interval time
+
+Lootbox addon will execute and run along with other addons the server has (possible to configure so lootbox stops and waits if other addons are using up resource.)
+Lootbox addon will still keep running even if players log in to the server after restart
+(Above is something to do with the Arma3 engine, other addons react the same)
+* test results: on CUP Takistan (Windows/Core i5) around 3 minutes for addon to fully execute
 
 -------------------------------------------------------------------------------
-■■ 動作確認 / Environment
+## Environment
 Arma3 1.88.145285　64bit/32bit
 Arma3 Dedicated Server
 Windows 10 Home/Professional
@@ -124,367 +121,340 @@ MOD:Exile MOD Server 1.0.3a/1.0.4a(Pineapple)
 Addon:DMS/Defent's Mission System　Server
 	https://www.exilemod.com/topic/61-dms-defents-mission-system/
 
-PBOファイルのパック＆アンパックは、以下のソフトウェアが必要になります。
+Below will be needed to unpack/pack the pbo.
 	PBO Manager
 	http://www.armaholic.com/page.php?id=16369
-設定ファイル等の編集にお薦めなテキストエディタ
+Great text editor to use to change config values and such
 	Notepad+
 	https://notepad-plus-plus.org/
-	※VisualStudio Codeもよく使われてるそうです
-公式の各種ユーティリティソフト群、あれば便利
+	* Visual Code is a good one as well
+Official BI tools are nice to have
 	Arma3 Tools
-	※Steamにて別途インストール可能
-	※画像変換にも必須となります
+	* Install through Steam
+	* Arma Tools would be needed for such as when you want to make a custom sign
 
 -------------------------------------------------------------------------------
-■■ 動作説明 / Description
-[マップロケーション]
-マップに登録されているロケーション情報（町やランドマーク等）を対象にして、アイテムボックス等をランダムで配置します。
-デフォルトでは、「村・町・大きな町」の３種類を対象に、動作します。
-ロケーションタイプだけでなく、ロケーション地名を指定する事も可能です（この場合、マップ依存になります）
-タイプが合致すると、無条件に全ての町を対象にするため、無効にしたい場合は別途個別に設定してください。
-このロケーションエンジンにて、それぞれに基準点が決められます。
+## Description
+[Map Locations]
+Lootboxes and such shall be randomly placed based on map locations (towns, landmarks, etc..)
+By default this addon works on 3 different tiers of locations (villages, cities, large cities)
+Apart from location type, this addon can be customized to use location names (this customization will make the addon map specific)
+When the location type is found within the given map, it will execute on all it finds so if you need to blacklist specifi locations, please customize the addon to your needs.
+This addon functionality all bases on above mentioned location engine.
 
-他のランドマークも対象にしたい場合は、以下を参照するか、マップデータを調査してください。
+If you want to add other landmarks, you can use below as reference or look through your map.
 https://community.bistudio.com/wiki/Location
-	ロケーションタイプ名
-	NameVillage　村
-	NameCity　町
-	NameCityCapital　大きな町
-	NameLocal　何らかのランドマーク (*)
-	Mount　山
-	Airport　空港
+	Location Type // Name
+	NameVillage // Village
+	NameCity // City
+	NameCityCapital // Large City (Capital)
+	NameLocal // Landmarks
+	Mount // Mountains
+	Airport // Airports
 	etc..
 
-	技術的：
-	マップデータには、地点毎に"タイプ名"と"地名"のセットで登録されてます。
-	よって、タイプではなく、地名で指定すると、その１箇所のみが対象となります。
-	町として登録されていない、任意のランドマーク（NameLocal）を対象にする場合は、ログファイルを参照して手動で設定してください。
-	（CUP Takistanの場合、"山・林"、"集落"や"オイルパイプライン"、"地雷原"など）
-	当アドオンで唯一、マップに依存する設定項目（NameLocal）となります。
+	Technnical Background: 
+	On any given correctly made map, there are different points where Type Names and Location Names are set.
+	Thus, if you specify by location name instead of type, the addon will work on that one specific location.
+	If the given location doesn't have a type name defined on the map, you would be able to use the landmarks instead (NameLocal) my finding this value from logfiles.
+	(In terms of CUP Takistan, Hills, Brushes, Unnamed villages, pipelines, etc..)
+	This addon will only create a requirement for the specific map information if above is utilized.
 
-	ランダム要素を増やすため、ロケーション発見時に、"基準点"を若干ランダムで移動させます。
+	To add randomness to the functionality, when the engine runs and finds a location to execute on, it will have a random sway in setting its center point.
 
-	（メモ）
-	ミリタリーエリア（軍事施設）に関しては、ロケーションタイプというのは存在しません。
-	そのため、調査の上、独自に判断してます。
-	（Airport又はNameLocalに属している、NameCityCapitalの場合も有り）
-	
-[新しいロケーション作成]
-マップ上に、独自にロケーションを作成する事ができます。
-このロケーションを、ロケーションエンジンの動作対象にする事も可能となってます。
+	(Memo)
+	Oftenly, military locations do not have location types thus this addon will try to find it on it's own.
+	(Such as the military is near/within an Airport or a NameLocal, NameCityCapital as well)
 
-	技術的：
-	ロケーションタイプはArma3側で登録されている設定を引き継ぎます。
-	（マップ表示の色やフォント、サイズ、アイコン種類など）
+[Creating new locations]
+        Technnical Background:
+	Location type uses what Arma3 uses as default.
+	(such as font, size, icons)
 
-[アイテムボックス場所]
-アイテムボックスの設置箇所は、簡単には見つからないような場所を探しています。
-以下の条件内でランダムで決められます。
-	o MAPデータ内ロケーション登録地点を基準とした範囲内
-	o 範囲内の建物をランダムで選び、屋内外のいずれか
-	※屋内：屋内のいずれかの場所（主に窓際や出入り口等）
-		入口から最も遠い場所が選択されます
-		建物によっては、最上階のパターンになります
-	※屋外：建物の周囲、近辺になります
-	（いずれも範囲内に建物が無い場合、無効となります）
-	
-	技術的：
-	o 屋内湧きは、buildingPositionデータを利用します
+[Lootbox locations]
+Lootboxe spawn mechanism tries to find a hidden location.
+Spawn mechanism will be based randomly on below criteria.
+  * Within realms of the specified locations within the map
+  * Indoors OR outdoors of a structure within the realm
+  * Indoors: Either OR locations within the structure
+    * the furthest away location from entrance
+    * Depending on structure, such as the most upper level
+  * Outdoors: Random location around the given structure
+  (If mechanism can not find any structures, it will not execute)
+  
+  Technnical Background:
+    * For spawning the lootbox indoors, I am use data provided by "buildingPosition"
 
-[アイテムリスト生成]
-アイテムボックスや湧き車両コンテナ、バンディットＡＩの所持物に適用されます。
-アイテムリストは、複数の要素によって決められます。
-個々のアイテムボックス毎に、以下の各要素の合算分が統合され決定されます。
+[Generating item lists]
+This mechanism is used for Lootbox inventory, spawned vehicle inventory, Bandit AI inventory.
+Item lists will be determined by several factors.
+For each individual inventory, below is calculated and used.
 
-アイテム要素　→レア追加？　→ゴミ化（又は削除）　→シャッフル　→決定
+Item -> Add Rare items? -> Possibility of changing items to trash (or remove) -> Shuffle -> Define and execute
+  * Static Add (global which influences all inventory types)
+  * Statuc quantity value (If value is defined to fluctuate, then random value from range)
+  * 50% of defined list is set randomly
+  * 1 item is selected from the Rare items list
+  * Possibility of 1 item is selected from the Special Rate item list
+  * Poptabs added randomly based on range specified
+  
+    Technical Background:
+    I've tried to make mechanism average out as possible.
+    Once defined and executed, the item order is set to be random as well.
+    (Takes in to account of given inventory container capacity.)
 
-	o 固定追加（全タイプ共通）
-	o 固定(倍率指定されてる場合は、複数個ランダム)
-	o リスト内の５０％がランダムで選択
-	o ”レア”リスト内の１つがランダムで選択
-	o ”スペシャルレア”内から、確立で１つ選択
-	o ポップタブが範囲ランダムで追加
+[Trash filter]
+Once initial item list is created, Trash filter will replace items with trash based on percentage.
+(If setting Trash filter to = 1, then it means all items will be set to trash.)
+With the same mechanism, it's possible to make it such as if Village, the percentage of trash is higher.
+Instead of turning to trash, mechanism will also delete from initial set item list.
 
-	技術的：
-	可能な限り公平に分布されるよう計算の上配慮してます。
-	最終的にはリスト順番もバラバラになるようにしています。
-	（コンテナキャパシティ制限を考えたため、切り捨て）
+[Poptabs]
+Poptabs will be added to given inventory container.
+Poptabs will be calculated based on specified value as max value, then will generate the poptab amount with a 30% minimam value calculation.
+Poptabs in vehicles will follow the same calculation
 
-[ゴミ化フィルター]
-仕上がったアイテムリストに対して、ゴミ率を割合として置換します。
-（つまり、ゴミ化率を１で設定すると、全てがゴミに変わってしまいます）
-同一設定で、村でのアイテムボックスは、ゴミが多い、という形に出来ます。
-ゴミに変えるではなく、削除する機能も追加しました。
+  Example: If specified value = 1000, then 1000 x 0.3 = 300 (minimum value)
+           Thus amount of poptabs will be a random value between 300 to 1000
 
-[ポップタブ]
-アイテムボックスに、ランダムでポップタブが格納されます。
-設定された値を最大として、30%下限でランダムとなります。
-車両も同様となります。
+[Lootbox traps]
+When lootbox is placed outdoors, there is a possibility of a wiretrap to be placed around the given lootbox
+The Wiretrap will be placed randomly within 2m of the given lootbox
+You would be able to change the trap type if wanted
+    Technical Background:
+    Depending on terrain slope, sometimes the traps will be burried underground
+    (I've tried to make this not happen as much as possible, but it can still happen)
 
-	例：指定値1000の場合、1000 x 0.3 = 300（下限値）
-	300-1000の範囲でランダム
+[Static Lootbox Spawns]
+You will be able to set static locations for lootboxes apart from base spawn function according to locations
+This function can be used for such situations as prizes inside mazes or on mountain tops, etc...
+    Technical Background:
+    coordinates can be defined by X/Y values
+    Z value is "0" to specify to spawn on the terrain surface
+    Example:[1800,2130,0]
+    Note: you can not specify a static lootbox to spawn near spawn points or bases
 
-[アイテムボックストラップ]
-トラップワイヤーが、アイテムボックス近くに設置されます（屋外のみ＆確立）
-ランダムで周囲2m付近に設置されます。
-他トラップに変更する事ができます。
+[Traps and Landmines]
+Once lootboxes finish spawning in a given location, the addon will start spawning traps and landmines randomly on roads around the area
+This is meant for hardcore gameplay so be warned.
+If your AI are set to be EAST faction, the AI will be able to see traps and landmine locations so they shouldn't step on them.
+You will be able to change trap/Landmine types if you want
+    Technical Background:
+    Traps/Landmines will be placed around the middle of the road
+    It'll only look like a small dot on the road so unless you are careful beforehand, they are hard to find and avoid.
+    Traps/Landmines will spawn on any surface defined as a "road" by the map (such as, on airport landimg strips)
 
-	技術的：
-	地形によっては、地面に隠れてしまう場合があります。
-	（微調整はしましたが・・限界が・・あります）
+[GPS Trap]
+Your location will be marked on the map when you are found by bandit AI, or mistakenly execute a vehicle trap
+If a Bandit AI shoots you, you will always be marked on the map
+As well, Bandit AI will report your location on global chat
+Above functionality will only support AI spawned by this addon
+(Town invasion AI, Traveling AI, Iron Man)
+This function triggers based on gunfire, thus it will execute as well when firing upon zombies or allies
+All players in the server will be able to see the AI map marker
+Vehicle traps will have a percentage possibility of being marked on the map
+Marked location is not exact and is generalized
+    Technical Background:
+    For vehicle traps, there is a 50% chance it will execute the trap, then it will select to either detonate a grenade trap or GPS trap.
+    Map markers are refreshed every 1 minute but each AI group
 
-[アイテムボックス固定湧き]
-ロケーションとは関係無く、指定場所にアイテムボックスを湧かせる事ができます。
-迷路、山頂や行きにくい場所などのプライズ的な利用を想定しています。
+[Grenade Trap]
+2 seconds after a found vehicle's engine is started, the trap will detonate either a smoke grenade or a mini grenade
+Function will have a 20% possibility of using mini grenades
+    Technical Background:
+    The even hook will only execute the 1st time and will then delete itself from happening again on the same vehicle.
 
-	技術的：
-	この項目に限った事ではありませんが、座標はX/Yのみで構いません。
-	Z値軸の"0"は、その地点の地表という意味になります。
-	例：[1800,2130,0]
-	セーフゾーンや拠点近くには設置できません。
+[Unusual Objects]
+You will be able to random spawn defined objects within defined area
+By default, this function will spawn dead trees, statues, barrels, wrecked vehicles.
+By placing wrecked vehicles, trash, old tires, dead bodies, you would be able to provide some  unique experiences to your server.
+You will also be able to place buildings which can change the look of a given town
+    Technical Background:
+    This function will randomly try to place given object at an open area, but will try its best to place near a structure
+    If in case the object is a flat type (such as oil spills, blood splatter, trash) it will place itself on roads as higher priority
+    You can specify object size to try to avoid the object clipping in to other objects
+    For sake of performance, I would suggest disabling simulation
+    (by default, objects are generated with CreateSimpleObject attributes, which will reduce performance load by around 10%-20%)
 
-[トラップ・地雷]
-１ロケーションの全てのアイテムボックスを置き終わると、周囲の道路上に地雷をランダムで配置します。
-とても、鬼畜な設定となりますので、ご注意ください。
-EAST側には、地雷の場所が分かってる形になっているため、ＡＩが掛かる事は無いかと思います。
-他トラップに変更する事ができます。
+[Camp Fires]
+Camp fires will be placed for night time lighting or cooking
+Camp fires will be placed randomly near structures
+You can use this functionality for being nice to bambies (such as, use around spawn points or villages)
 
-	技術的：
-	道の中央に設置されます。
-	目視では、小さな黒い点でしか無いため、まず回避する事ができません。
-	マップデータで道路として認識されている場所全てが適用されます（空港の滑走路など）
+[Burning objects]
+This function will randomly place specified objects with burning effects or smoking effects around towns
+You can specify not only vehicles wrecks or heli wrecks, but objects like structures or stack of wood, etc..
+This function can be used as dummy heli crashes or visible reference of town locations from afar.
+    Technical Background:
+    This function will try to avoid placing itself on top of roads
+    This is to reduce Driving patrol AI from crashing in to the objects
 
-[GPSトラップ]
-車両トラップか、バンディットに見つかった際に、マップ上に黒点マークされてしまいます。
-バンディットに見つかった（射撃された）場合は、必ずマークされます。
-同時に、バンディットによる全チャット報告がされます。
-バンディットは、当アドオンでスポーンしたものに限ります。
-（町ＡＩ、トラベラーＡＩ、アイアンマンＡＩ）
-射撃をトリガーとしているため、味方やゾンビなどに発砲した際も、マークされます。
-全プレーヤーに、プレーヤーがその付近に居る事が、分かってしまいます。
-車両の場合でも、確立でトラップが作動します。
-マークされる場所は、おおよその場所となります。
+[Bandit AI in towns]
+This function will place bandit AI inside structures within towns (mostly around near windows or entrances/exits)
+If the specified spawn location of the AI is above defined values, it can spawn snipers
+You will be able to specify if these AI will patrol or not
+If AI is set to patrol, they will patrol around nearby vehicles, roads, petrol stations within range
+You can specify a seperate class all together to have custom loadouts
+(As for AI skill settings, I'm having addon to reference what DMS specifies)
+If in case there are no structures within realms of specified spawn point, they will be randomly placed within the area
+If a player shoots against these AI, they will mark a general location of the player on the map (aka, GPS trap)
+    Technical Background:
+    AI strengh is set to random by DMS
+    When a player is not near, the AI will use DMS AI Freeze function to reduce server load
+    AI spawns will try to spawn at the most highest point within the area unless below
+      * Location type is airfoeld/Airport/military base
+      * if in case the latitude difference within the specified area is within 10m difference
+    
+    When placing AI inside structures, it uses buildingPosition data from the map
+    Within above, it will also take in to consideration of spawning at a location which is within 100m of a road type
+    Above is set to increase possibility of finding players
+    
+    This function will define 1 AI as 1 group
+    (Arma3 is able to handle more than 200 groups but be careful in how you set this up)
+  
+    AI which are set to patrol will set waypoints to near vehicles, roads and petrol sations (max quantity of waypoints is 5)
+    (all waypoints will be set within defined area around the spawn point)
+    If in case set waypoint is less then defined value, it will use location base points
+    At the end of waypoint 5, AI will then go back to spawnpoint and start over again
+    
+    If you specify a custom class, you will be able to customize AI equipment
+    Inventory contents is defined by this addom
+    (LB_LootAllFixedItems is not used)
+    (item types which have associted quantity will have random quantity values)
 
-	技術的：
-	車両の場合、５０％の確立で、トラップが確定し、グレネードトラップかGPSトラップとなります。
-	マップマークは、ＡＩグループ単位で、１分間単位で更新されます。
+[Vehicle Spawns]
+Vehicels found by this function can be used by players
+Vehicles will try to spawn in safe areas around structures and will have ability to have items or poptabs within its inventory
+Vehicles are spawned to make look like someone parked there, instead of looking like it "spawned"
+    Difference in spawn mechanism
+      * Exile default will spawn randomly in an open area such as fields
+      * This addon will spawn around near structures, or somewhere inside towns
 
-[グレネードトラップ]
-車両特有のトラップで、エンジンを掛けた２秒後、スモークグレネードか、ミニグレネードが起爆します。
-およそ２０％の確立で、ミニグレネードになります。
-
-	技術的：
-	イベントフックは最初の１回だけで、削除されます。
-
-[奇妙オブジェクト]
-指定されたオブジェクトを、範囲内のどこかにランダムで複数配置できます。
-デフォルトでは、枯れた木、銅像、ドラム缶、破損車両などが設定されています。
-壊れた車両や、ゴミ、古タイヤ、死体などを散らばらせ、いつもとは違う雰囲気を提供する事ができます。
-また、建物を置くことも可能であり、町を擬似的に様変わりさせる事が可能となってます。
-
-	技術的：
-	ランダムで空き空間に配置していますが、可能な限り建物近くを選択します。
-	但し、フラット型は、道路に優先的に配置します（オイル漏れ、血溜まり、ゴミ帯など）
-	他オブジェクトとは重ならないよう、オブジェクトのサイズ設定にて回避可能となってます。
-	負荷的に、シミュレーションを無効にする事をお勧めします。
-	（CreateSimpleObjectにて生成します。約10-20%負荷低下）
-
-[キャンプファイヤ]
-クラフトや調理、夜間の照明などに利用できる小さなキャンプファイヤを設置します。
-ランダムで、建物近くに置かれます。
-初期プレーヤーのための施策としてお使いください（スポーン地や村など）
-
-[炎上オブジェクト]
-町内にランダムで、炎上及び黒煙を、複数設置します。
-それと共に、オブジェクトをランダムで設置できます。
-車両やヘリだけでなく、建物や建築資材などのオブジェクトを設定できます。
-ヘリクラッシュのダミーとしても、遠方からでも町の場所が分かります。
-	
-	技術的：
-	この項目に限った事ではありませんが、道路上は避けて設置されます。
-	ＡＩパトロール車両の衝突を防ぐためでもあります。
-	
-[バンディット町ＡＩ]
-建物屋内（主に窓際・出入り口）に、バンディットＡＩをランダム配置する事ができます。
-建物内場所の高さが規定以上の場合に、スナイパーを配置できます。
-また、パトロールの可否についての設定も可能となってます。
-パトロールの際は、近場の車両や、道路、給油所を徘徊します。
-クラスをカスタムとして、装備を別に設定する事ができます。
-（ＡＩスキル設定に関しては、DMSアドオン設定が利用されます）
-建物が無い場合は、範囲内にランダム配置されます。
-プレーヤーを発見（発砲）した場合、おおよその場所にマップマークします。
-（名称：GPSトラップ）
-
-	技術的：
-	難易度は、DMS設定（random）としています。
-	プレーヤーが近くにいない時は、動作を停止しています（DMS Freeze）
-	マップ位置は、出来るだけ高台（ASL基準）を選択しますが、以下の場合は無視します。
-	o ロケーションタイプがairfield/Airport/military baseの場合
-	o 地域内高低差が10m以下の場合
-
-	屋内位置は、マップのbuildingPositionデータを利用します。
-	その中でも、近辺100m以内の道路に最も近い場所を選択します。
-	これはプレーヤーとの遭遇率を上げるための配慮となってます。
-
-	１ＡＩを１グループとして処理しています。
-	（Arma3では200を超えるグループを管理できますが、一応留意ください）
-	
-	パトロールが許可されたＡＩは、近くの車両と道路、給油場所にウェイポイントが設定されます。最大５箇所
-	（いずれも、スポーン場所からロケーション設定範囲で検索）
-	ウェイポイントが少ない場合は、ロケーション基準点が利用されます。
-	最後にスポーン場所に戻り、巡回します。
-
-	カスタムクラスにすると、装備を変更できます。
-	所持アイテムは、当アイテムボックスエンジンを利用します。
-	（LB_LootAllFixedItems（全固定設定）は利用されません）
-	（残数のあるアイテムは、ランダムとはなりません）
-	
-[車両湧き]
-Exileサーバでの湧き車両と同様にプレーヤーが自由に利用可能なものになります。
-建物近くの空き地に車両が配置され、アイテムボックスと同様に、インベントリ内にアイテムやポップタブを格納できます。
-湧いてるというよりも、誰かが駐車したという趣きになってます。
-
-	湧き位置の違い
-	o サーバの車両湧き	フィールド上にランダム
-	o 当アドオン車両湧き	建物付近又は、町のどこか
-
-また、ダメージを部位毎に指定する事が可能です。
-ガソリンの量指定はランダムで、下限と上限をそれぞれ指定できます。
-ランダムガソリンを利用しない場合は、上限が利用されます。
-建物が無い場合は、範囲内にランダム配置されます。
-エンジンを掛けた際、確立で、グレネードトラップが作動します（スモーク又はミニグレネード）
-（又は、GPSトラップが作動します）
-ランダムで、エンジンが掛かった状態にしたり、ライトが点灯した状態にもできます。
-また、町バンディットAIの巡回としても設定されます。
-
-	技術的：
-	クラス名に”_bike”を含む場合は、ダメージ無しとなります。
-	ダメージ箇所は、参考資料をご覧ください。
-	車両タイプに応じて、範囲を吟味しております（建物との衝突防止）
-	固定翼航空機の湧きは、おすすめできません（物理演算）
+You will also be able to set damage values for each part of the spawned vehicle
+Petrol amount will be a random value but max and min value can be specified
+If in case random value function is not used, it will use the max value specified
+If in case a structure can not be found, it will fall back to spawn randomly within specified area
+There is a possibility of grenade trap detonating (either smoke grenades or mini grenades) OR GPS trap executing 2 seconds after turning the engine on 
+You can also randomly set it so the engine or lights are turned on
+Bandit AI's in Town which are set to patrol will use these vehicles as waypoints
+    Technical Background:
+    If in case vehicle class includes "_bike", random damage will not applied
+    For information regarding damage part locations, look at Reference section
+    Depending on vehicle type, this function tries to adjust the amount of open space it needs and decides where it will spawn
+    I will not suggest spawning plane types using this function (get Arma'd)
 
 ----------------------------------------------------------------
-これより以下は、ロケーションエンジンとは関係ありませんが、町の場所を取得する必要があります
+Written below has nothing to do with the Location Engine but will still need to figure town locations
 ----------------------------------------------------------------
-[バンディットシティ]
-バンディット達に町が占領されます。
-グループ数を指定できます（１グループ３人）
-報酬が無く、鹵獲目的の簡易ミッションのような扱いとなります。
-町には、（乗れない）車両と、オブジェクトが複数置かれます。
-範囲内の最も低い場所が基準点に選ばれます。
+[Bandit AI town invasions]
+A random CapitalCity type will be invaded by bandit AI
+You will be able to speficy the amount of groups (1 group has 3 AI)
+This will not have any prizes like other mission type addons
+Within the selected town, vehicles (which can not be used by player) and objects are spawned
+The nearest location within defined area will be used
+    Technical Background:
+    Spawns will be selected randomly from within CapitalCity types
+    player unusable vehicles will spawn based on quantity of each group
+    (the vehicle is unusable since it's spawned in as SimpleObject attribute)
 
-	技術的：
-	大きな町（CapitalCity）のいずれかが選択されます。
-	車両をグループ数に応じて配置しますが、SimpleObjectのため利用は不可となります。
+[Iron Man]
+Iron Man has tolerance against anything nature throws at him and has super health regeneration capabilities
+Even if you manage to kill him, you can't kill him enough and he will rise up from the dead again
+If you manage to kill him, a smoke grenade will detonate at given location
+Iron Man is equipped with Prisoner Clothes, Santa Hat, a machinegun and grenades (despawns when killed)
+He also has bipods and scopes
+You can utilize him by specifying a static spawn location as well as spawn several of him as 1 group
+If Iron Man finds a player, he will mark the players location on map
+If you manage to kill Iron Man, all of his equiment despawns, as well no respect is added to player
+Because of above, noone will like having to deal with Iron Man.
+    Technical Background:
+    Each time a damage event happens, his auto regeneration function executes
+    Iron Man patrols around within 300m of defined spawn point
+    Iron Man does not hide, he will start shooting at players as soon as he finds any
+    Iron Man equips below
+      MMG_01_hex_F/acc_flashlight/optic_AMS_snd/bipod_02_F_hex
+    Iron Man function spawn can utilize the location engine
 
-[アイアンマン]
-ゾンビ菌に耐性を持った特殊なバンディットで、驚異的な治癒力を持ってます。
-倒しても、また起き上がります（再生成湧き）
-倒れた場合、その場所からスモークが焚かれます。
-囚人服にサンタ帽、マシンガン＆グレネードを所持しています（鹵獲は出来ません）
-バイポット、スコープを装備しています。
-固定湧きとして、場所を指定します。１グループ複数ＡＩとして設定できます。
-難易度調整などにお使いください。
-プレーヤーを発見（発砲）した場合、おおよその場所にマップマークします。
-死んだ場合、全ての装備品やアイテムは削除されます。リスペクトも加算されません。
-そのため、プレーヤーにとって、まったくウマミがありません。
-（まぼろし？ゴースト？のような扱い）
-
-	技術的：
-	ダメージイベントの際に、体力を全開しています。
-	300m程度をパトロールします。
-	身を隠さず、プレーヤーを発見次第、発砲します。
-	以下を装備しています。
-	MMG_01_hex_F/acc_flashlight/optic_AMS_snd/bipod_02_F_hex
-	ロケーションエンジン内で、対象の場所を収集しています。
-
-[トラベラー]
-町と町の間を移動しているＡＩを配置します。
-マップ上の全てのキャピタル・シティ（大きな町）で発生し、近場の町を移動します。
-（マップによりますが、およそ1～1.5Km圏内）
-そのため、要所間の道路上、町に近づいたプレーヤーと遭遇しやすくなります。
-１グループのＡＩ個数を設定できます。
-装備は、ロケーションバンディット町ＡＩの装備設定が利用されます。
-所持アイテムとポップタブが設定できます。
-プレーヤーを発見（発砲）した場合、おおよその場所にマップマークします。
-（名称：GPSトラップ）
-
-	技術的：
-	CUP Takistanマップでは、大きな町（NameCityCapital）は４箇所となります。
-	他マップでも、ほぼ同様かと思います。
-	ウェイポイントは、となり町のNameCityのいずれかが対象になります。
-	ほとんどの場合、道路が敷かれてるはずですので、道路での遭遇が想定されます。
-	ロケーションエンジン内で、対象の場所を収集しています。
+[Traveling AI]
+This function will spawn AI which traven between towns
+Traveling AI will spawn in every CapitalCity type town and will travel around near towns
+(It will depend on map, but roughly around 1-1.5km range)
+Because of above, traveling AI have a higher chance of encountering players which have gotten near towns
+You are able to specify the quantity of AI within each group
+Equipment generation uses what Bandit AI town invasions uses
+Inventory items and poptabs can be set seperate
+If AI find player, they will fire upon as well as mark general location of player on map
+    Technical Background:
+    This addon tweked around to be used on CUP Takistan, CUP Takistan map as 4 NameCityCapital types
+    I would think other maps have around the same amount of NameCityCapital types available
+    traveling waypoints will be set towards one of the near towns
+    Most of the time there should be a road between spawn and waypoint so encounters would mostly be along roads
+    This function relies on the Location Engine to decide which location to execute
 
 ----------------------------------------------------------------
-これより以下は、ロケーションエンジンとは関係無く、単独で機能します。
+Below does not rely on Location Engine and will work stand-alone
 ----------------------------------------------------------------
-[Exileオブジェクトランダム設置]
-フレッシュウォーター又はコンクリートミキサー等のクラフト可能なオブジェクトをランダム設置します。
-複数箇所を定義した上、指定の個数をランダムで選択されます。
-置かれた場所には、マップマークされます。
-ランダム個数の場合、ダミーのマップマークが記される事があります。
-exile_3den.pboツールによるエクスポートに頼る事なく設置が出来ます。
+[Random placement of Exile objects]
+This function will allow to randomly place meaningful Exile related objects (such as water servers, concrete mixers, etc..)
+Once defining spawnable locations, defining quantity will allow the objects to randomly spawn
+Objects spawned will show an icon on the map
+If in case possibility is random, then mapmarkers are sometimes dummies
+Above function will allow user to not having to rely on exile_3den.pbo tool to place these objects
+    Technical Background:
+    If in case the default object is customized, use the object name as is to specify
 
-	技術的：
-	デフォルトのオブジェクトを変更している場合は、オブジェクト名をそのまま指定してください
+[Custom Signs]
+This functionality allows to place custom signs in defined locations
+You would be able to brand these signs with your server info and such if wanted
+You will be able to read graphic files in from within your mission pbo to be displayed
+Use Eden editor to note down the X/Y location and rotation value
+(rotation value will be "z" value)
+Even if not a sign object, any object which allows swapping textures will work
+    Technical Background:
+    graphic images must be saved inside your mission pbo
+    You may use jpg or paa file formats for your graphic
+    height and width of image should always be 2^x (such as 64/238/256/512)
+    Using around 512*256, 512*512 would be on the safer side
+    * If possible keeping graphic size under 20kb would be better
+    enableSimulationGlobal/enableRopeAttach/allowDamage will all be set to false when signs are generated
+    There are objects which you can't change textures (I would suggest using normal signs/billboards)
+    If in case an object which can use several different textures, you would only be able to use 1 custom graphic
 
-[カスタム看板]
-マップの任意の場所に、カスタム看板を設置できます。
-サーバルールやロゴなどサーバ独自色を出すことができます。
-ミッションファイルに格納された画像を貼り付けテクスチャーを変更できます。
-Edenエディタにて、位置と方向の数字だけメモして、設定してください。
-（方向は、rotation項目の"z"の値）
-看板オブジェクトでなくても、全てのオブジェクトで動作します（設定可能なオブジェクトのみ）
+[Writing on the Map]
+This function will allow you to write and use icons on desired location on map
+This function will allow drawing Ellipses as well
+Color and Size can be defined
+    Technical Background:
+    This uses the default base map marker functionality so if you place too many, it'll lag
+    Changing the font will not be supported
 
-	技術的：
-	画像ファイルはミッションファイルに格納されている必要があります。
-	Jpeg又は、Paa（Arma3独自）の形式の画像が利用できます。
-	（サイズは必ず、2^xサイズでなければなりません）
-	※64/128/256/512などの単位、512*256、512*512辺りが妥当
-	※できればファイルサイズを20KB以下
-	enableSimulationGlobal/enableRopeAttach/allowDamageなどはfalseで生成されます
-	テクスチャーを変更できないオブジェクトもあります。
-	（ここでは看板をお勧めします）
-	テクスチャーを、複数扱えるオブジェクトの場合、１つのみとなります。
+[Sending Server Messages]
+This function will allow to send canned messages to players at a set interval
+Several different messages can be set
+Please use this functionality for server announcements and such
+    Technical Background:
+    This function will push messages globally to all players on the server at the time
+    This function is able to specify intervals in seconds but actual push would depend on server load as well
+    Due to Arma3's language rendering limitations, using double-byte languages in this function will not recommended as it would look ugly
+    Due to this function triggering against systemChat, if scrolled too much the message might disappear quite fast
 
-[マップ文字入れ]
-マップ上の任意の場所に文字とアイコンを入れる事ができます。
-また、円形ドロー（Ellipse）を行う事ができます。
-色の指定やサイズの指定が可能となってます。
-
-	技術的：
-	既存のマップマーカーの機能で実現してますので、大量に置くと負荷が掛かります。
-	サイズは、縦横それぞれに倍率指定となります。
-	本体又はミッション設定に依存しますので、フォントはここから選べません。
-
-[サーバーメッセージ配信]
-定期的に、全プレーヤーにメッセージを配信します。
-メッセージは複数定義でき、各行毎に、切り替えて配信します。
-サーバからのお知らせ、定形メッセージなどで利用ください。
-
-	技術的：
-	配信間隔は、秒で指定できますが、実際の配信にはラグが相当含まれます。
-	Arma3の仕様上、フォントが特殊で日本語は潰れてしまうので読みづらくなります。
-	systemChatで配信してるため、スクロールですぐ消えてしまう場合があります。
-	
 -------------------------------------------------------------------------------
-■■ インストール方法 / Setups
-a3_exile_lootbox.pboをPBOアンパックし、必要な設定を行います。
-※PBOファイルの管理に、PBOManager（無料）が必要です
-※当文書（readme_jp.txt）は動作には不要ですので削除してください
-再度、a3_exile_lootbox.pboにPBOパックし直します。
+## Install & Setups
+Unpack a3_exile_lootbox.pbo and do whatever needed to tweak
+※You will need PBO Manager or something to unpack and repack
+※This readme（readme_en.txt）is unneeded for execution of addon so you may delete if you want
+Repack a3_exile_lootbox.pbo
 
-Exileサーバ内の、@ExileServer/addons/にPBOファイルとして配置してください。
-Exileサーバが自動的に呼び出します。
-また、必要に応じて、ミッションファイル（mission.sqm）に編集が必要となります（後述）
-サーバ動作時に、ログファイルにエラーが出ていないか確認します（後述）
+Place the addon pbo inside within Exile's @ExileServer/addons/ directory
+Exile will automatically load the addon at startup
+Depending on your edits, you will need to edit your mission file as well
+Run server and verify no problems are observed from your server rpt logs
 
-DMSアドオン設定（config.sqf）にて、以下項目をfalseに設定してください。
-AIフリーズ機能が利用できるようになります（サーバ負荷軽減）
+Within your DMS config.sqf, turn below to faluse
+If below is false, and no other AI addon would be effected, LootBox AI will freeze accordingly same as how DMS AI freeze when a player is not near (This will help in server performance)
 DMS_ai_freeze_Only_DMS_AI = false;
 
+ // Still translating below... (yukihito23) //
 
 ■■ 設定方法 / Cooking method
 配布ファイル内にはいくつかのファイルが入っており、設定編集の際は、PBOアンパックする必要があります。
