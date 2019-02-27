@@ -774,7 +774,7 @@ private _bc_vehicles=[
 	"Ikarus_Civ_02"
 ];
 private _bc_objects=[
-// !! CUP-Terrain objests !! *if u wont delete or replace
+// !! CUP-Terrain objests !! *if u don't need, delete or replace
 	"US_WarfareBUAVterminal_Base_EP1",
 	"TK_WarfareBVehicleServicePoint_Base_EP1",
 	"Land_PowGen_Big_ruins_EP1",
