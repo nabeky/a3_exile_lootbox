@@ -3,9 +3,9 @@
 // *config file => config.sqf
 //
 // for Arma3 EXILE MOD (Server-Addon) and Community
-// *if u wont supports? blog.ahh.jp (Japanese only)
+// *if u want supports? blog.ahh.jp (Japanese only)
 // *included documents "readme_jp.txt" but japanese only.
-// *someone who translates!(English,French,German etc.)
+// *currently working on "readme_en.txt" for english (yukihito23)
 //
 //	Index
 //	(1) Map Marker
@@ -13,7 +13,7 @@
 //	(3) Target location type
 //	(4) Create new location
 //	(5) Blacklist
-//	(6) Trush items
+//	(6) Trash items
 //	(7) Special Rare items
 //	(8) Loot groups
 //	(9) Location settings
@@ -24,7 +24,7 @@
 //	(14) Fire-place objects
 //	(15) Strange objects
 //	(16) Flaming objects
-//	(17) Travelers AI
+//	(17) Traveler AI
 //	(18) Iron-man AI
 //	(19) Random Exile-objects
 //	(20) Custom billboards
@@ -136,7 +136,7 @@ LB_BLBandit = 5;
 LB_BLVehicle = 10;
 
 /*=============================
-	(6) Trush items (garbage)
+	(6) Trash items (garbage)
 
 	*overwrite(replace or delete) the items-list
 	*("" is delete item)
@@ -239,7 +239,7 @@ LB_SRareItems = [
 		[items....] <- rare random 1 pickup
 	*Think about Storage capacity
 	*One may be added from LB_RareItems
-	*Finally it will be overwritten with trush(%)
+	*Finally it will be overwritten with trash(%)
 	*/
 LB_LootAllFixedItems = [
 	"ItemMap","Binocular",
@@ -910,9 +910,9 @@ LB_TravelerPoptabMax = 1000;
 	1:Spawn position[x,y,0] *[] is military or airports random
 	2:AI count
 	* Iron body AI spawn position
-	* Banbi-uniform & Santa hut with Machine gun & Granade
+	* Banbi-uniform & Santa hat with Machine gun & Granade
 	* 300m radius patrol,remove all weapons
-	* no Death,canot capture items & weapons
+	* does not die, canot loot items & weapons
 	*/
 LB_IronMan = [
 	//[[100,100,0],1]	// *SAMPLE [100,100] fixed spawn
@@ -947,7 +947,7 @@ LB_IronMan = [
 	3:Angle(0-359) *Eden editor rotation "Z" value
 
 	*config.sqf:CfgInteractionModels->CleanWaterSource etc..
-	*if u wont in building spawn. use Z value [x,y,z]
+	*if u want in building spawn. use Z value [x,y,z]
 	*trader:shitting position. Bambi overall & AK47 & Gasmask. with RubberDuck
 	*trader:Please place it in the back of the building
 	*The rest is randomly marked as a map & put skeleton head
