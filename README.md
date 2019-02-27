@@ -2,5 +2,4 @@
 
 # LOOT BOX for Arma3 EXILE MOD and Community "a3_exile_lootbox"
 
-JP > 機能について、readme_jp.txtをご覧ください。
-EN > Please read readme_en.txt for information
+機能について、readme_jp.txtをご覧ください。 / Please read readme_en.txt for information
