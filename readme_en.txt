@@ -391,79 +391,70 @@ If AI find player, they will fire upon as well as mark general location of playe
     Most of the time there should be a road between spawn and waypoint so encounters would mostly be along roads
     This function relies on the Location Engine to decide which location to execute
 
- // Still translating below... (yukihito23) //
-
 ----------------------------------------------------------------
 Below does not rely on Location Engine and will work stand-alone
 ----------------------------------------------------------------
 [Random placement of Exile objects]
+This function will allow to randomly place meaningful Exile related objects (such as water servers, concrete mixers, etc..)
+Once defining spawnable locations, defining quantity will allow the objects to randomly spawn
+Objects spawned will show an icon on the map
+If in case possibility is random, then mapmarkers are sometimes dummies
+Above function will allow user to not having to rely on exile_3den.pbo tool to place these objects
+    Technical Background:
+    If in case the default object is customized, use the object name as is to specify
 
+[Custom Signs]
+This functionality allows to place custom signs in defined locations
+You would be able to brand these signs with your server info and such if wanted
+You will be able to read graphic files in from within your mission pbo to be displayed
+Use Eden editor to note down the X/Y location and rotation value
+(rotation value will be "z" value)
+Even if not a sign object, any object which allows swapping textures will work
+    Technical Background:
+    graphic images must be saved inside your mission pbo
+    You may use jpg or paa file formats for your graphic
+    height and width of image should always be 2^x (such as 64/238/256/512)
+    Using around 512*256, 512*512 would be on the safer side
+    * If possible keeping graphic size under 20kb would be better
+    enableSimulationGlobal/enableRopeAttach/allowDamage will all be set to false when signs are generated
+    There are objects which you can't change textures (I would suggest using normal signs/billboards)
+    If in case an object which can use several different textures, you would only be able to use 1 custom graphic
 
-[Exileオブジェクトランダム設置]
-フレッシュウォーター又はコンクリートミキサー等のクラフト可能なオブジェクトをランダム設置します。
-複数箇所を定義した上、指定の個数をランダムで選択されます。
-置かれた場所には、マップマークされます。
-ランダム個数の場合、ダミーのマップマークが記される事があります。
-exile_3den.pboツールによるエクスポートに頼る事なく設置が出来ます。
+[Writing on the Map]
+This function will allow you to write and use icons on desired location on map
+This function will allow drawing Ellipses as well
+Color and Size can be defined
+    Technical Background:
+    This uses the default base map marker functionality so if you place too many, it'll lag
+    Changing the font will not be supported
 
-	技術的：
-	デフォルトのオブジェクトを変更している場合は、オブジェクト名をそのまま指定してください
+[Sending Server Messages]
+This function will allow to send canned messages to players at a set interval
+Several different messages can be set
+Please use this functionality for server announcements and such
+    Technical Background:
+    This function will push messages globally to all players on the server at the time
+    This function is able to specify intervals in seconds but actual push would depend on server load as well
+    Due to Arma3's language rendering limitations, using double-byte languages in this function will not recommended as it would look ugly
+    Due to this function triggering against systemChat, if scrolled too much the message might disappear quite fast
 
-[カスタム看板]
-マップの任意の場所に、カスタム看板を設置できます。
-サーバルールやロゴなどサーバ独自色を出すことができます。
-ミッションファイルに格納された画像を貼り付けテクスチャーを変更できます。
-Edenエディタにて、位置と方向の数字だけメモして、設定してください。
-（方向は、rotation項目の"z"の値）
-看板オブジェクトでなくても、全てのオブジェクトで動作します（設定可能なオブジェクトのみ）
-
-	技術的：
-	画像ファイルはミッションファイルに格納されている必要があります。
-	Jpeg又は、Paa（Arma3独自）の形式の画像が利用できます。
-	（サイズは必ず、2^xサイズでなければなりません）
-	※64/128/256/512などの単位、512*256、512*512辺りが妥当
-	※できればファイルサイズを20KB以下
-	enableSimulationGlobal/enableRopeAttach/allowDamageなどはfalseで生成されます
-	テクスチャーを変更できないオブジェクトもあります。
-	（ここでは看板をお勧めします）
-	テクスチャーを、複数扱えるオブジェクトの場合、１つのみとなります。
-
-[マップ文字入れ]
-マップ上の任意の場所に文字とアイコンを入れる事ができます。
-また、円形ドロー（Ellipse）を行う事ができます。
-色の指定やサイズの指定が可能となってます。
-
-	技術的：
-	既存のマップマーカーの機能で実現してますので、大量に置くと負荷が掛かります。
-	サイズは、縦横それぞれに倍率指定となります。
-	本体又はミッション設定に依存しますので、フォントはここから選べません。
-
-[サーバーメッセージ配信]
-定期的に、全プレーヤーにメッセージを配信します。
-メッセージは複数定義でき、各行毎に、切り替えて配信します。
-サーバからのお知らせ、定形メッセージなどで利用ください。
-
-	技術的：
-	配信間隔は、秒で指定できますが、実際の配信にはラグが相当含まれます。
-	Arma3の仕様上、フォントが特殊で日本語は潰れてしまうので読みづらくなります。
-	systemChatで配信してるため、スクロールですぐ消えてしまう場合があります。
-	
 -------------------------------------------------------------------------------
-■■ インストール方法 / Setups
-a3_exile_lootbox.pboをPBOアンパックし、必要な設定を行います。
-※PBOファイルの管理に、PBOManager（無料）が必要です
-※当文書（readme_jp.txt）は動作には不要ですので削除してください
-再度、a3_exile_lootbox.pboにPBOパックし直します。
+## Install & Setups
+Unpack a3_exile_lootbox.pbo and do whatever needed to tweak
+※You will need PBO Manager or something to unpack and repack
+※This readme（readme_en.txt）is unneeded for execution of addon so you may delete if you want
+Repack a3_exile_lootbox.pbo
 
-Exileサーバ内の、@ExileServer/addons/にPBOファイルとして配置してください。
-Exileサーバが自動的に呼び出します。
-また、必要に応じて、ミッションファイル（mission.sqm）に編集が必要となります（後述）
-サーバ動作時に、ログファイルにエラーが出ていないか確認します（後述）
+Place the addon pbo inside within Exile's @ExileServer/addons/ directory
+Exile will automatically load the addon at startup
+Depending on your edits, you will need to edit your mission file as well
+Run server and verify no problems are observed from your server rpt logs
 
-DMSアドオン設定（config.sqf）にて、以下項目をfalseに設定してください。
-AIフリーズ機能が利用できるようになります（サーバ負荷軽減）
+Within your DMS config.sqf, turn below to faluse
+If below is false, and no other AI addon would be effected, LootBox AI will freeze accordingly same as how DMS AI freeze when a player is not near (This will help in server performance)
 DMS_ai_freeze_Only_DMS_AI = false;
 
+ // Still translating below... (yukihito23) //
 
 ■■ 設定方法 / Cooking method
 配布ファイル内にはいくつかのファイルが入っており、設定編集の際は、PBOアンパックする必要があります。
