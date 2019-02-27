@@ -73,7 +73,7 @@ This addon relies on DMS for it's AI spawning functionality (even if you don't u
     * AI will traven from town to town
     * Players will have higher possibility of encountering these traveling AI between locations
   * Spawns a so-called "Iron-Man" AI (does not die)
-    * "Iron Man" is a bandit with high self-healing capability
+    * "Iron Man" is a bandit with super health regeneration capability
     * "Iron Man" will not drop any items or provide any respect
   * GPS Traps
     * When found by AI, your location will be marked on map
@@ -311,108 +311,94 @@ If a player shoots against these AI, they will mark a general location of the pl
     
     This function will define 1 AI as 1 group
     (Arma3 is able to handle more than 200 groups but be careful in how you set this up)
- 
+  
+    AI which are set to patrol will set waypoints to near vehicles, roads and petrol sations (max quantity of waypoints is 5)
+    (all waypoints will be set within defined area around the spawn point)
+    If in case set waypoint is less then defined value, it will use location base points
+    At the end of waypoint 5, AI will then go back to spawnpoint and start over again
+    
+    If you specify a custom class, you will be able to customize AI equipment
+    Inventory contents is defined by this addom
+    (LB_LootAllFixedItems is not used)
+    (item types which have associted quantity will have random quantity values)
+
+[Vehicle Spawns]
+Vehicels found by this function can be used by players
+Vehicles will try to spawn in safe areas around structures and will have ability to have items or poptabs within its inventory
+Vehicles are spawned to make look like someone parked there, instead of looking like it "spawned"
+    Difference in spawn mechanism
+      * Exile default will spawn randomly in an open area such as fields
+      * This addon will spawn around near structures, or somewhere inside towns
+
+You will also be able to set damage values for each part of the spawned vehicle
+Petrol amount will be a random value but max and min value can be specified
+If in case random value function is not used, it will use the max value specified
+If in case a structure can not be found, it will fall back to spawn randomly within specified area
+There is a possibility of grenade trap detonating (either smoke grenades or mini grenades) OR GPS trap executing 2 seconds after turning the engine on 
+You can also randomly set it so the engine or lights are turned on
+Bandit AI's in Town which are set to patrol will use these vehicles as waypoints
+    Technical Background:
+    If in case vehicle class includes "_bike", random damage will not applied
+    For information regarding damage part locations, look at Reference section
+    Depending on vehicle type, this function tries to adjust the amount of open space it needs and decides where it will spawn
+    I will not suggest spawning plane types using this function (get Arma'd)
+
+----------------------------------------------------------------
+Written below has nothing to do with the Location Engine but will still need to figure town locations
+----------------------------------------------------------------
+[Bandit AI town invasions]
+A random CapitalCity type will be invaded by bandit AI
+You will be able to speficy the amount of groups (1 group has 3 AI)
+This will not have any prizes like other mission type addons
+Within the selected town, vehicles (which can not be used by player) and objects are spawned
+The nearest location within defined area will be used
+    Technical Background:
+    Spawns will be selected randomly from within CapitalCity types
+    player unusable vehicles will spawn based on quantity of each group
+    (the vehicle is unusable since it's spawned in as SimpleObject attribute)
+
+[Iron Man]
+Iron Man has tolerance against anything nature throws at him and has super health regeneration capabilities
+Even if you manage to kill him, you can't kill him enough and he will rise up from the dead again
+If you manage to kill him, a smoke grenade will detonate at given location
+Iron Man is equipped with Prisoner Clothes, Santa Hat, a machinegun and grenades (despawns when killed)
+He also has bipods and scopes
+You can utilize him by specifying a static spawn location as well as spawn several of him as 1 group
+If Iron Man finds a player, he will mark the players location on map
+If you manage to kill Iron Man, all of his equiment despawns, as well no respect is added to player
+Because of above, noone will like having to deal with Iron Man.
+    Technical Background:
+    Each time a damage event happens, his auto regeneration function executes
+    Iron Man patrols around within 300m of defined spawn point
+    Iron Man does not hide, he will start shooting at players as soon as he finds any
+    Iron Man equips below
+      MMG_01_hex_F/acc_flashlight/optic_AMS_snd/bipod_02_F_hex
+    Iron Man function spawn can utilize the location engine
+
+[Traveling AI]
+This function will spawn AI which traven between towns
+Traveling AI will spawn in every CapitalCity type town and will travel around near towns
+(It will depend on map, but roughly around 1-1.5km range)
+Because of above, traveling AI have a higher chance of encountering players which have gotten near towns
+You are able to specify the quantity of AI within each group
+Equipment generation uses what Bandit AI town invasions uses
+Inventory items and poptabs can be set seperate
+If AI find player, they will fire upon as well as mark general location of player on map
+    Technical Background:
+    This addon tweked around to be used on CUP Takistan, CUP Takistan map as 4 NameCityCapital types
+    I would think other maps have around the same amount of NameCityCapital types available
+    traveling waypoints will be set towards one of the near towns
+    Most of the time there should be a road between spawn and waypoint so encounters would mostly be along roads
+    This function relies on the Location Engine to decide which location to execute
+
  // Still translating below... (yukihito23) //
- 
-    AI which are set to patrol will
-
-	屋内位置は、マップのbuildingPositionデータを利用します。
-	その中でも、近辺100m以内の道路に最も近い場所を選択します。
-	これはプレーヤーとの遭遇率を上げるための配慮となってます。
-
-	１ＡＩを１グループとして処理しています。
-	（Arma3では200を超えるグループを管理できますが、一応留意ください）
-	
-	パトロールが許可されたＡＩは、近くの車両と道路、給油場所にウェイポイントが設定されます。最大５箇所
-	（いずれも、スポーン場所からロケーション設定範囲で検索）
-	ウェイポイントが少ない場合は、ロケーション基準点が利用されます。
-	最後にスポーン場所に戻り、巡回します。
-
-	カスタムクラスにすると、装備を変更できます。
-	所持アイテムは、当アイテムボックスエンジンを利用します。
-	（LB_LootAllFixedItems（全固定設定）は利用されません）
-	（残数のあるアイテムは、ランダムとはなりません）
-	
-[車両湧き]
-Exileサーバでの湧き車両と同様にプレーヤーが自由に利用可能なものになります。
-建物近くの空き地に車両が配置され、アイテムボックスと同様に、インベントリ内にアイテムやポップタブを格納できます。
-湧いてるというよりも、誰かが駐車したという趣きになってます。
-
-	湧き位置の違い
-	o サーバの車両湧き	フィールド上にランダム
-	o 当アドオン車両湧き	建物付近又は、町のどこか
-
-また、ダメージを部位毎に指定する事が可能です。
-ガソリンの量指定はランダムで、下限と上限をそれぞれ指定できます。
-ランダムガソリンを利用しない場合は、上限が利用されます。
-建物が無い場合は、範囲内にランダム配置されます。
-エンジンを掛けた際、確立で、グレネードトラップが作動します（スモーク又はミニグレネード）
-（又は、GPSトラップが作動します）
-ランダムで、エンジンが掛かった状態にしたり、ライトが点灯した状態にもできます。
-また、町バンディットAIの巡回としても設定されます。
-
-	技術的：
-	クラス名に”_bike”を含む場合は、ダメージ無しとなります。
-	ダメージ箇所は、参考資料をご覧ください。
-	車両タイプに応じて、範囲を吟味しております（建物との衝突防止）
-	固定翼航空機の湧きは、おすすめできません（物理演算）
 
 ----------------------------------------------------------------
-これより以下は、ロケーションエンジンとは関係ありませんが、町の場所を取得する必要があります
+Below does not rely on Location Engine and will work stand-alone
 ----------------------------------------------------------------
-[バンディットシティ]
-バンディット達に町が占領されます。
-グループ数を指定できます（１グループ３人）
-報酬が無く、鹵獲目的の簡易ミッションのような扱いとなります。
-町には、（乗れない）車両と、オブジェクトが複数置かれます。
-範囲内の最も低い場所が基準点に選ばれます。
+[Random placement of Exile objects]
 
-	技術的：
-	大きな町（CapitalCity）のいずれかが選択されます。
-	車両をグループ数に応じて配置しますが、SimpleObjectのため利用は不可となります。
 
-[アイアンマン]
-ゾンビ菌に耐性を持った特殊なバンディットで、驚異的な治癒力を持ってます。
-倒しても、また起き上がります（再生成湧き）
-倒れた場合、その場所からスモークが焚かれます。
-囚人服にサンタ帽、マシンガン＆グレネードを所持しています（鹵獲は出来ません）
-バイポット、スコープを装備しています。
-固定湧きとして、場所を指定します。１グループ複数ＡＩとして設定できます。
-難易度調整などにお使いください。
-プレーヤーを発見（発砲）した場合、おおよその場所にマップマークします。
-死んだ場合、全ての装備品やアイテムは削除されます。リスペクトも加算されません。
-そのため、プレーヤーにとって、まったくウマミがありません。
-（まぼろし？ゴースト？のような扱い）
-
-	技術的：
-	ダメージイベントの際に、体力を全開しています。
-	300m程度をパトロールします。
-	身を隠さず、プレーヤーを発見次第、発砲します。
-	以下を装備しています。
-	MMG_01_hex_F/acc_flashlight/optic_AMS_snd/bipod_02_F_hex
-	ロケーションエンジン内で、対象の場所を収集しています。
-
-[トラベラー]
-町と町の間を移動しているＡＩを配置します。
-マップ上の全てのキャピタル・シティ（大きな町）で発生し、近場の町を移動します。
-（マップによりますが、およそ1～1.5Km圏内）
-そのため、要所間の道路上、町に近づいたプレーヤーと遭遇しやすくなります。
-１グループのＡＩ個数を設定できます。
-装備は、ロケーションバンディット町ＡＩの装備設定が利用されます。
-所持アイテムとポップタブが設定できます。
-プレーヤーを発見（発砲）した場合、おおよその場所にマップマークします。
-（名称：GPSトラップ）
-
-	技術的：
-	CUP Takistanマップでは、大きな町（NameCityCapital）は４箇所となります。
-	他マップでも、ほぼ同様かと思います。
-	ウェイポイントは、となり町のNameCityのいずれかが対象になります。
-	ほとんどの場合、道路が敷かれてるはずですので、道路での遭遇が想定されます。
-	ロケーションエンジン内で、対象の場所を収集しています。
-
-----------------------------------------------------------------
-これより以下は、ロケーションエンジンとは関係無く、単独で機能します。
-----------------------------------------------------------------
 [Exileオブジェクトランダム設置]
 フレッシュウォーター又はコンクリートミキサー等のクラフト可能なオブジェクトをランダム設置します。
 複数箇所を定義した上、指定の個数をランダムで選択されます。
