@@ -2,7 +2,7 @@
 
 # LOOT-BOX "a3_exile_lootbox" Arma3 Exile-Mod Server Addon
 
-for EXILE MOD 1.0.4b, Communities, Survivors, Bohemia
+for EXILE MOD 1.0.4(Pineapple), Communities, Survivors, Bohemia
 
 機能について、"readme_jp.txt"をご覧ください。 / Please read "readme_en.txt" for information.
 
