@@ -72,9 +72,9 @@ This addon relies on DMS for it's AI spawning functionality (even if you don't u
   * Spawns traveling AI
     * AI will traven from town to town
     * Players will have higher possibility of encountering these traveling AI between locations
-  * Spawns a so-called "Iron-Man" AI (does not die)
-    * "Iron Man" is a bandit with super health regeneration capability
-    * "Iron Man" will not drop any items or provide any respect
+  * Spawns "Iron Miller" AI (does not die)
+    * "Iron Miller" is a man with super health regeneration capability
+    * "Iron Miller" will not drop any items or provide any respect
   * GPS Traps
     * When found by AI, your location will be marked on map
     * There is a certail percentage AI will mark map if you turn on a found vehicle
@@ -357,23 +357,23 @@ The nearest location within defined area will be used
     player unusable vehicles will spawn based on quantity of each group
     (the vehicle is unusable since it's spawned in as SimpleObject attribute)
 
-[Iron Man]
-Iron Man has tolerance against anything nature throws at him and has super health regeneration capabilities
+[Iron Miller]
+Iron Miller is a man of steel, he has tolerance against anything mother nature throws at him and has super health regeneration capabilities
 Even if you manage to kill him, you can't kill him enough and he will rise up from the dead again
 If you manage to kill him, a smoke grenade will detonate at given location
-Iron Man is equipped with Prisoner Clothes, Santa Hat, a machinegun and grenades (despawns when killed)
+Iron Miller is equipped with Prisoner Clothes, Santa Hat, a machinegun and grenades (despawns when killed)
 He also has bipods and scopes
 You can utilize him by specifying a static spawn location as well as spawn several of him as 1 group
-If Iron Man finds a player, he will mark the players location on map
-If you manage to kill Iron Man, all of his equiment despawns, as well no respect is added to player
+If Iron Miller finds a player, he will mark the players location on map
+If you manage to kill Iron Miller, all of his equiment despawns, as well no respect is added to player
 Because of above, noone will like having to deal with Iron Man.
     Technical Background:
     Each time a damage event happens, his auto regeneration function executes
-    Iron Man patrols around within 300m of defined spawn point
-    Iron Man does not hide, he will start shooting at players as soon as he finds any
-    Iron Man equips below
+    Iron Miller patrols around within 300m of defined spawn point
+    Iron Miller does not hide, he will start shooting at players as soon as he finds any
+    Iron Miller equips below
       MMG_01_hex_F/acc_flashlight/optic_AMS_snd/bipod_02_F_hex
-    Iron Man function spawn can utilize the location engine
+    Iron Miller function spawn can utilize the location engine
 
 [Traveling AI]
 This function will spawn AI which traven between towns
@@ -470,7 +470,7 @@ DMS_ai_freeze_Only_DMS_AI = false;
 	o 車両湧き関連
 	o ロケーション作成
 	o トラベラーＡＩ
-	o アイアンマン
+	o アイアンミラー
 	o バンディットシティ
 
 	（非ロケーション関連）
