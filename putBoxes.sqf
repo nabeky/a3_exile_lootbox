@@ -24,6 +24,7 @@ _C_nearMine = LB_NearMine;
 _C_roadMine = LB_RoadMine;
 _C_rndexileobj = LB_RandomExileObj;
 _C_cleanwatercnt = LB_ReoCleanWaterCount;
+_C_lockercnt = LB_ReoLockerCount;
 _C_concretemixcnt = LB_ReoConcreteMixCount;
 _C_tradercnt = LB_ReoTraderCount;
 //
@@ -124,7 +125,7 @@ fn_findEmptyAroundField={
 		_pos = [_pos,0,_radius,_size,0,0.3,0,_spawned] call BIS_fnc_findSafePos;
 		if(count _pos == 2)then{
 			if !(isOnRoad _pos)then{
-				if(count(_pos nearRoads 10) < 1)then{
+				if(count(_pos nearRoads 12) < 1)then{
 					_ok=true;_ret=_pos;
 				};
 			};
@@ -915,7 +916,7 @@ if(_C_banditcitygrp > 0)then{
 	};
 };
 //-------------------------------
-// Spawn Iron-man
+// Spawn Iron-Miller
 if(count _locMilitaryPos > 0)then{
 	_aicnt = 0;
 	{
@@ -963,7 +964,7 @@ if(count _locMilitaryPos > 0)then{
 */
 			_aicnt = _aicnt + 1;
 			["LB_IR#"+str _aicnt,_pos,_C_markertypeAItr,_C_markercolorAItr,0.7] call LB_fnc_marker;
-			[format["IronMan %1/%2 %3 %4 AIs",_aicnt,count _C_ironman,_pos,_spawn]] call LB_fnc_log;
+			[format["IronMiller %1/%2 %3 %4 AIs",_aicnt,count _C_ironman,_pos,_spawn]] call LB_fnc_log;
 		};
 	}forEach _C_ironman;
 };
@@ -994,15 +995,17 @@ if(count _C_maptext > 0)then{
 };
 //-------------------------------
 // Random Exile Obejct
-// (Clean-water / ConcreteMixer / Trader)
-private["_objs","_angle","_spawn_w","_spawn_c","_spawn_t","_ok","_trsp"];
+// (Clean-water / ConcreteMixer / Locker / Trader)
+private["_objs","_angle","_spawn_w","_spawn_l","_spawn_c","_spawn_t","_ok","_trsp"];
 if(count _C_rndexileobj > 0)then{
 	_trsp = [];
 	_objs = _C_rndexileobj call ExileClient_util_array_shuffle;
 	_spawn_w = _C_cleanwatercnt;
+	_spawn_l = _C_lockercnt;
 	_spawn_c = _C_concretemixcnt;
 	_spawn_t = _C_tradercnt;
 	if(_spawn_w < 0)then{_spawn_w = 99;};
+	if(_spawn_l < 0)then{_spawn_l = 99;};
 	if(_spawn_c < 0)then{_spawn_c = 99;};
 	if(_spawn_t < 0)then{_spawn_t = 99;};
 	_cnt = 0;
@@ -1013,12 +1016,21 @@ if(count _C_rndexileobj > 0)then{
 		_angle = _x select 2;
 		// Clean water
 		if(_spawn_w > 0 and _className isEqualTo "Land_WaterCooler_01_new_F")then{
-			[_className,AGLToASL(_pos),_angle,0.5]call LB_fnc_putSimpleobj;
+			[_className,AGLToASL(_pos),_angle,0.7]call LB_fnc_putSimpleobj;
 			_spawn_w = _spawn_w - 1;
 			_ok = true;
 		};
-		// Concrete Mixer
-		if(_spawn_c > 0 and _className isEqualTo "Exile_ConcreteMixer")then{	// canot use simple obj.
+		// Locker(canot use simple obj.)
+		if(_spawn_l > 0 and _className isEqualTo "Exile_Locker")then{
+			_vehicle = createVehicle [_className,_pos,[],0,"CAN_COLLIDE"];
+			_vehicle setDir _angle;
+			_vehicle allowDamage false;
+			_vehicle enableSimulationGlobal true;
+			_spawn_l = _spawn_l - 1;
+			_ok = true;
+		};
+		// Concrete Mixer(canot use simple obj.)
+		if(_spawn_c > 0 and _className isEqualTo "Exile_ConcreteMixer")then{
 			_vehicle = createVehicle [_className,_pos,[],0,"CAN_COLLIDE"];
 			_vehicle setDir _angle;
 			_vehicle allowDamage false;

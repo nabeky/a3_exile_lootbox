@@ -31,7 +31,9 @@ _unit = [_group,_pos,"custom","hardcore","bandit","soldier",
 	//[_unit] joinSilent grpNull;
 	[_unit] joinSilent _group;
 	_unit allowDamage false;
-	_unit setName "Iron-man";
+	_unit setName "Iron-Miller";
+	//_unit setFace "Miller";
+	if(isServer)then{[_unit, "Miller"] remoteExec ["setFace", 0, _unit]};
 	reloadEnabled _unit;
 	if(needReload _unit == 1)then{reload _unit};
 	//removeUniform _unit;	// wut!?

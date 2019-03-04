@@ -12,7 +12,7 @@ _arg = toUpper _this;
 
 _ironman = false;
 
-// Iron-Man
+// Iron-Miller
 if(_arg isEqualTo "IRON")then
 {
 	_ironman = true;
@@ -25,7 +25,7 @@ if(_arg isEqualTo "IRON")then
 	_magazines = [["HandGrenade",2]];
 	_AIHGun = [];
 	_AIHgunAttach = [];
-	_AIAssign = ["Exile_Headgear_GasMask"];
+	_AIAssign = [];//["Exile_Headgear_GasMask"];
 	_AIItem = [];
 	_AILauncher = [];
 }else{
