@@ -20,10 +20,10 @@ _grp setVariable ["LB_FireCount",time];
 	["LB_GPS#"+_name,_pos,"mil_dot_noShadow","ColorBlack",0.7] call LB_fnc_marker;
 	[format["GPS trap %1 %2",_pos,_name]] call LB_fnc_log;
 	"Bandit : " + selectRandom [
-		"Encountered f**ker!",
+		"Encountered a f**ker!",
 		"Who is that?!",
-		"What a f**k!!",
+		"What the f**k!!",
 		"Kill that guy!",
-		"Is that Survivor?"
+		"Is that a Survivor?"
 		] remoteExecCall ["systemChat",-2];
 };
