@@ -11,3 +11,7 @@ for EXILE MOD 1.0.4(Pineapple), Communities, Survivors, Bohemia
 http://blog.ahh.jp/?p=17204
 
 (ノ｀Д´)ノ彡┻━┻
+
+実際の動作を確認されたい場合は、以下のサーバにてご確認出来ます（実稼働中）
+
+[JP]TEST-鯖味噌:Saba-Miso Exile|PvP|Takistan|1.0.4
