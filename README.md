@@ -17,9 +17,9 @@ http://blog.ahh.jp/?p=17204
 [JP]鯖味噌:Saba-Miso Exile|PvP|Takistan|1.0.4
 
 Comming soon Version 1.5!!!!!!!!!!!!!!
-*Traveling Trader
-*Breakdown FuelStations
-*Speeding up
-*Bugfix
+Traveling Trader
+Breakdown FuelStations
+Speeding up
+Bugfix
 
 (ﾟ∀ﾟ)ノ
