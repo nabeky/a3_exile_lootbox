@@ -1,7 +1,7 @@
 *English documents(UTF,tab:4)
 *Version look to (config.cpp)
 *Change log to End of doc.
-*We are looking for someone who translates this document　;-)
+*We are looking for some folks which can translate this document　;-)
 	(Japanese => English,German,French,Russian etc..)
 ////////////////////////////////////////////////////////////////////////
 //	LOOT BOX for Arma3 EXILE MOD,Communities,Survivors,Bohemia
@@ -450,39 +450,39 @@ Exile will automatically load the addon at startup
 Depending on your edits, you will need to edit your mission file as well
 Run server and verify no problems are observed from your server rpt logs
 
-Within your DMS config.sqf, turn below to faluse
+Within your DMS config.sqf, turn below to false
 If below is false, and no other AI addon would be effected, LootBox AI will freeze accordingly same as how DMS AI freeze when a player is not near (This will help in server performance)
 DMS_ai_freeze_Only_DMS_AI = false;
 
+[Configurations]
+There are several files within what's distributed by this addon, when configuring settings, you will need to unpack the pbo.
+All basic configurations can be changed within the [config.sqf] file
+
+	Notable configurations (Locational)
+	* Map Locations
+	* Generating item lists
+	* Traps and Landmines
+	* Bandit AI
+	* Unusual Objects
+	* Burning objects
+	* Vehicle Spawns
+	* Creating new locations
+	* Traveling AI
+	* Iron Miller
+	* Bandit Cities
+
+	Notable configurations (non-Locational)
+	* Custom Billboards
+	* Exile Object placements
+	* Map Marker text
+	* Sever Messages
+
+As per default, majority of the configurations are made for a hardcore experience
+Please figure out where in your server this add-on will be utilized and configure accordingly
+This add-on should still run on any map without any first time configuration setup needed
+
  // Still translating below... (yukihito23) //
-
-■■ 設定方法 / Cooking method
-配布ファイル内にはいくつかのファイルが入っており、設定編集の際は、PBOアンパックする必要があります。
-基本的に、「config.sqf」のみが設定編集の対象です。
-
-	主な設定項目群
-	o 対象ロケーション
-	o アイテムタイプ
-	o トラップ関連
-	o バンディットAI関連
-	o 奇妙オブジェクト関連
-	o 炎上オブジェクト関連
-	o 車両湧き関連
-	o ロケーション作成
-	o トラベラーＡＩ
-	o アイアンミラー
-	o バンディットシティ
-
-	（非ロケーション関連）
-	o カスタム看板
-	o Exileオブジェクト設置
-	o マップマークテキスト
-	o サーバメッセージ配信
-
-デフォルトの設定内容は、かなり質素なアイテム構成となってます。
-サーバの環境に合わせて、このアイテムボックスの立ち位置を決め、設定変更ください。
-基本的には、そのままの状態で全てのマップで自動動作します。
-
+ 
 [設定方法]
 Arma3スクリプティングの記法に合わせて、注意して編集してください。
 多くの部分は、一般的プログラム言語と同様の記法となってます。
@@ -502,8 +502,8 @@ Arma3スクリプティングの記法に合わせて、注意して編集して
 	o 確立設定の項目は、0.00～1.00を記述します。1が100%となります
 
 	[主要なファイル]
-	config.sqf		設定ファイル
-	putBoxes.sqf	実装部分
+	config.sqf	//Configuration file
+	putBoxes.sqf	//Function
 	./functions/	汎用的なスクリプトファイル
 	readme_jp.txt	このファイル、運用開始時は削除しても結構です
 	※他ファイルはおまじないのようなモノ
