@@ -18,12 +18,9 @@ http://blog.ahh.jp/?p=17204
 
 Comming soon Version 1.5!!!!!!!!!!!!!!
 
-Traveling Trader
-
-Breakdown FuelStations
-
-Speeding up
-
-Bugfix
+- Traveling Trader
+- Broken FuelStations
+- Speeding up
+- Bugfixes
 
 (ﾟ∀ﾟ)ノ
