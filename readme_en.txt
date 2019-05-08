@@ -49,24 +49,24 @@ This addon relies on DMS for it's AI spawning functionality (even if you don't u
 
 # Changes mainly around the location system
   * Spawns loot boxes in random towns
-    * Lootbox will randomly spawn either outside or inside houses
+    * Lootboxes will spawn either inside or outside houses in towns
     * Loot contents can be configured easily (Such as there are 3 tiers you can set the lootbox size to be depending on size of town.)
-    * Capable of setting wiretrap mines around loot boxes for that extra entertainment  
+    * Capable of setting wiretrap mines around lootboxes for that extra entertainment  
   * Spawns random vehicles and aircrafts around in/near random towns
-    * Vehicles can be customized to have different tiers of damage and items
-    * Vehicles will mainly spawn near buildings, not on roads our out in the open
-    * Capable of setting GPR and grenade traps around these vehicles for that extra entertainment
+    * Vehicles can be customized to have different tiers of damage and item content
+    * Vehicles will try to spawn near buildings, not out in the open fields
+    * Capable of setting GPS and grenade traps around these vehicles for that extra entertainment
   * Spawns bandit AI in random towns
     * AI will spawn inside buildings and can garrison or wander around town
-    * AI will also wander around near petrol stations, spawned vehicles and on roads
-    * Depending on the latitude of location, there is a possibility of sniper AI spawning
+    * AI will also wander around near petrol stations, spawned vehicles and along roads
+    * Depending on the latitude of location, there is a possibility of sniper attributed AI spawning
   * Spawns landmines around towns
     * landmines will be placed mainly on roads
-  * Spawns unusual objects, objects with fire effects in random towns
-    * You would be able to provide a bit of a differente experience to players
+  * Spawns unusual objects, objects with fire effects randomly in towns
+    * You would be able to provide a bit of a different experience to players
     * You will be able to spawn trash, broken vehicles around towns
   * Buildings will have a random percentage the doors are open
-    * Erases other players footstep marks on the ground
+    * Ability to erase players footstep marks on the ground
   * Places random campfires around the map
     * This will give a nice feeling to night time as well as provide lucky players with a fire to cook
   * Spawns traveling AI
@@ -77,19 +77,19 @@ This addon relies on DMS for it's AI spawning functionality (even if you don't u
     * "Iron Miller" will not drop any items or provide any respect
   * GPS Traps
     * When found by AI, your location will be marked on map
-    * There is a percentage AI will mark your coordinates on map if you turn on a found vehicle
+    * There is a percentage AI will mark your coordinates on map if you start a found vehicle spawned by this addon
     * (Above functionality only works for AI spawned by this addon)
   * Grenade Traps
-    * There is a percentage a grenade trap goes off if you turn on a found vehicle
+    * There is a percentage a grenade trap goes off if you start a found vehicle spawned by this addon
     * (Above will either be smoke or mini grenades)
   * Town invasion by bandit AI
     * A random town will be invaded by bandit AI
     * This system will not have any reward boxes
 
 # Others
-  * This addon will work out of the box (default config requires cup core but can be configured)
-    * This addon will read needed values from the map directly
-    * This addon will work on different maps without problem
+  * This addon will work out of the box (default config requires cup core but can be removed)
+    * This addon will read needed locational values from the map directly
+    * This addon will work on different maps out of the box
     * (Above is true unless you customize it to have a static location value)
   * Ammo inside magazines will be randomized
     * Any spawned loot item with a magazine type system will have random values
@@ -100,14 +100,14 @@ This addon relies on DMS for it's AI spawning functionality (even if you don't u
     * Function to add map markers as well
     * (double-byte language text is hard to read)
   * Functionality to add custom signs
-    * Signs can use graphic files you want to use
+    * Signs can use graphic files of choice (as long as Arma engine understands it)
     * If the given object supports texture changes, it doesn't have to be a sign object
   * Supports sending out server messages
     * Supports sending canned messages to all players on the server at set interval time
 
 Lootbox addon will execute and run along with other addons the server has (possible to configure so lootbox stops and waits if other addons are using up resource.)
-Lootbox addon will still keep running even if players log in to the server after restart
-(Above is something to do with the Arma3 engine, other addons react the same)
+Lootbox addon will continue to execute even if players has joined session
+(Above is something to do with the Arma3 engine, other addons react similary)
 * test results: on CUP Takistan (Windows/Core i5) around 3 minutes for addon to fully execute
 
 -------------------------------------------------------------------------------
@@ -172,7 +172,7 @@ https://community.bistudio.com/wiki/Location
 	(such as font, size, icons)
 
 [Lootbox locations]
-Lootboxe spawn mechanism tries to find a hidden location.
+Lootbox spawn mechanism tries to find a hidden location.
 Spawn mechanism will be based randomly on below criteria.
   * Within realms of the specified locations within the map
   * Indoors OR outdoors of a structure within the realm
@@ -183,7 +183,7 @@ Spawn mechanism will be based randomly on below criteria.
   (If mechanism can not find any structures, it will not execute)
   
   Technnical Background:
-    * For spawning the lootbox indoors, I am use data provided by "buildingPosition"
+    * For spawning the lootbox indoors, I am using values provided by "buildingPosition"
 
 [Generating item lists]
 This mechanism is used for Lootbox inventory, spawned vehicle inventory, Bandit AI inventory.
