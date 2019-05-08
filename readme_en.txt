@@ -77,22 +77,22 @@ This addon relies on DMS for it's AI spawning functionality (even if you don't u
     * "Iron Miller" will not drop any items or provide any respect
   * GPS Traps
     * When found by AI, your location will be marked on map
-    * There is a certail percentage AI will mark map if you turn on a found vehicle
+    * There is a percentage AI will mark your coordinates on map if you turn on a found vehicle
     * (Above functionality only works for AI spawned by this addon)
   * Grenade Traps
-    * There is a certail percentage a grenade trap goes off if you turn on a found vehicle
+    * There is a percentage a grenade trap goes off if you turn on a found vehicle
     * (Above will either be smoke or mini grenades)
   * Town invasion by bandit AI
     * A random town will be invaded by bandit AI
-    * This system will not have any loot rewards
+    * This system will not have any reward boxes
 
 # Others
-  * This addon will work out of the box
+  * This addon will work out of the box (default config requires cup core but can be configured)
     * This addon will read needed values from the map directly
     * This addon will work on different maps without problem
     * (Above is true unless you customize it to have a static location value)
-  * Ammo inside magazines will be random
-    * Any spawned loot item with a magazine type system will become random
+  * Ammo inside magazines will be randomized
+    * Any spawned loot item with a magazine type system will have random values
   * Water source and concrete mixers can be placed (can be configured to be random)
     * Various Exile related objects can be set to spawn randomly
   * Function to add custom location names on the map
