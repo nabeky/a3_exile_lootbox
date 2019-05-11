@@ -39,13 +39,12 @@ There is no need to set anything inside your mp_mission.pbo for this addon to wo
 
 This addon has been developed to try to get players to explore to towns and landmarks which oftenly are barren in default Exile game play.
 For looting, this addon will create a lootbox somewhere outside, or indoors of random towns. (apart from Exile loot spawn system.)
-The lootboxes oftenly have some random items, poptabs, trash which would benefit bambie players. (There is a module which will spawn landmines near these lootboxes.)
-This addon has an inhouse vehicle spawning system. (apart from Exile vehicle spawning system.)
+The lootboxes oftenly have some random items, poptabs, trash which would benefit bambie players. (There is also a module which will spawn landmines near these lootboxes so be aware!)
+This addon has it's own vehicle spawning system which tries to spawn vehicles in a further natural way. (apart from Exile vehicle spawning system.)
 There are various additiona functioanlity this addon supports which should provide players with some nice experiences when playing.
 
 I have tried to do my best in writing the code in an easily understand format but if you need to modify it, please do so.
-There are no mods needed for this addon to work.
-This addon relies on DMS for it's AI spawning functionality (even if you don't use the DMS mission system.)
+This addon only requires DMS to execute (for it's AI spawning functionality.)
 
 # Changes mainly around the location system
   * Spawns loot boxes in random towns
@@ -53,13 +52,13 @@ This addon relies on DMS for it's AI spawning functionality (even if you don't u
     * Loot contents can be configured easily (Such as there are 3 tiers you can set the lootbox size to be depending on size of town.)
     * Capable of setting wiretrap mines around lootboxes for that extra entertainment  
   * Spawns random vehicles and aircrafts around in/near random towns
-    * Vehicles can be customized to have different tiers of damage and item content
-    * Vehicles will try to spawn near buildings, not out in the open fields
+    * Vehicles can be customized to have random damage and item content inside inventory
+    * Vehicles will try its best to spawn near buildings, not out in the open fields
     * Capable of setting GPS and grenade traps around these vehicles for that extra entertainment
   * Spawns bandit AI in random towns
     * AI will spawn inside buildings and can garrison or wander around town
-    * AI will also wander around near petrol stations, spawned vehicles and along roads
-    * Depending on the latitude of location, there is a possibility of sniper attributed AI spawning
+    * AI will also patrol near petrol stations, spawned vehicles and along roads
+    * Depending on the latitude of location, there is a possibility of a sniper attributed AI spawning
   * Spawns landmines around towns
     * landmines will be placed mainly on roads
   * Spawns unusual objects, objects with fire effects randomly in towns
