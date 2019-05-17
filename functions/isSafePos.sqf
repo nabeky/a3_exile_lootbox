@@ -4,17 +4,12 @@
 	
 	return:boolean
 */
-private ["_pos","_blacklist","_isInRange"];
+params ["_pos","_blacklist"];
 
-_pos = _this select 0;
-_blacklist = _this select 1;
-
-_isInRange = false;
+if(_pos isEqualTo [])exitWith{false};
+private _isInRange = false;
 {
-	if (((_x select 0) distance2D _pos) < _x select 1) exitWith
-	{
-		_isInRange = true;
-	};
+	if (((_x#0) distance2D _pos) < _x#1) exitWith{_isInRange = true;};
 }forEach _blacklist;
 if(_isInRange) exitWith{false};
 

@@ -88,17 +88,16 @@ if(_launcher != "")then{
 	_mags = getArray(configFile >> "CfgWeapons" >> _launcher >> "magazines");
 	_magazines pushBack [selectRandom _mags,1];
 };
-_loadout = [
-	_weapon,
-	_weaponAttachments,
-	_magazines,
-	_pistol,
-	_pistolAttachments,
-	_assignedItems,
-	_launcher,
-	_headgear,
-	_uniform,
-	_vest,
-	_backpack
-];
-_loadout
+[
+_weapon,
+_weaponAttachments,
+_magazines,
+_pistol,
+_pistolAttachments,
+_assignedItems,
+_launcher,
+_headgear,
+_uniform,
+_vest,
+_backpack
+]

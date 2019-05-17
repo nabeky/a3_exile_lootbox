@@ -1,7 +1,7 @@
 *English documents(UTF,tab:4)
 *Version look to (config.cpp)
 *Change log to End of doc.
-*We are looking for some folks which can translate this document　;-)
+*We are looking for someone who translates this document　;-)
 	(Japanese => English,German,French,Russian etc..)
 ////////////////////////////////////////////////////////////////////////
 //	LOOT BOX for Arma3 EXILE MOD,Communities,Survivors,Bohemia
@@ -39,59 +39,60 @@ There is no need to set anything inside your mp_mission.pbo for this addon to wo
 
 This addon has been developed to try to get players to explore to towns and landmarks which oftenly are barren in default Exile game play.
 For looting, this addon will create a lootbox somewhere outside, or indoors of random towns. (apart from Exile loot spawn system.)
-The lootboxes oftenly have some random items, poptabs, trash which would benefit bambie players. (There is also a module which will spawn landmines near these lootboxes so be aware!)
-This addon has it's own vehicle spawning system which tries to spawn vehicles in a further natural way. (apart from Exile vehicle spawning system.)
+The lootboxes oftenly have some random items, poptabs, trash which would benefit bambie players. (There is a module which will spawn landmines near these lootboxes.)
+This addon has an inhouse vehicle spawning system. (apart from Exile vehicle spawning system.)
 There are various additiona functioanlity this addon supports which should provide players with some nice experiences when playing.
 
 I have tried to do my best in writing the code in an easily understand format but if you need to modify it, please do so.
-This addon only requires DMS to execute (for it's AI spawning functionality.)
+There are no mods needed for this addon to work.
+This addon relies on DMS for it's AI spawning functionality (even if you don't use the DMS mission system.)
 
 # Changes mainly around the location system
   * Spawns loot boxes in random towns
-    * Lootboxes will spawn either inside or outside houses in towns
+    * Lootbox will randomly spawn either outside or inside houses
     * Loot contents can be configured easily (Such as there are 3 tiers you can set the lootbox size to be depending on size of town.)
-    * Capable of setting wiretrap mines around lootboxes for that extra entertainment  
+    * Capable of setting wiretrap mines around loot boxes for that extra entertainment  
   * Spawns random vehicles and aircrafts around in/near random towns
-    * Vehicles can be customized to have random damage and item content inside inventory
-    * Vehicles will try its best to spawn near buildings, not out in the open fields
-    * Capable of setting GPS and grenade traps around these vehicles for that extra entertainment
+    * Vehicles can be customized to have different tiers of damage and items
+    * Vehicles will mainly spawn near buildings, not on roads our out in the open
+    * Capable of setting GPR and grenade traps around these vehicles for that extra entertainment
   * Spawns bandit AI in random towns
     * AI will spawn inside buildings and can garrison or wander around town
-    * AI will also patrol near petrol stations, spawned vehicles and along roads
-    * Depending on the latitude of location, there is a possibility of a sniper attributed AI spawning
+    * AI will also wander around near petrol stations, spawned vehicles and on roads
+    * Depending on the latitude of location, there is a possibility of sniper AI spawning
   * Spawns landmines around towns
     * landmines will be placed mainly on roads
-  * Spawns unusual objects, objects with fire effects randomly in towns
-    * You would be able to provide a bit of a different experience to players
+  * Spawns unusual objects, objects with fire effects in random towns
+    * You would be able to provide a bit of a differente experience to players
     * You will be able to spawn trash, broken vehicles around towns
   * Buildings will have a random percentage the doors are open
-    * Ability to erase players footstep marks on the ground
+    * Erases other players footstep marks on the ground
   * Places random campfires around the map
     * This will give a nice feeling to night time as well as provide lucky players with a fire to cook
   * Spawns traveling AI
     * AI will traven from town to town
     * Players will have higher possibility of encountering these traveling AI between locations
-  * Spawns "Iron Miller" AI (does not die)
-    * "Iron Miller" is a man with super health regeneration capability
-    * "Iron Miller" will not drop any items or provide any respect
+  * Spawns a so-called "Iron-Man" AI (does not die)
+    * "Iron Man" is a bandit with super health regeneration capability
+    * "Iron Man" will not drop any items or provide any respect
   * GPS Traps
     * When found by AI, your location will be marked on map
-    * There is a percentage AI will mark your coordinates on map if you start a found vehicle spawned by this addon
+    * There is a certail percentage AI will mark map if you turn on a found vehicle
     * (Above functionality only works for AI spawned by this addon)
   * Grenade Traps
-    * There is a percentage a grenade trap goes off if you start a found vehicle spawned by this addon
+    * There is a certail percentage a grenade trap goes off if you turn on a found vehicle
     * (Above will either be smoke or mini grenades)
   * Town invasion by bandit AI
     * A random town will be invaded by bandit AI
-    * This system will not have any reward boxes
+    * This system will not have any loot rewards
 
 # Others
-  * This addon will work out of the box (default config requires cup core but can be removed)
-    * This addon will read needed locational values from the map directly
-    * This addon will work on different maps out of the box
+  * This addon will work out of the box
+    * This addon will read needed values from the map directly
+    * This addon will work on different maps without problem
     * (Above is true unless you customize it to have a static location value)
-  * Ammo inside magazines will be randomized
-    * Any spawned loot item with a magazine type system will have random values
+  * Ammo inside magazines will be random
+    * Any spawned loot item with a magazine type system will become random
   * Water source and concrete mixers can be placed (can be configured to be random)
     * Various Exile related objects can be set to spawn randomly
   * Function to add custom location names on the map
@@ -99,14 +100,14 @@ This addon only requires DMS to execute (for it's AI spawning functionality.)
     * Function to add map markers as well
     * (double-byte language text is hard to read)
   * Functionality to add custom signs
-    * Signs can use graphic files of choice (as long as Arma engine understands it)
+    * Signs can use graphic files you want to use
     * If the given object supports texture changes, it doesn't have to be a sign object
   * Supports sending out server messages
     * Supports sending canned messages to all players on the server at set interval time
 
 Lootbox addon will execute and run along with other addons the server has (possible to configure so lootbox stops and waits if other addons are using up resource.)
-Lootbox addon will continue to execute even if players has joined session
-(Above is something to do with the Arma3 engine, other addons react similary)
+Lootbox addon will still keep running even if players log in to the server after restart
+(Above is something to do with the Arma3 engine, other addons react the same)
 * test results: on CUP Takistan (Windows/Core i5) around 3 minutes for addon to fully execute
 
 -------------------------------------------------------------------------------
@@ -171,7 +172,7 @@ https://community.bistudio.com/wiki/Location
 	(such as font, size, icons)
 
 [Lootbox locations]
-Lootbox spawn mechanism tries to find a hidden location.
+Lootboxe spawn mechanism tries to find a hidden location.
 Spawn mechanism will be based randomly on below criteria.
   * Within realms of the specified locations within the map
   * Indoors OR outdoors of a structure within the realm
@@ -182,7 +183,7 @@ Spawn mechanism will be based randomly on below criteria.
   (If mechanism can not find any structures, it will not execute)
   
   Technnical Background:
-    * For spawning the lootbox indoors, I am using values provided by "buildingPosition"
+    * For spawning the lootbox indoors, I am use data provided by "buildingPosition"
 
 [Generating item lists]
 This mechanism is used for Lootbox inventory, spawned vehicle inventory, Bandit AI inventory.
@@ -356,23 +357,23 @@ The nearest location within defined area will be used
     player unusable vehicles will spawn based on quantity of each group
     (the vehicle is unusable since it's spawned in as SimpleObject attribute)
 
-[Iron Miller]
-Iron Miller is a man of steel, he has tolerance against anything mother nature throws at him and has super health regeneration capabilities
+[Iron Man]
+Iron Man has tolerance against anything nature throws at him and has super health regeneration capabilities
 Even if you manage to kill him, you can't kill him enough and he will rise up from the dead again
 If you manage to kill him, a smoke grenade will detonate at given location
-Iron Miller is equipped with Prisoner Clothes, Santa Hat, a machinegun and grenades (despawns when killed)
+Iron Man is equipped with Prisoner Clothes, Santa Hat, a machinegun and grenades (despawns when killed)
 He also has bipods and scopes
 You can utilize him by specifying a static spawn location as well as spawn several of him as 1 group
-If Iron Miller finds a player, he will mark the players location on map
-If you manage to kill Iron Miller, all of his equiment despawns, as well no respect is added to player
+If Iron Man finds a player, he will mark the players location on map
+If you manage to kill Iron Man, all of his equiment despawns, as well no respect is added to player
 Because of above, noone will like having to deal with Iron Man.
     Technical Background:
     Each time a damage event happens, his auto regeneration function executes
-    Iron Miller patrols around within 300m of defined spawn point
-    Iron Miller does not hide, he will start shooting at players as soon as he finds any
-    Iron Miller equips below
+    Iron Man patrols around within 300m of defined spawn point
+    Iron Man does not hide, he will start shooting at players as soon as he finds any
+    Iron Man equips below
       MMG_01_hex_F/acc_flashlight/optic_AMS_snd/bipod_02_F_hex
-    Iron Miller function spawn can utilize the location engine
+    Iron Man function spawn can utilize the location engine
 
 [Traveling AI]
 This function will spawn AI which traven between towns
@@ -449,39 +450,39 @@ Exile will automatically load the addon at startup
 Depending on your edits, you will need to edit your mission file as well
 Run server and verify no problems are observed from your server rpt logs
 
-Within your DMS config.sqf, turn below to false
+Within your DMS config.sqf, turn below to faluse
 If below is false, and no other AI addon would be effected, LootBox AI will freeze accordingly same as how DMS AI freeze when a player is not near (This will help in server performance)
 DMS_ai_freeze_Only_DMS_AI = false;
 
-[Configurations]
-There are several files within what's distributed by this addon, when configuring settings, you will need to unpack the pbo.
-All basic configurations can be changed within the [config.sqf] file
-
-	Notable configurations (Locational)
-	* Map Locations
-	* Generating item lists
-	* Traps and Landmines
-	* Bandit AI
-	* Unusual Objects
-	* Burning objects
-	* Vehicle Spawns
-	* Creating new locations
-	* Traveling AI
-	* Iron Miller
-	* Bandit Cities
-
-	Notable configurations (non-Locational)
-	* Custom Billboards
-	* Exile Object placements
-	* Map Marker text
-	* Sever Messages
-
-As per default, majority of the configurations are made for a hardcore experience
-Please figure out where in your server this add-on will be utilized and configure accordingly
-This add-on should still run on any map without any first time configuration setup needed
-
  // Still translating below... (yukihito23) //
- 
+
+■■ 設定方法 / Cooking method
+配布ファイル内にはいくつかのファイルが入っており、設定編集の際は、PBOアンパックする必要があります。
+基本的に、「config.sqf」のみが設定編集の対象です。
+
+	主な設定項目群
+	o 対象ロケーション
+	o アイテムタイプ
+	o トラップ関連
+	o バンディットAI関連
+	o 奇妙オブジェクト関連
+	o 炎上オブジェクト関連
+	o 車両湧き関連
+	o ロケーション作成
+	o トラベラーＡＩ
+	o アイアンマン
+	o バンディットシティ
+
+	（非ロケーション関連）
+	o カスタム看板
+	o Exileオブジェクト設置
+	o マップマークテキスト
+	o サーバメッセージ配信
+
+デフォルトの設定内容は、かなり質素なアイテム構成となってます。
+サーバの環境に合わせて、このアイテムボックスの立ち位置を決め、設定変更ください。
+基本的には、そのままの状態で全てのマップで自動動作します。
+
 [設定方法]
 Arma3スクリプティングの記法に合わせて、注意して編集してください。
 多くの部分は、一般的プログラム言語と同様の記法となってます。
@@ -501,8 +502,8 @@ Arma3スクリプティングの記法に合わせて、注意して編集して
 	o 確立設定の項目は、0.00～1.00を記述します。1が100%となります
 
 	[主要なファイル]
-	config.sqf	//Configuration file
-	putBoxes.sqf	//Function
+	config.sqf		設定ファイル
+	putBoxes.sqf	実装部分
 	./functions/	汎用的なスクリプトファイル
 	readme_jp.txt	このファイル、運用開始時は削除しても結構です
 	※他ファイルはおまじないのようなモノ

@@ -1,15 +1,12 @@
 /*
 	1:cargo
-	2:items
+	2:items (item random-count)
 	3:poptabs
 	4:trash items(fill mode)
 */
-private["_cargo","_items","_poptabs","_trash","_content","_ammoCount"];
+params ["_cargo","_items","_poptabs","_trash"];
 
-_cargo = _this select 0;
-_items = _this select 1;
-_poptabs = _this select 2;
-_trash = _this select 3;
+private["_content","_ammoCount","_name"];
 
 clearMagazineCargoGlobal _cargo;
 clearWeaponCargoGlobal _cargo;
@@ -17,7 +14,7 @@ clearItemCargoGlobal _cargo;
 clearBackpackCargoGlobal _cargo;
 _cargo setVariable ["ExileMoney",0,true];
 
-_content = "";
+//_content = "";
 {
 	if !(_cargo canAdd _x)exitWith{};
 	_itemType = _x call BIS_fnc_itemType;
@@ -37,18 +34,15 @@ _content = "";
 		case "Equipment";
 		default {_cargo addItemCargoGlobal [_x, 1]};
 	};
-	_content = _content + _x + ",";
+//	_content = _content + _x + ",";
 } foreach _items;
 
 // fill mode
-if(count _trash > 0)then
-{
-	while{_cargo canAdd _x}do
-	{
-		_cargo addItemCargoGlobal [selectRandom _trash, 1];
+if(count _trash > 0)then{
+	while{_name = selectRandom _trash;_cargo canAdd _name}do{
+		_cargo addItemCargoGlobal [_name,1];
 	};
 };
-
 //[format["content:%1",_content]] call LB_fnc_log;
 
 _cargo setVariable ["ExileMoney", _poptabs, true];
