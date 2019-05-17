@@ -12,15 +12,10 @@ http://blog.ahh.jp/?p=17204
 
 (ノ｀Д´)ノ彡┻━┻
 
+New Version 1.5 here!!  2019/05/18
+
 実際の動作を確認されたい場合は、以下のサーバにてご確認出来ます（実稼働中） / If you want to actually see this add-on running, you can do so from server below.
 
 [JP]鯖味噌:Saba-Miso Exile|PvP|Takistan|1.0.4
-
-Comming soon Version 1.5!!!!!!!!!!!!!!
-
-- Traveling Trader
-- Broken FuelStations
-- Speeding up
-- Bugfixes
 
 (ﾟ∀ﾟ)ノ
