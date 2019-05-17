@@ -31,6 +31,7 @@ if !(LB_MapMarker)then
 	if ((_name find "LB_BANDITCITY") > -1)then{_ok = true;};
 	if ((_name find "LB_REOBJ") > -1)then{_ok = true;};
 	if ((_name find "LB_MAPTEXT") > -1)then{_ok = true;};
+	if ((_name find "LB_BFUEL") > -1)then{_ok = true;};
 };
 if !(_ok)exitWith{};
 
