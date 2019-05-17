@@ -1270,7 +1270,7 @@ LB_SpawnTravelingTrader={
 	if(_invincible)then{
 		_trader allowDamage false;
 		_trader addEventHandler ["HandleDamage",{0}];
-		_trader addEventHandler ["Dammaged","(_this#0) setDammage 0"];
+		_trader addEventHandler ["Dammaged","(_this#0) setDamage 0"];
 	};
 	// gears
 	removeGoggles _trader;
