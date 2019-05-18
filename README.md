@@ -23,3 +23,4 @@ New Version 1.5 here!!  2019/05/18
 V1.5 TravelingTrader
 https://youtu.be/xOWREQskIwM
 
+[![](http://img.youtube.com/vi/xOWREQskIwM/0.jpg)](http://www.youtube.com/watch?v=xOWREQskIwM "")
