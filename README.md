@@ -21,4 +21,5 @@ New Version 1.5 here!!  2019/05/18
 (ﾟ∀ﾟ)ノ
 
 V1.5 TravelingTrader
-<iframe width="560" height="315" src="https://www.youtube.com/embed/xOWREQskIwM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+https://youtu.be/xOWREQskIwM
+
