@@ -1,39 +1,38 @@
 *Japanese documents(UTF,tab:4)
-*Version look to (config.cpp)
-*Change log to End of doc.
-*We are looking for someone who translates this document　;-)
+*Versionings: look at (config.cpp)
+*Change log at End of doc.
+*We are looking for someone who can translate this document　;-)
 (Japanese => English,German,French,Russian etc..)
 
 |	LOOT BOX for Arma3 EXILE MOD(Server-Addon)
 |		to Arma3 All Communities,Survivors,Bohemia
-|	アイテム漁りに小さな幸せを・・　/ for beggar-mans
+|	アイテム漁りに小さな幸せを・・　/ for beggar-man
 |	"a3_exile_lootbox"
-|	*if u want supports? blog.ahh.jp (Japanese only)
+|	*if u want support? blog.ahh.jp (Japanese only)
 |	*included documents "readme_jp.txt" but japanese only.
-|	*someone who translates!(English,French,German etc.)
 |	*currently working on "readme_en.txt" for english (yukihito23)
+|	*If anyone is interested in translating!(French,German etc.)
 
 |	開発&著作 / Dev.&Auth.：nabek 2018/4-
-|	CreativeCommons:CC-NC
+|	クリエイティヴ・コモンズ 表示 - 非営利 4.0 国際 (CC BY-NC 4.0)
 |	Discord : https://discord.gg/b4FT278
 |	GitHub : https://github.com/nabeky/a3_exile_lootbox
 |	Blog : http://blog.ahh.jp/?tag=arma3
 |	Server : [JP]鯖味噌:Saba-Miso Exile|PvP|Takistan
 |	
 |	Special Thanks!
-|		Yukihito, Losty
+|		yukihito23, Losty
 
 |	取扱説明書 / Manual （日本語 / Japanese）
 |	目次 / Index
 |	o アドオン概要 / Overview
 |	o 動作確認 / Environment
 |	o 動作説明 / Description
-|	o インストール方法 / Setups
-|	o 設定方法 / Cooking method
-|	o 参考資料 / Documents
+|	o インストール方法 / Installation
+|	o 設定方法 / Settings
 |	o ライセンス・サポートについて / License & Supports
-|	o 既知の問題・バグ / Cockroaches?
 |	o たぶん開発者らしいnabekから / from Dev.nabek
+|	o 参考資料 / Documents
 |	o 更新履歴 / Change logs
 |дﾟ)
 -------------------------------------------------------------------------------
@@ -121,10 +120,10 @@ Arma3 EXILE MODサーバ専用アドオンとなります。
 	o サーバーメッセージ配信（システムチャット）
 		定期的にメッセージを全プレーヤーに配信します
 		最後文まで行くと最初文に戻ります
-	o 給油所の故障（New!）
+	o 給油所の故障（New! v1.5）
 		マップ上の給油所をランダムで故障させます
 		車両の自動給油が出来なくなりますがクラフトは可能です
-	o 移動トレーダー（New!）
+	o 移動トレーダー（New! v1.5）
 		マップ上を徒歩で移動しているトレーダー
 
 当LOOTBOXアドオンの起動は、他アドオンと並列で動作します（遅延・負荷時待機可）
@@ -848,13 +847,31 @@ LB_TTMessages		メッセージの種類（ランダム）
 LB_TTWayPoints		移動経路
 
 -------------------------------------------------------------------------------
-■■ ライセンス・サポートについて / License & Supports
-クリエイティブコモン（CC-NC）にて、自由にご利用頂けます。
+■■ ライセンス・サポートについて / License & Support
+このアドオン、およびそのコンテンツはクリエイティヴ・コモンズ ( 表示 - 非営利 4.0 国際 (CC BY-NC 4.0)) によって保護されております。
+このアドオン、おとびそのコンテンツを入手、複製、利用する場合は同封のライセンスに同意したとみなされます。
 ・著作権は放棄しておりません
 ・営利目的での利用は禁じます
 サポートは、当方NGOでもボランティアでも慈善事業のつもりでも御座いませんので、基本的には受け付けません・・が、その時の気分で対応させて頂きます。
 その辺はご了承ください。
 ご利用の際は、一声頂ければ幸いです。モチベーションのアップと、さらなるバージョンアップへの布石となります。
+
+[クリエイティヴ・コモンズ: 表示 - 非営利 4.0 国際 (CC BY-NC 4.0)
+あなたは以下の条件に従う限り、自由に：
+共有 — どのようなメディアやフォーマットでも資料を複製したり、再配布できます。
+翻案 — 資料をリミックスしたり、改変したり、別の作品のベースにしたりできます
+あなたがライセンスの条件に従っている限り、許諾者がこれらの自由を取り消すことはできません。
+
+あなたの従うべき条件は以下の通りです。
+表示 — あなたは 適切なクレジットを表示し、ライセンスへのリンクを提供し、変更があったらその旨を示さなければなりません。あなたはこれらを合理的などのような方法で行っても構いませんが、許諾者があなたやあなたの利用行為を支持していると示唆するような方法は除きます。
+非営利 — あなたは営利目的でこの資料を利用してはなりません。
+追加的な制約は課せません — あなたは、このライセンスが他の者に許諾することを法的に制限するようないかなる法的規定も技術的手段 も適用してはなりません。
+
+ご注意：
+あなたは、資料の中でパブリック・ドメインに属している部分に関して、あるいはあなたの利用が著作権法上の権利制限規定にもとづく場合には、ライセンスの規定に従う必要はありません。
+保証は提供されていません。ライセンスはあなたの利用に必要な全ての許諾を与えないかも知れません。例えば、パブリシティ権、肖像権、人格権 などの他の諸権利はあなたがどのように資料を利用するかを制限することがあります。
+ライセンス要約版: https://creativecommons.org/licenses/by-nc/4.0/deed.ja
+ライセンス全文版: https://creativecommons.org/licenses/by-nc/4.0/legalcode.ja
 
 -------------------------------------------------------------------------------
 ■■ たぶん開発者らしいnabekから / from Dev.nabek
@@ -909,39 +926,46 @@ m9(　ﾟдﾟ)！！
 ※AMD FM1-A6-3650　4Cores 3.6Ghz!!
 
 翻訳、アイデア、技術的な多大なるご支援に大変感謝致します。
-	Yukihito
-	Losty
+	* yukihito23
+	* Losty
 
 開発に参加してくださる方も参加募っております。
 （デバッガー、アイデア企画、コーディング等）
 
 以上です。お疲れ様でした。とても疲れた。
-(；´Д｀)3...give me smoke
+(；´Д｀)3...needing some smokes
 
 -------------------------------------------------------------------------------
 ■■ 参考資料 / Documents
 [マップマーカー色]
 https://community.bistudio.com/wiki/CfgMarkerColors_Arma_3
+
 [マップマーカータイプ]
 https://community.bistudio.com/wiki/cfgMarkers
+
 [ロケーションタイプ]
 https://community.bistudio.com/wiki/Location
+
 [爆発物]
 ATMine/APERSMine/APERSBoundingMine/SLAMDirectionalMine/APERSTripMine
 SatchelCharge_F/DemoCharge_F/Claymore_F/IEDUrbanBig_F/IEDLandBig_F/IEDUrbanSmall_F/IEDLandSmall_F
 UnderwaterMine/UnderwaterMineAB/UnderwaterMinePDM
 https://community.bistudio.com/wiki/Arma_CfgVehicles_Other
 ※検索するとオブジェクト画像が見れます(Ctrl+F)
+
 [アイテム種類]
 EXILEミッションファイルのconfig.cppを参考に記述してください。
 （トレーダー辺りが一覧で見易いかと思います）
+
 [車両ダメージ基本部位]
 HitEngine (engine #1)／HitEngine2 (engine #2)／HitEngine3 (engine #3)／HitHRotor (main rotor)／HitVRotor (tail rotor)／HitBatteries (electrical systems)／HitLight (landing light)／HitHydraulics (entire hydraulics system)／HitTransmission (engine transmission)／HitGear (landing gear)／HitFuel (all fuel tanks)／HitHStabilizerL1 (first left horizontal stabilizer)／HitHStabilizerR1 (first right horizontal stabilizer)／HitVStabilizer1 (first vertical stabilizer)／HitTail (tail boom)／HitPitotTube (all pitot tubes)／HitStaticPort (all static ports)／HitStarter1 (starter for engine #1)／HitStarter2 (starter for engine #2)／HitStarter3 (starter for engine #3)／HitAvionics／HitHull／HitMissiles／HitRGlass／HitLGlass／HitGlass1／HitGlass2／HitGlass3／HitGlass4／HitGlass5／HitGlass6
 ※オブジェクトによって部位は変わります
+
 [人間ダメージ部位]
 HitFace／HitNeck／HitHead／HitPelvis／HitAbdomen／HitDiaphragm／HitChest／HitBody／HitArms／HitHands／HitLegs
 neck／head／pelvis／spine1／spine2／spine3／body／hands／legs
 ※当アドオンには関係ない資料
+
 [Arma3内蔵サウンドファイル]
 Arma 3: SoundFiles
 https://community.bistudio.com/wiki/Arma_3:_SoundFiles

@@ -1,34 +1,40 @@
 *English documents(UTF,tab:4)
-*Version look to (config.cpp)
-*Change log to End of doc.
-*We are looking for some folks which can translate this document　;-)
-	(Japanese => English,German,French,Russian etc..)
-////////////////////////////////////////////////////////////////////////
-//	LOOT BOX for Arma3 EXILE MOD,Communities,Survivors,Bohemia
-//	"a3_exile_lootbox"
-//	アイテム漁りに小さな幸せを・・　/ for beggar-man
-//
-//	Dev.&Auth.：nabek (blog.ahh.jp) 2018/4-
-//	Discord Ch. https://discord.gg/b4FT278
-//
-//	Manual （英語 / English）
-//
-//		Index
-//		* Overview (EN translated)
-//		* Environment (EN translated)
-//		* Description
-//		* Setups
-//		* Cooking method
-//		* Documents
-//		* Logging
-//		* Errors and remedy
-//		* Customize
-//		* License & Supports
-//		* Cockroaches?
-//		* from Dev.nabek
-//		* Change logs
-////////////////////////////////////////////////////////////////////////
+*Versionings: look at (config.cpp)
+*Change log at End of doc.
+*We are looking for someone who can translate this document　;-)
+(Japanese => German,French,Russian etc..)
 
+|	LOOT BOX for Arma3 EXILE MOD(Server-Addon)
+|		to Arma3 All Communities,Survivors,Bohemia
+|	アイテム漁りに小さな幸せを・・　/ for beggar-man
+|	"a3_exile_lootbox"
+|	*if u want support? blog.ahh.jp (Japanese only)
+|	*included documents "readme_en.txt" but japanese only.
+|	*currently working on "readme_en.txt" for english (yukihito23)
+|	*If anyone is interested in translating!(French,German etc.)
+|
+|	Dev&Auth.：nabek 2018/4-
+|	Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)
+|	Discord : https://discord.gg/b4FT278
+|	GitHub : https://github.com/nabeky/a3_exile_lootbox
+|	Blog : http://blog.ahh.jp/?tag=arma3
+|	Server : [JP]鯖味噌:Saba-Miso Exile|PvP|Takistan
+|	
+|	Special Thanks!
+|		yukihito23, Losty
+|
+|	Manual （English）
+|		Index
+|		* Overview (EN translated)
+|		* Environment (EN translated)
+|		* Description (EN translated)
+|		* Installation (EN translated)
+|		* Settings
+|		* License & Supports (EN translated)
+|		* from Dev.nabek (EN translated)
+|		* Documents (EN translated)
+|		* Change logs (EN translated)
+|дﾟ)
 -------------------------------------------------------------------------------
 ## Overview
 
@@ -46,11 +52,17 @@ There are various additiona functioanlity this addon supports which should provi
 I have tried to do my best in writing the code in an easily understand format but if you need to modify it, please do so.
 This addon only requires DMS to execute (for it's AI spawning functionality.)
 
-# Changes mainly around the location system
+# Changes mainly around the location engine
+  * Locational variables will be read directly from the map
+    * add-on will auto evaluate what map you're using and run
+	* Even if map is changed, it will understand
+	* above excludes in case a specific coordinate for a map is specified
   * Spawns loot boxes in random towns
     * Lootboxes will spawn either inside or outside houses in towns
     * Loot contents can be configured easily (Such as there are 3 tiers you can set the lootbox size to be depending on size of town.)
-    * Capable of setting wiretrap mines around lootboxes for that extra entertainment  
+    * Capable of setting wiretrap mines around lootboxes for that extra entertainment
+  * Magazine type items will now have a random value
+    * Items such as ammo magazines, matches, grenades will have random remaining quantity
   * Spawns random vehicles and aircrafts around in/near random towns
     * Vehicles can be customized to have random damage and item content inside inventory
     * Vehicles will try its best to spawn near buildings, not out in the open fields
@@ -62,16 +74,17 @@ This addon only requires DMS to execute (for it's AI spawning functionality.)
   * Spawns landmines around towns
     * landmines will be placed mainly on roads
   * Spawns unusual objects, objects with fire effects randomly in towns
-    * You would be able to provide a bit of a different experience to players
+    * You would be able to provide a bit of a different experience for players
     * You will be able to spawn trash, broken vehicles around towns
   * Buildings will have a random percentage the doors are open
-    * Ability to erase players footstep marks on the ground
+    * Ability to make it harder to track down other players
   * Places random campfires around the map
     * This will give a nice feeling to night time as well as provide lucky players with a fire to cook
   * Spawns traveling AI
     * AI will traven from town to town
     * Players will have higher possibility of encountering these traveling AI between locations
-  * Spawns "Iron Miller" AI (does not die)
+  * Spawns "Iron Miller" AI (Invinsible)
+	* "Iron Miller" doesn't like any of you, you would be best staying away from him
     * "Iron Miller" is a man with super health regeneration capability
     * "Iron Miller" will not drop any items or provide any respect
   * GPS Traps
@@ -103,21 +116,29 @@ This addon only requires DMS to execute (for it's AI spawning functionality.)
     * If the given object supports texture changes, it doesn't have to be a sign object
   * Supports sending out server messages
     * Supports sending canned messages to all players on the server at set interval time
+  * Broken gas stations (NEW! v1.5)
+    * Random gas stations on the map will be "broken"
+	* Auto refuel won't work but crafting will still work
+  * Traveling Trader (NEW! v1.5)
+    * Trader will be traveling across the map on foot
+
 
 Lootbox addon will execute and run along with other addons the server has (possible to configure so lootbox stops and waits if other addons are using up resource.)
 Lootbox addon will continue to execute even if players has joined session
 (Above is something to do with the Arma3 engine, other addons react similary)
-* test results: on CUP Takistan (Windows/Core i5) around 3 minutes for addon to fully execute
+* test results: on CUP Takistan (Windows/Ryzen 1400) around 1 minute 50 seconds for addon to fully execute
 
 -------------------------------------------------------------------------------
 ## Environment
-Arma3 1.88.145285　64bit/32bit
+Arma3 1.92.145539　(64bit/32bit)
 Arma3 Dedicated Server
 Windows 10 Home/Professional
 Linux(Ubuntu 16.04LTS/17.10/18.04LTS)
 
-MOD:Exile MOD Server 1.0.3a/1.0.4a(Pineapple)
-Addon:DMS/Defent's Mission System　Server
+Required MOD:
+	Exile MOD Server 1.0.3a/1.0.4a(Pineapple)
+	https://www.exilemod.com/
+Required Addon:DMS/Defent's Mission System　Server
 	https://www.exilemod.com/topic/61-dms-defents-mission-system/
 
 Below will be needed to unpack/pack the pbo.
@@ -126,7 +147,7 @@ Below will be needed to unpack/pack the pbo.
 Great text editor to use to change config values and such
 	Notepad+
 	https://notepad-plus-plus.org/
-	* Visual Code is a good one as well
+	* Visual Code is a good alternative as well
 Official BI tools are nice to have
 	Arma3 Tools
 	* Install through Steam
@@ -296,7 +317,7 @@ If AI is set to patrol, they will patrol around nearby vehicles, roads, petrol s
 You can specify a seperate class all together to have custom loadouts
 (As for AI skill settings, I'm having addon to reference what DMS specifies)
 If in case there are no structures within realms of specified spawn point, they will be randomly placed within the area
-If a player shoots against these AI, they will mark a general location of the player on the map (aka, GPS trap)
+If a player shoots at these AI, they will mark a general location of the player on the map (aka, GPS trap)
     Technical Background:
     AI strengh is set to random by DMS
     When a player is not near, the AI will use DMS AI Freeze function to reduce server load
@@ -342,15 +363,12 @@ Bandit AI's in Town which are set to patrol will use these vehicles as waypoints
     Depending on vehicle type, this function tries to adjust the amount of open space it needs and decides where it will spawn
     I will not suggest spawning plane types using this function (get Arma'd)
 
-----------------------------------------------------------------
-Written below has nothing to do with the Location Engine but will still need to figure town locations
-----------------------------------------------------------------
 [Bandit AI town invasions]
-A random CapitalCity type will be invaded by bandit AI
+A random CapitalCity will be invaded by bandit AI
 You will be able to speficy the amount of groups (1 group has 3 AI)
-This will not have any prizes like other mission type addons
+This will not have any lootboxes like other mission type addons
 Within the selected town, vehicles (which can not be used by player) and objects are spawned
-The nearest location within defined area will be used
+The lowest latitude point within the realm will be utilized for this spawn
     Technical Background:
     Spawns will be selected randomly from within CapitalCity types
     player unusable vehicles will spawn based on quantity of each group
@@ -437,8 +455,30 @@ Please use this functionality for server announcements and such
     Due to Arma3's language rendering limitations, using double-byte languages in this function will not recommended as it would look ugly
     Due to this function triggering against systemChat, if scrolled too much the message might disappear quite fast
 
+[Broken Gas Stations]
+Gas stations on the map can be set to be broken from auto refuel with a percentage
+if specifying as "0", then this function will not run
+if specifying as "1", then all gas stations will be broken from auto refuel
+Auto Refuel will be broken but crafting will still work
+    Technical Background:
+	The function will execute based on possibility of value you define
+
+[Traveling Trader]
+The Traveling Trader is set to walk from waypoint to waypoint.
+Waypoint selection order is set randomly
+If several different traders are set, they will start from different waypoints.
+When a player gets near with their weapon down, the traveling trader will react to trades.
+If in case player has a radio equiped, they will hear noise broadcasting through their radio when a traveling trader is within 500m.
+The Traveling Trader is set to me immortal but due to arma engine, sometimes this does not fully work,
+in this situation if a player kills the trader, the player will receive a penalty.
+If player attacks trader = -5% of respect
+If player kills trader = -30% respect
++ if trader is killed, then the killer player name will be broadcasted within server
+    Technical Background:
+	The Traveling Trader is set side as WEST so the AI should ignore him, though there might need to be some adjustments made in sides for other sides which may coexist on the map (such as zombies)
+
 -------------------------------------------------------------------------------
-## Install & Setups
+## Installation
 Unpack a3_exile_lootbox.pbo and do whatever needed to tweak
 ※You will need PBO Manager or something to unpack and repack
 ※This readme（readme_en.txt）is unneeded for execution of addon so you may delete if you want
@@ -449,6 +489,8 @@ Exile will automatically load the addon at startup
 Depending on your edits, you will need to edit your mission file as well
 Run server and verify no problems are observed from your server rpt logs
 
+-------------------------------------------------------------------------------
+## Settings
 Within your DMS config.sqf, turn below to false
 If below is false, and no other AI addon would be effected, LootBox AI will freeze accordingly same as how DMS AI freeze when a player is not near (This will help in server performance)
 DMS_ai_freeze_Only_DMS_AI = false;
@@ -479,65 +521,63 @@ All basic configurations can be changed within the [config.sqf] file
 As per default, majority of the configurations are made for a hardcore experience
 Please figure out where in your server this add-on will be utilized and configure accordingly
 This add-on should still run on any map without any first time configuration setup needed
-
- // Still translating below... (yukihito23) //
  
-[設定方法]
-Arma3スクリプティングの記法に合わせて、注意して編集してください。
-多くの部分は、一般的プログラム言語と同様の記法となってます。
-間違って記述した際は、スクリプトエラーとしてログに報告されます。
+[Setups]
+Please the usual Arma3 script syntax and proceed with care.
+Majority of add-on follows similar rules to basic programing language.
+If in case something is wrong, the add-on will generate errors.
 
-	o []や{}や""などは必ず対になるようにしてください
-	o コードの行末は必ず";"セミコロンで終わらなければなりません
-	o 配列[]に関する設定部分では、要素間を","で区切って下さい
-	（但し、最後要素の後ろには、書く必要がありません）
-	o コード内にダブルバイト文字（日本語他）は利用できません
-	（但しコメント内は自由に記述できます）
-	o 文字コードは"UTF-8"で、改行コードは、サーバのOSに合わせてください
-	（Windows：CR/LF、Linux：LF）
-	o オブジェクトを指定する際は、正式なクラス名を記述してください
-	o 個数を設定する部分は、必ずしも、その数分だけ適用されるものではありません
-	（エラーなどで、処理が飛ばされる場合があるため。よって希望最大値となります）
-	o 確立設定の項目は、0.00～1.00を記述します。1が100%となります
+	* [], {}, "" will always be in sets
+	* and the end of a row, always be sure to have a ";" (semicolon)
+	* for sections which are inside [] (brackets), always be sure to separate with commas (,)
+	* Double-Byte characters may not be used within the code. (It's ok for comments)
+	* Encoding is set to "UTF-8".
+	* As for end of line code, please relate to the OS you are using. （Windows：CR/LF、Linux：LF）
+	* When specifying an object, call against it's correct classname
+	* Locations specifying a value does not mean it will always use that value
+	(If an error may happen, the execution may be skipped, thus defiled value is expected max value)
+	* for percentage values use in format of 0.00 - 1.00 (1 = 100&)
 
-	[主要なファイル]
-	config.sqf	//Configuration file
-	putBoxes.sqf	//Function
-	./functions/	汎用的なスクリプトファイル
-	readme_jp.txt	このファイル、運用開始時は削除しても結構です
-	※他ファイルはおまじないのようなモノ
+
+	[core files]
+	config.sqf				// Configuration file
+	putBoxes.sqf			// Function
+	./functions/			// commonly used script directory
+	readme_en.txt			// This file may be deleted when actually using
 
 [./config.sqfファイル]
-LB_DebugMode		デバッグモード
-LB_OutputLog		ログ出力するか？
-LB_PendingTime		起動時の待機秒
-※起動時に他アドオンと問題がある場合、起動時間をずらしてください
+LB_DebugMode				// Debug mode On/Off
+LB_OutputLog				// Generate logs? yes/no
+LB_PendingTime				// Delay time(seconds) for execution at server start
+* If in case there are other performance heavy add-ons which run at startup, you can smooth out the startup sequence by setting delay for this add-on
 
-(1)マーカー設定
-LB_MapMarker		マップ上にマークするか？
-LB_MapMarkerColor	マーカー色
-LB_MapMarkerType	マーカータイプ
-LB_MapMarkerColorMine	（トラップ）
+(1)Marker Settings
+LB_MapMarker				// Display markers on map Yes/No
+LB_MapMarkerColor			// Marker Colors
+LB_MapMarkerType			// Marker Types
+LB_MapMarkerColorMine		// traps
 LB_MapMarkerTypeMine
-LB_MapMarkerColorAI		（バンディットＡＩ）
+LB_MapMarkerColorAI			// Bandit AI's
 LB_MapMarkerTypeAI
-LB_MapMarkerColorAITr	（トラベラーＡＩ）
+LB_MapMarkerColorAITr		// Traveler AI's
 LB_MapMarkerTypeAITr
-LB_MapMarkerColorST		（奇妙／炎上オブジェクト）
+LB_MapMarkerColorST			// Random/Burning Objects
 LB_MapMarkerTypeST
-LB_MapMarkerColorVehicle（車両）
+LB_MapMarkerColorVehicle	// Spawned Vehicles
 LB_MapMarkerTypeVehicle
-※設定値は、参考資料をご覧ください
+* View default values for examples
 
-(2)コンテナオブジェクト設定
-LB_BoxObjClass_indoor[]	アイテムボックスの種類（屋外用）
-LB_BoxObjClass_outdoor[]アイテムボックスの種類（屋内用）
-※利用するコンテナオブジェクトを記述してください
-※他アドオンの動作に支障をきたす場合があるため、事前に調査ください
-（Exile_Container_SupplyBoxはヘリクラの場所決めに影響有り）
+(2)Container Object Settings
+LB_BoxObjClass_indoor[]		// Item Box types (outdoors)
+LB_BoxObjClass_outdoor[]	// Item Box types (indoors)
+* Specify what container object shall be utilized
+* Depending on what is specified, it may get in the way of other add-ons or scripts
+(Using "Exile_Container_SupplyBox" seems to interfere with supply drop locations）
 
-(3)ロケーションタイプ設定
-LB_Locations[]		対象のロケーションタイプ
+ // Still translating below... (yukihito23) //
+
+(3)Location Type Settings
+LB_Locations[]				//Target Location Type
 ※対象となるマップロケーションタイプを指定してください
 ※デフォルトでは、登録されている全て町が対象となります
 ※優先順位があるので、個別設定は先に記述してください
@@ -760,289 +800,191 @@ LB_BcmessageTime	配信間隔（秒）
 (23)バンディットシティ
 LB_BCGroups			グループ数（1グループ3AI）
 
-■■ 参考資料 / Documents
-[マップマーカー色]
+-------------------------------------------------------------------------------
+## License & Support
+This work is protected by Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0) and obtaining, copying, using any of the content will mean you agree to the license included.
+  * This work is protected by the specified license and the Dev & Author "nabek" has not given up his rights.
+  * This work is not allowed to be used for commercial purposes.
+  * The Dev & Author "nabek" is "NOT" obligated to provide support for this work.
+  * The Dev & Author "nabek", "may" provide support if asked nicely and he feels like doing so.
+  * If using, it would be nice if Dev & Author "nabek" can be notified so he can keep his motivation up for future updates. (Please note, Dev & Author "nabek" does NOT utilize English as his first language.)
+
+[Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)]
+You are free to:
+Share — copy and redistribute the material in any medium or format
+Adapt — remix, transform, and build upon the material
+The licensor cannot revoke these freedoms as long as you follow the license terms.
+
+Under the following terms:
+Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+NonCommercial — You may not use the material for commercial purposes.
+No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+
+Notices:
+You do not have to comply with the license for elements of the material in the public domain or where your use is permitted by an applicable exception or limitation.
+No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
+
+Summary Format: https://creativecommons.org/licenses/by-nc/4.0/
+Full Format: https://creativecommons.org/licenses/by-nc/4.0/legalcode
+
+-------------------------------------------------------------------------------
+## from Dev.nabek
+I have made this add-on as a small return gift to the Exile community for the endless hours I have played and enjoyed this game mode.
+This add-on was originally developed for my own Exile Server but I wish to release this to the public so other server owners are able to utilize it. I would be happy if this add-on is used somewhere in the world =)
+
+I would like to ask if anyone is interested in translating this document (for free), such as to German, French, Russian, etc..)
+
+You can contact Dev & Author "nabek" from below blog
+(I also write updates about this add-on, if interested)
+blog.ahh.jp (use tag search:arma3)
+
+Discord (Saba-Miso Server)
+https://discord.gg/q96R9pe
+
+I'm glad there are already several server owners which seem interested in this add-on so far!
+Below maybe some new features I "may" introduce
+
+TODO:
+	* Vending Machines
+		* Able to get your redgull fix anytime
+	* Placement of slums near large towns
+		* Maybe generate missions inside these slums
+	* Confirmed maps this add-on will work
+		Takistan (Done!)
+		Altis
+		Stratis
+		Malden
+		Tanoa
+		Chenarus (Done!)
+		bornholm
+		Esseker
+		Taunus
+		taviana
+		tavi
+		(If any other maps have been confirmed, please let me know.)
+
+if interested in my server, you can find it from below.
+m9(　ﾟдﾟ)！！
+
+	[Server Name]
+	[JP]鯖味噌:Saba-Miso Exile|PvP|Takistan
+	[Map]
+	Takistan　（CUP Terrains mod）
+	[Type]
+	Seriously Hardcore survival, PvP
+	[Operation Hours]
+	Japan Standard Time 18:00 - 24:00
+
+* Sever name may change in the future
+* Server is running on a 20 dollar machine
+* AMD FM1-A6-3650　4Cores 3.6Ghz!!
+
+I would like to thank the following for translations, ideas and technical advice.
+	* yukihito23
+	* Losty
+
+I'm also searching for anyone which would like to join me. (of course, in Japanese language)
+(debugging, ideas, coding, etc...)
+
+Aaaaaand, that's it. I'm tried, I mean...really tired.
+(；´Д｀)3...needing some smokes
+
+-------------------------------------------------------------------------------
+## Documents
+[Map Marker Coloing]
 https://community.bistudio.com/wiki/CfgMarkerColors_Arma_3
-[マップマーカータイプ]
+
+[Map Marker Types]
 https://community.bistudio.com/wiki/cfgMarkers
-[ロケーションタイプ]
+
+[Location Types]
 https://community.bistudio.com/wiki/Location
-[爆発物]
+
+[Explosives]
 ATMine/APERSMine/APERSBoundingMine/SLAMDirectionalMine/APERSTripMine
 SatchelCharge_F/DemoCharge_F/Claymore_F/IEDUrbanBig_F/IEDLandBig_F/IEDUrbanSmall_F/IEDLandSmall_F
 UnderwaterMine/UnderwaterMineAB/UnderwaterMinePDM
 https://community.bistudio.com/wiki/Arma_CfgVehicles_Other
-※検索するとオブジェクト画像が見れます(Ctrl+F)
-[アイテム種類]
-EXILEミッションファイルのconfig.cppを参考に記述してください。
-（トレーダー辺りが一覧で見易いかと思います）
-[車両ダメージ基本部位]
+* Easy to find things by doing a search(Ctrl+F)
+
+[Items]
+Please have a look inside the Exile config.cpp file.
+(somewhere around traders might be easy to view)
+
+[Vehicle Damage]
 HitEngine (engine #1)／HitEngine2 (engine #2)／HitEngine3 (engine #3)／HitHRotor (main rotor)／HitVRotor (tail rotor)／HitBatteries (electrical systems)／HitLight (landing light)／HitHydraulics (entire hydraulics system)／HitTransmission (engine transmission)／HitGear (landing gear)／HitFuel (all fuel tanks)／HitHStabilizerL1 (first left horizontal stabilizer)／HitHStabilizerR1 (first right horizontal stabilizer)／HitVStabilizer1 (first vertical stabilizer)／HitTail (tail boom)／HitPitotTube (all pitot tubes)／HitStaticPort (all static ports)／HitStarter1 (starter for engine #1)／HitStarter2 (starter for engine #2)／HitStarter3 (starter for engine #3)／HitAvionics／HitHull／HitMissiles／HitRGlass／HitLGlass／HitGlass1／HitGlass2／HitGlass3／HitGlass4／HitGlass5／HitGlass6
-※オブジェクトによって部位は変わります
-[人間ダメージ部位]
+* parts differ depending on object
+
+[Human Damage]
 HitFace／HitNeck／HitHead／HitPelvis／HitAbdomen／HitDiaphragm／HitChest／HitBody／HitArms／HitHands／HitLegs
 neck／head／pelvis／spine1／spine2／spine3／body／hands／legs
-※当アドオンには関係ない資料
-[Arma3内蔵サウンドファイル]
+ * Really doens't have anything to do with this add-on for now.
+
+[Arma3 Sound Files]
 Arma 3: SoundFiles
 https://community.bistudio.com/wiki/Arma_3:_SoundFiles
-※座標
-ASL：Z軸が、水面基準
-ATL：Z軸が、地形基準（Z軸は基本使用しない）、橋などは浮いてる扱い
-AGL：Z軸が、地形基準（地面に接しない場合など、建物の上とかオブジェクトの上等）
-EDENのプロパティでは、AGL座標で表示されているため、海に設置する場合は注意
-内部コマンドによっては、それぞれを使い分けないといけない。
 
 -------------------------------------------------------------------------------
-■■ ログ内容 / Logging
-（情報が若干古めですが、残してます）
-ログ出力の先頭は、「[LOOTBOX]::」で始まるようになってます。
-かなりの量のログが出力されますので、必要に応じてログ出力を無効にしてください。
-ほとんどが、サーバ起動時のログとなりますが、イベント発生時に出力される事があります。
+## Change logs
+2019/05/18 V1.5
+Specified license
+Added function for random broken gas stations
+Added function for bandit AI's to respawn
+Modified AI spawn locations a bit
+Added static loot-box functionality to have some random values
+Added StatusReporter functionality to provide set timer logs
+Removed some default config settings requiring CUP
+Optimized code
+Rearranged Code
+Cleaned around in logs
+Deleted unneeded code
+Merged a lot of code to main
 
-正常な場合以下のログ出力の後、メイン処理に移ります。
-コード上に文法エラーがある場合、ここでエラーとなります。
- "[LOOTBOX]:: Loot boxes v1.10 (02-04-2018) starting"
- "[LOOTBOX]:: Loading Config"
- "[LOOTBOX]:: Initialised"
- "[LOOTBOX]:: Starting Loot boxes"
-
-まず最初に、ロケーション作成が実行されます。
- "[LOOTBOX]:: create new location : NameCity:Scrap Yard [5200,11300,0]"
-
-ロケーション設定が見つからなかった場合、以下が出力されます。
-マップ上の全ての地名が出力されますので、特定地を対象にしたい場合は、参考にできます。
-（空港の扱いはマップによって違うようです）
-以下は、"NameLocal"というタイプ名で、"Darbang pass"という地名となります。
-
- "[LOOTBOX]:: nothing location config : NameLocal:Darbang pass"
- 
-ロケーションが見つかった場合、場所名と、適用されるロケーション設定値が出力され、
-ここから、作成されるアイテムボックス分だけ、以下が繰り返されます。
-
- "[LOOTBOX]:: found NameCity:Anar [5910.59,5687.44] radius:200 box:5"
-	（アイテムボックスが置かれた場合）
- "[LOOTBOX]:: (items:21 trash:6 s-rare:true)"
-　"[LOOTBOX]:: put 1/5 [5931.98,7181] House:true Exile_Container_Storagecrate"
-	（場所が見つからなかった場合）
-　"[LOOTBOX]:: 1/5 canot found places"
-※見つからない理由としては、スポーンゾーン／トレーダー／拠点近くの場合があります。
-
-同時にトラップワイヤーが設置された場合は、場所が出力されます。
- "[LOOTBOX]:: trap [5247.08,6070.86]"
- 
-地雷が設置された場合は、以下のようになります。
- "[LOOTBOX]:: mine 1/2 [5296.96,11317.8,0.0228882]"
-
-バンディットAIを設置した場合は、以下のようになります。
-"wp"は、登録したウェイポイント先となります（車両、道路、ガソリンスタンド等）
- "[LOOTBOX]:: AI 2/3 custom [6394.32,11317.6,3.0638]"
- "[LOOTBOX]:: wp 1 [6566.41,10703.9,0.165947] (vehicle)"
- "[LOOTBOX]:: wp 2 [5888.28,11888.3,0.0886993] (vehicle)"
- "[LOOTBOX]:: wp 3 [5924.98,11892.8,0] (road)"
- "[LOOTBOX]:: wp 4 [6394.32,11317.6,3.0638] (cycle)"
-建物に立て籠もり状態の場合は、以下のようになります。
-　"[LOOTBOX]:: wp : freeze"
-
-車両を設置した場合は、以下のようになります。
- "[LOOTBOX]:: Vehicle 2/4 [1985.16,7764.84,0.164642] rnd:false Exile_Bike_MountainBike"
-※"rnd"は、条件が合わなかったために、フィールド上にランダムに置かれたか？と示します
- 
-トラベラーAIを配置した場合、以下が出力されます。
-続けて、ウェイポイント先の町名となります。
-　"[LOOTBOX]:: TravelerSpawn 3 Rasman [6080.47,11182,0] 2 AIs"
- "[LOOTBOX]:: wp Nur [1905.47,11777.3,0]"
-
-アイアンマンを設置した場合、以下が出力されます。
- "[LOOTBOX]:: IronMan 1 [100.781,100.781,0] 1 AIs"
- 
-カスタム看板を設置した場合、以下が出力されます。
- "[LOOTBOX]:: put custom obejct Land_Billboard_F [0,0,0] bill0.jpg"
- 
-以下のログで完了となります。
- "[LOOTBOX]:: finished! have fun"
- 
-奇妙オブジェクトに関しては、ゲームとは直接関与しませんので、ログ出力されません。
-アイテムの中身もログ出力する場合は、以下のコメントを外してください。
-
-functions/addCargo.sqf
-//[format["content:%1",_content]] call LB_fnc_log;
-この様に出力されます。
- "[LOOTBOX]:: content:Exile_Item_PlasticBottleFreshWater,Exile_Item_RabbitSteak_Raw,Exile_Item_PlasticBottleFreshWater,Exile_Item_Catfood,Exile_Item_Bullets_556,Exile_Item_Catfood,U_C_Poor_1,Exile_Item_FuelCanisterEmpty,Exile_Item_Dogfood,Exile_Item_InstantCoffee,Exile_Item_InstantCoffee,Exile_Item_InstantCoffee,Exile_Item_MountainDupe,Exile_Item_MountainDupe,Exile_Item_Moobar,Exile_Item_GloriousKnakworst,Exile_Item_Noodles,"
-
-これらログ出力は、LB_OutputLogにて、OFFに出来ます。
-
--------------------------------------------------------------------------------
-■■ ログエラーについて / Errors and remedy
-（情報が若干古めですが、残してます）
-必ずログファイルを確認して、エラー記述が無いように留意してください。
-サーバアドオン起動時は、他のアドオンも並列で動作していますので、同時にログに出力されています。
-文法エラーなどの場合は、どのアドオンでエラーになっているのか、判断が難しいので注意してください。
-
-[config.sqf記述ミス]
-設定ファイルの記述ミスにより、スクリプトが続行不能になった場合に、以下が出力されます。
-
-"[LOOTBOX]:: failed to read config.sqf ;-("
-
-[オブジェクトモデルの設定]
-ログファイルに以下のようなエラーが出力された場合は、ミッション内のmission.sqmのaddons[]に追加する必要があります（使用モデルの追加）
-当アドオンに限らず、必要な設定となります。
-※LB_StrangeObjsの設定反映時のエラー
-
-Warning Message: You cannot play/edit this mission; it is dependent on downloadable content that has been deleted.
-cup_a1_editorobjects
-
-デフォルト設定の場合、以下が必要です（いずれもCUP Terrains MOD）
-cup_editor_plants_config
-cup_a1_editorobjects
-cup_a2_editorobjects
-
--------------------------------------------------------------------------------
-■■ 改造について / Customize
-ほとんどの動作部分において、設定が可能なように作られていますが、希望の動作や機能が欲しい場合、お好きなように改造してください。
-省略せず、できるだけ分かりやすいように記述したつもりですので、コメント等から箇所を特定できるかと思います。
-相談、アイデア等がありましたら、お気軽にご連絡ください。
-
-putBoxes.sqf			メインスクリプト
-config.sqf				設定ファイル
-initServer.sqf			初期化
-config.cpp				アドオン定義
-functions/
-	addCargo.sqf		コンテナオブジェクト格納
-	collectItems.sqf	アイテムリスト生成
-	findBuildings.sqf	周囲の建物オブジェクト取得
-	getBuildingPos.sqf	建物内のポジション取得
-	selectAIGear.sqf	AI装備設定
-	isSafePos.sqf		セーフエリアチェック
-	log.sqf				ログ出力
-	marker.sqf			マップマーカー
-	selectAIGear.sqf	AI装備選択
-	spawnIronman.sqf	アイロンマン生成
-	putSimpleobj		静的オブジェクト生成
-	event/				イベント関連
-		eh_ContainerOpened.sqf（未使用）
-		eh_Dammaged.sqf	ＡＩダメージ時（未使用）
-		eh_Engine.sqf	車両エンジンON時
-		eh_Fired.sqf	ＡＩ発砲時
-		eh_mpKilled.sqf	ＡＩデッド時
-
-o アイアンマンの装備
-	selectAIGear.sqf
-o グレネードトラップの確立
-	eh_Engine.sqf
-
--------------------------------------------------------------------------------
-■■ ライセンス・サポートについて / License & Supports
-完全無欠のオープンとなっておりますので、ご自由にご利用ください。
-スクリプトコードは、改造も容易ではないかと思います。
-ただ、著作の権利を主張するのだけは勘弁してください。
-サポートは、当方NGOでもボランティアでも慈善事業のつもりでも御座いませんので、基本的には受け付けません・・が、その時の気分で対応させて頂きます。
-その辺はご了承ください。
-ご利用の際は、一声頂ければ幸いです。モチベーションのアップと、さらなるバージョンアップへの布石となります。
-
--------------------------------------------------------------------------------
-■■ 既知の問題・バグ / Cockroaches?
-o 済：同じ場所に複数個、設置される場合がある
-o 済：アイテムボックスから取り出せない
-o 済：変な場所にアイテムボックスが湧く
-o 済：AI装備がおかしくなる（DMS側の問題？）
-	サーバ起動時の負荷が、若干関係してます
-o --:アイアンマンの装備が安定しない
-o --:処理に時間が掛かる
-	安全な場所にオブジェクトを設置するため、その計算に時間が掛かってます
-	オブジェクトのサイズ等を小さくする事で、回避可能になります
-	（StrangeObjectなら、サイズ指定の数値）
-
--------------------------------------------------------------------------------
-■■ たぶん開発者らしいnabekから / from Dev.nabek
-遊びまくったEXILEとMODコミュニティに、小さな恩返しのつもりでアドオンを開発しました。
-無論、私のサーバで実現したかった事のひとつが、これだった訳でもありますけども。
-かなり後出しになってしまいましたが、世界のどこかのサーバで稼働してたら嬉しい。
-この文書を、各国語版にしたいのですが、（無報酬ですが）ご協力していただけたら、幸いです。
-（独語・仏語・英語・ロシア語辺りがあれば完璧なんだろうけども）
-
-ご連絡の際は、ブログの方にコメントください。
-当アドオンの開発日記も書いてます。
-blog.ahh.jp (use tag search:arma3)
-
-当アドオンを利用してくれてる猛者サーバさんもいらっしゃってるようで嬉しい限りです。
-当アドオンに入れるかどうか迷ってるんですが、新しいアイデアもいくつかあります。
-TODO:
-	o 自販機
-		誰にも見られずにエロ本が買える?!
-	o 大きな町の外れに、スラム街を設置
-		スラム街だけでのミッションを置くとか
-	o　町バンディット戦車
-		驚異のバンディットAI
-	o 済：サーバ独自のマップロケーション設置の支援
-	o 済：カスタム看板設置の支援
-	o 色々なマップでの動作確認
-		済：Takistan
-		－：Altis
-		－：Stratis
-		－：Malden
-		－：Tanoa
-		済：Chenarus
-		－：bornholm
-		－：Esseker
-		－：Taunus
-		－：taviana
-		－：tavi
-		（ご報告お待ちしてます！！）
-
-当方管理のExileサーバもよろしくなッ！（未稼働2019/1現在）
-m9(　ﾟдﾟ)！！
-
-	[サーバ名]
-	[JP]鯖味噌:Saba-Miso Exile|PvP|Takistan
-	[マップ]
-	Takistan　（CUP Terrains mod）
-	[タイプ]
-	ハードコア過ぎるサバイバル、PvP
-	[稼働時間]
-	JST 18:00 - 24:00
-
-※サーバ名は変更されるかもしれません
-※2000円激貧PCで運用しております（詳細はブログで）
-※AMD FM1-A6-3650　4Cores 3.6Ghz!!
-
-以上です。お疲れ様でした。とても疲れた。
-(；´Д｀)3...give me smoke
-
--------------------------------------------------------------------------------
-■■ 更新履歴 / Change logs
 2019/02/13 V1.4
-バンディットシティ機能の追加、ランダムExileオブジェクト機能増加（コンクリートミキサー、トレーダー）
-Ammoマガジンの残弾数をランダム（マッチ等の残数アイテム全て）、ゴミアイテムによるアイテム削除機能の追加
-建物のドアをランダムで開く、アイアンマンAI湧きポイント調整、バンディットのデフォ設定見直し
-町＆トラベラーAIのウェイポイントをセーフゾーン内に設定しないように修正
-マップテキスト機能に円形ドロー追加、コンクリートミキサー設置機能、マップ上テキスト配置に文字のみを追加
-箱に、Exile_Item_OldChestKitを追加、バンディットAIに臆病度をランダムで適用（0-0.3）
-設定デフォルト値の調整、エロ本（はずれ）LOOT設定の追加、ソースコードの整理、高速化、当文書加筆
+Added Bandid City functionality
+Added more random Exile related object spawns (concrete mixers, traders, lockers)
+Added functionality to randomize contents of magazine type items
+Added functionality to have extra trash layer in item spawns
+Added functionality to randomly open building doors
+Modified Iron Miller spawn points a bit
+Relooked at bandit AI default settings
+Modified so traveling AI don't come near safe zones
+Added a new draw method for draw to map functionality
+Added functionality to place concrete mixers
+Added fear factor to bandit AI (random 0 to 0.3)
+Relooked at default settings again
+Added trash loot
+Cleaned code
+Optimized code
+Added/Modified readme
+Changed "Iron Man" to "Iron Miller"
 
 2018/05/17 V1.3
-アイアンマン（無敵AI）機能追加、GPSトラップ機能追加、グレネードトラップ機能追加、サーバーメッセージ配信機能追加
-キャンプファイヤー設置機能追加、マップ文字入れ機能追加、水汲み場設置機能追加
-"Exile_Magazine_10Rnd_9x39"（スナイパー用）を固定湧きにしていたので移動
-ロケーション数と処理位置をログ出力、Readmeの加筆修正
+Added "Iron Man" functionality
+Added GPS Trap functionality
+Added Grenade trap functionality
+Added server message functionality
+Added camp fire functionality
+Added draw to map functionality
+Added water source object placement functionality
+Made "Exile_Magazine_10Rnd_9x39" to a static spawn so moved it around
+Added functionality to log location engine related results
+Added/Modified readme
 
 2018/04/21 V1.2
-車両湧きで、稀に接触があるのを修正、奇妙オブジェクトの負荷率低下（SimpleObject化）
-AI動作バグ取り、AIパトロール機能の追加＆調整、炎上オブジェクト機能の追加、ログを見やすく若干修正
-アイテムボックス生成時バグ修正、オリジナルロケーション作成機能の追加
-地雷設置バグ修正、カスタム看板機能の追加、アイテムボックス固定湧き機能の追加
-ＡＩカスタム装備の追加（selectAIGear.sqfファイルの追加）
-デフォルト設定値の見直し、全ファイル改行コードをLFに更新
-トラベラーAI機能の追加
+Fixed some situations of vehicles touching other objects at spawn time, optimized random object spawner module (made objects in to SimpleObjects)
+Fixed some bugs around AI movement, Added functionality for AI Patrole, Added burning objets, modified logs for better readability.
+Fixed bug which may happen at time of loot-box spawn, Added functionality for original location creation function
+Fixed bug around landmines, added functionality to place custom signs, added functionality to spawn loot-boxes at set coordinates.
+Added custom AI equipment (selectAIGear.sqf)
+Modified default settings
+Added traveling AI functionality
 
-2018/04/10 V1.1 据え置き
-デフォルト設定値の記述ミス、Readmeの加筆修正
+2018/04/10 V1.1
+Fixed default settings value bugs
+Added/Modified readme
 
 2018/04/03 V1.1
-AIリーダー忘れ、スナイパー設定追加、ロケーション位置自動調整、ログ出力周り改変、config見やすく改変、起動待機の追加
-コンテナ許容量エラーチェック、コンテナへアイテム追加時コード書き直し、奇妙オブジェクトシミュレーションフラグ追加
-ポップタブ計算方法変更、セーフエリアの除外追加（トレーダー／スポーン／各拠点）、アイテム50%集計の改変
-車両湧きの追加、負荷が掛かりそうな処理後にウェイト挿入、アイテムボックス及びＡＩの沸き場所の調整、各湧き要素の位置調整
-総当たりデバッグ作業
+Forgot about AI leaders..., added sniper settings, added stuff around location engine, cleaned config, added wait time for boot execution. Added container capacity error check, rewite on code to add items to container, simulation flag for random objects module, changed poptab calculations, added blacklist for safe areas (traders, spawn, bases), changed function around item handling, added vehicle spawn module, added wait for functions which may take longer execution time, modified loot box and AI spawn locations, modified around spawning functionality, debug debug and debug....
 
 orz..
