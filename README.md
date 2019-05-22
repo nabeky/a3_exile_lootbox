@@ -22,7 +22,7 @@ New Version 1.5 here!!  2019/05/18
 
 V1.5 in-game demonstration
 
-[![](http://img.youtube.com/vi/xOWREQskIwM/0.jpg)](http://www.youtube.com/watch?v=pVbM1F78G6M "")
+[![](http://img.youtube.com/vi/pVbM1F78G6M/0.jpg)](http://www.youtube.com/watch?v=pVbM1F78G6M "")
 
 V1.5 TravelingTrader
 
