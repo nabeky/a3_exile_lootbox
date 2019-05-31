@@ -17,7 +17,6 @@ New Version 1.5 here!!  2019/05/18
 実際の動作を確認されたい場合は、以下のサーバにてご確認出来ます（実稼働中） / If you want to actually see this add-on running, you can do so from server below.
 
 [JP]鯖味噌:Saba-Miso Exile|PvP|Takistan|1.0.4
-
 (ﾟ∀ﾟ)ノ
 
 V1.5 in-game demonstration
@@ -27,3 +26,9 @@ V1.5 in-game demonstration
 V1.5 TravelingTrader
 
 [![](http://img.youtube.com/vi/xOWREQskIwM/0.jpg)](http://www.youtube.com/watch?v=xOWREQskIwM "")
+
+Discord (Locked Dev. ch)
+https://discord.gg/b4FT278
+
+Exile Mod Forum
+https://www.exilemod.com/topic/27878-released-loot-box-add-on-by-nabek%EF%BE%9F%E2%88%80%EF%BE%9F%E3%83%8E/?tab=comments#comment-203932
