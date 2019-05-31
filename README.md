@@ -31,4 +31,4 @@ Discord (Locked Dev. ch)
 https://discord.gg/b4FT278
 
 Exile Mod Forum
-https://www.exilemod.com/topic/27878-released-loot-box-add-on-by-nabek%EF%BE%9F%E2%88%80%EF%BE%9F%E3%83%8E/?tab=comments#comment-203932
+https://www.exilemod.com/topic/27878-released-loot-box-add-on-by-nabek%EF%BE%9F%E2%88%80%EF%BE%9F%E3%83%8E/
